@@ -1,5 +1,5 @@
 export interface IVeiculos extends Array<IVeiculo> {}
-export interface Veiculo {
+export interface IVeiculo {
     numeroVeiculo: string
     placaVeiculo: string;
 }

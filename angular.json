@@ -40,7 +40,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "2000kb",
                   "maximumError": "1mb"
                 },
                 {
@@ -96,6 +96,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "advertencia-penalidade:build:production",
+              "serveTarget": "advertencia-penalidade:serve:production"
+            },
+            "development": {
+              "buildTarget": "advertencia-penalidade:build:development",
+              "serveTarget": "advertencia-penalidade:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
