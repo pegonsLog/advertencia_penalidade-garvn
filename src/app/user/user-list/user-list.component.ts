@@ -27,6 +27,7 @@ export class UserComponent {
     this.userService.list().then((data) => (this.users = data));
   }
 
+  
   oneUser(matricula: string) {
     this.userService.oneUser(matricula).then((data) => {
       if (data.matricula === matricula) {
