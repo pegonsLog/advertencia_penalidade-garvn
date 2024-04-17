@@ -1,0 +1,16 @@
+<p>user works!</p>
+
+
+<ul>
+@for (item of users; track item) {
+  <li>{{ item.matricula }} - {{ item.nome }} - {{ item.senha }} - {{ item.perfil }}</li>
+
+} @empty {
+  <strong>No items found</strong>
+}
+</ul>
+
+<button mat-button-raised (click)="oneUser('564')">Um usuário</button>
+<p>{{user.nome}}</p>
+
+

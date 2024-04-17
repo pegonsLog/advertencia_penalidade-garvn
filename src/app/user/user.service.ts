@@ -9,10 +9,11 @@ import {
   getDocs,
   getFirestore,
   query,
-  updateDoc
+  updateDoc,
+  where,
 } from 'firebase/firestore/lite';
-import { IUsuario } from '../interface/usuario';
-import { firebaseConfig } from '../shared/firestore-config';
+import { IUsuario, IUsuarios } from '../interface/usuario';
+import { firebaseConfig } from '../shared/firestore-config/firestore-config';
 
 @Injectable({
   providedIn: 'root',
@@ -21,28 +22,41 @@ export class UserService {
   app = initializeApp(firebaseConfig);
   db = getFirestore(this.app);
 
+  users: IUsuarios = [];
+  user: IUsuario = {
+    matricula: '',
+    nome: '',
+    senha: '',
+    perfil: '',
+  };
+  id: string = '';
+
   constructor() {}
 
   async list() {
     const q = query(collection(this.db, 'users'));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      this.users.push(doc.data() as IUsuario);
+    });
+    return this.users;
+  }
+
+  async oneUser(matricula: string): Promise<IUsuario> {
+
+    const q = query(
+      collection(this.db, 'users'),
+      where('matricula', '==', matricula)
+    );
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, ' => ', doc.data());
+      if(doc.exists()){
+        this.user = doc.data() as IUsuario;
+      }
     });
-  }
 
-  async oneUser() {
-    const docRef = doc(this.db, 'users', '...');
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      console.log('Document data:', docSnap.data());
-    } else {
-      // docSnap.data() will be undefined in this case
-      console.log('No such document!');
-    }
+    return this.user
   }
 
   async addUser(data: IUsuario) {
@@ -51,16 +65,16 @@ export class UserService {
     console.log('Document written with ID: ', docRef.id);
   }
 
-  async updateUser() {
-    const washingtonRef = doc(this.db, 'users', '...');
+  async updateUser(id: string) {
+    const userRef = doc(this.db, 'users', id);
 
     // Set the "capital" field of the city 'DC'
-    await updateDoc(washingtonRef, {
+    await updateDoc(userRef, {
       capital: true,
     });
   }
 
-  async deleteUser(){
-    await deleteDoc(doc(this.db, "users", "..."));
+  async deleteUser() {
+    await deleteDoc(doc(this.db, 'users', '...'));
   }
 }

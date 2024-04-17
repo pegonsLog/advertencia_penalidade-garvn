@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { UserComponent } from './user/user.component';
-import { ConsorcioListaComponent } from './componentes/consorcio/consorcio-lista/consorcio-lista.component';
 import { ConsorcioFormComponent } from './componentes/consorcio/consorcio-form/consorcio-form.component';
-import { FiscalizacaoListaComponent } from './componentes/fiscalizacao/fiscalizacao-lista/fiscalizacao-lista.component';
+import { ConsorcioListaComponent } from './componentes/consorcio/consorcio-lista/consorcio-lista.component';
 import { FiscalizacaoFormComponent } from './componentes/fiscalizacao/fiscalizacao-form/fiscalizacao-form.component';
+import { FiscalizacaoListaComponent } from './componentes/fiscalizacao/fiscalizacao-lista/fiscalizacao-lista.component';
 import { InfracaoFormComponent } from './componentes/infracao/infracao-form/infracao-form.component';
 import { InfracaoListaComponent } from './componentes/infracao/infracao-lista/infracao-lista.component';
 import { IrregularidadeFormComponent } from './componentes/irregularidade/irregularidade-form/irregularidade-form.component';
@@ -13,11 +11,13 @@ import { LinhaFormComponent } from './componentes/linha/linha-form/linha-form.co
 import { LinhaListaComponent } from './componentes/linha/linha-lista/linha-lista.component';
 import { VeiculoFormComponent } from './componentes/veiculo/veiculo-form/veiculo-form.component';
 import { VeiculoListaComponent } from './componentes/veiculo/veiculo-lista/veiculo-lista.component';
+import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user-list/user-list.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'user',
     pathMatch: 'full',
   },
   {
