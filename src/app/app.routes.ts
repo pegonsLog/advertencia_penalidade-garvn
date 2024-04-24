@@ -12,12 +12,12 @@ import { LinhaListaComponent } from './componentes/linha/linha-lista/linha-lista
 import { VeiculoFormComponent } from './componentes/veiculo/veiculo-form/veiculo-form.component';
 import { VeiculoListaComponent } from './componentes/veiculo/veiculo-lista/veiculo-lista.component';
 import { LoginComponent } from './login/login.component';
-import { UserComponent } from './user/user-list/user-list.component';
+import { UserListComponent } from './user/user-list/user-list.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'user',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
@@ -26,7 +26,7 @@ export const routes: Routes = [
   },
   {
     path: 'user',
-    component: UserComponent,
+    component: UserListComponent,
   },
   {
     path: 'consorcioLista',

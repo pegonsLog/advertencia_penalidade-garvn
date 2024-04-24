@@ -1,1 +1,41 @@
-<p>login works!</p>
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar color="primary" id="peso-fonte"
+      >Advertência de Penalidade - GARBO</mat-toolbar
+    >
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="Usuário"
+        inputmode="numeric"
+        name="user"
+        pattern="[0-9]*"
+      />
+    </mat-form-field>
+    <!-- [(ngModel)]="user" -->
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="Senha"
+        type="password"
+        inputmode="numeric"
+        name="password"
+        pattern="[0-9]*"
+      />
+      <!-- [(ngModel)]="password" -->
+    </mat-form-field>
+    <div id="centralizar">
+      <mat-card-actions>
+        <button color="primary"
+          mat-raised-button
+          id="button-entrar"
+          (click)="entrar('drhs')"
+          name="drh"
+        >
+          ENTRAR
+        </button>
+      </mat-card-actions>
+    </div>
+  </mat-card-content>
+</mat-card>
