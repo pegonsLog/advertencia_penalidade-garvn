@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IUsuario, IUsuarios } from '../../interface/usuario';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 import { UserService } from '../user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -12,8 +13,9 @@ import { Router } from '@angular/router';
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
 })
-export class UserListComponent {
+export class UserListComponent implements OnDestroy {
   user: IUsuario = {
+    id: '',
     matricula: '',
     nome: '',
     senha: '',
@@ -24,34 +26,31 @@ export class UserListComponent {
 
   users: IUsuarios = [];
 
+  subscription: Subscription = new Subscription();
+
   constructor(private userService: UserService, private route: Router) {
-    this.userService.list().then((data) => (this.users = data));
+    this.userService
+      .list()
+      .pipe()
+      .subscribe((users: IUsuarios) => (this.users = users));
   }
-
-  oneUser(matricula: string) {
-    this.userService.oneUser(matricula).then((data) => {
-      if (data.matricula === matricula) {
-        this.user = data;
-      } else {
-        alert('Usuário não encontrado!');
-      }
-    });
-  }
-
-  updateUser(id: string) {
-    this.userService.updateUser(id).then((data) => {});
-  }
-  onSave() {
-    throw new Error('Method not implemented.');
-  }
-  voltar() {
-this.route.navigate(["login"])
-  }
-
-  edit(arg0: any) {
+  
+  oneUser(matricula: string) {}
+  
+  add(usuario: IUsuario) {
+    this.route.navigate(['userForm']);
+  }  
+  edit(user: IUsuario, id: string) {
     throw new Error('Method not implemented.');
   }
   delete(arg0: any) {
     throw new Error('Method not implemented.');
+  }
+  voltar() {
+    this.route.navigate(['login']);
+  }
+
+  ngOnDestroy(): void {
+   this.subscription.unsubscribe()
   }
 }

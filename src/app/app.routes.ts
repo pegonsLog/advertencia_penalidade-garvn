@@ -13,6 +13,7 @@ import { VeiculoFormComponent } from './componentes/veiculo/veiculo-form/veiculo
 import { VeiculoListaComponent } from './componentes/veiculo/veiculo-lista/veiculo-lista.component';
 import { LoginComponent } from './login/login.component';
 import { UserListComponent } from './user/user-list/user-list.component';
+import { UserFormComponent } from './user/user-form/user-form.component';
 
 export const routes: Routes = [
   {
@@ -25,8 +26,12 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'user',
+    path: 'userLista',
     component: UserListComponent,
+  },
+  {
+    path: 'userForm',
+    component: UserFormComponent,
   },
   {
     path: 'consorcioLista',

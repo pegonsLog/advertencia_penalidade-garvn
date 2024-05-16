@@ -1,29 +1,30 @@
-import { Injectable } from '@angular/core';
-import { initializeApp } from 'firebase/app';
+import { Injectable, inject } from '@angular/core';
+
 import {
+  Firestore,
   addDoc,
   collection,
+  collectionData,
   deleteDoc,
   doc,
-  getDoc,
+  docData,
   getDocs,
-  getFirestore,
   query,
-  updateDoc,
+  setDoc,
   where,
-} from 'firebase/firestore/lite';
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { IUsuario, IUsuarios } from '../interface/usuario';
-import { firebaseConfig } from '../shared/firestore-config/firestore-config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  app = initializeApp(firebaseConfig);
-  db = getFirestore(this.app);
+  firestore: Firestore = inject(Firestore);
 
   users: IUsuarios = [];
   user: IUsuario = {
+    id: '',
     matricula: '',
     nome: '',
     senha: '',
@@ -31,50 +32,36 @@ export class UserService {
   };
   id: string = '';
 
-  constructor() {}
-
-  async list() {
-    const q = query(collection(this.db, 'users'));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      this.users.push(doc.data() as IUsuario);
-    });
-    return this.users;
+  list() {
+    let $certificateRef = collection(this.firestore, 'users');
+    return collectionData($certificateRef, {
+      idField: 'id',
+    }) as Observable<IUsuarios>;
   }
 
-  async oneUser(matricula: string): Promise<IUsuario> {
-
-    const q = query(
-      collection(this.db, 'users'),
-      where('matricula', '==', matricula)
-    );
-
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      if(doc.exists()){
-        this.user = doc.data() as IUsuario;
-      }
-    });
-
-    return this.user
+  oneUser(matricula: string) {
+    let $certificateRef = doc(this.firestore, 'users' + matricula);
+    return docData($certificateRef, {
+      idField: 'id',
+    }) as Observable<IUsuario>;
   }
 
-  async addUser(data: IUsuario) {
-    // Add a new document with a generated id.
-    const docRef = await addDoc(collection(this.db, 'users'), data);
-    console.log('Document written with ID: ', docRef.id);
+  addUser(usuario: IUsuario) {
+    let $userRef = collection(this.firestore, 'users');
+    console.log('Document written with ID: ', $userRef);
+    return addDoc($userRef, usuario);
   }
 
-  async updateUser(id: string) {
-    const userRef = doc(this.db, 'users', id);
-
-    // Set the "capital" field of the city 'DC'
-    await updateDoc(userRef, {
-      capital: true,
-    });
+  updateUser(id: string) {
+    let $userRef = doc(this.firestore, 'users' + id);
+    const user = docData($userRef) as Observable<IUsuario>
+    return setDoc($userRef, user);
   }
 
-  async deleteUser() {
-    await deleteDoc(doc(this.db, 'users', '...'));
+  deleteUser(id: string) {
+    let $userRef = doc(this.firestore, 'users' + id);
+
+
+    return deleteDoc($userRef);
   }
 }
