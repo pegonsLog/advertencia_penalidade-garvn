@@ -40,7 +40,7 @@ export class UserService {
   }
 
   oneUser(matricula: string) {
-    let $certificateRef = doc(this.firestore, 'users' + matricula);
+    let $certificateRef = doc(this.firestore, 'users', matricula);
     return docData($certificateRef, {
       idField: 'id',
     }) as Observable<IUsuario>;
@@ -48,19 +48,17 @@ export class UserService {
 
   addUser(usuario: IUsuario) {
     let $userRef = collection(this.firestore, 'users');
-    console.log('Document written with ID: ', $userRef);
     return addDoc($userRef, usuario);
   }
 
   updateUser(id: string) {
-    let $userRef = doc(this.firestore, 'users' + id);
+    let $userRef = doc(this.firestore, 'users', id);
     const user = docData($userRef) as Observable<IUsuario>
     return setDoc($userRef, user);
   }
 
-  deleteUser(id: string) {
-    let $userRef = doc(this.firestore, 'users' + id);
-
+  async deleteUser(id: string) {
+    let $userRef = doc(this.firestore, 'users', id);
 
     return deleteDoc($userRef);
   }

@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, inject, signal } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IUsuario, IUsuarios } from '../../interface/usuario';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
+import { ConfirmationDialogComponent } from '../../shared/dialogs/confirmation/confirmation.component';
 import { UserService } from '../user.service';
 
 @Component({
@@ -14,40 +16,63 @@ import { UserService } from '../user.service';
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent implements OnDestroy {
-  user: IUsuario = {
+
+  #userService = inject(UserService);
+  #route = inject(Router);
+  dialog = inject(MatDialog);
+
+  users = signal<IUsuarios>([]);
+
+  user = signal({
     id: '',
     matricula: '',
     nome: '',
     senha: '',
     perfil: '',
-  };
+  });
 
   displayedColumns: string[] = ['name', 'password', 'role', 'actions'];
 
-  users: IUsuarios = [];
 
   subscription: Subscription = new Subscription();
 
-  constructor(private userService: UserService, private route: Router) {
-    this.userService
+  constructor() {
+    this.#userService
       .list()
       .pipe()
-      .subscribe((users: IUsuarios) => (this.users = users));
+      .subscribe((users: IUsuarios) => (this.users.set(users)));
   }
-  
+
   oneUser(matricula: string) {}
-  
+
   add(usuario: IUsuario) {
-    this.route.navigate(['userForm']);
-  }  
-  edit(user: IUsuario, id: string) {
-    throw new Error('Method not implemented.');
+    this.#route.navigate(['userForm']);
   }
-  delete(arg0: any) {
-    throw new Error('Method not implemented.');
+  edit(id: string) {
+    this.#route.navigate(['edit'], {
+      queryParams: { id: id},
+    });
+  }
+  delete(id: string) {
+    const dialogReference = this.dialog.open(ConfirmationDialogComponent);
+    this.subscription = dialogReference
+      .afterClosed()
+      .subscribe((result: any) => {
+        if (result) {
+          this.#userService
+            .deleteUser(id)
+            .then(() => {
+              alert('Registro excluído!')
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      });
+
   }
   voltar() {
-    this.route.navigate(['login']);
+    this.#route.navigate(['login']);
   }
 
   ngOnDestroy(): void {

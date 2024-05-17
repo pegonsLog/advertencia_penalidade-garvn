@@ -6,7 +6,7 @@
       >Usuários Cadastrados
 
       <span>
-        <button (click)="add(user)" id="mat-button-custom-adm">
+        <button (click)="add(user())" id="mat-button-custom-adm">
           <span class="material-symbols-outlined new"> add </span>
         </button>
       </span>
@@ -14,7 +14,7 @@
   </mat-card-header>
   <mat-card-content>
     <div id="altura" *ngIf="users; else loading">
-      <table mat-table [dataSource]="users">
+      <table mat-table [dataSource]="users()">
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Nome</th>
           <td mat-cell *matCellDef="let user">{{ user.nome }}</td>
@@ -36,7 +36,7 @@
           </th>
           <td mat-cell *matCellDef="let user">
             <span id="actions">
-              <button (click)="edit(user, user.id)" id="mat-button-custom">
+              <button (click)="edit(user.id)" id="mat-button-custom">
                 <span class="material-symbols-outlined" id="edit"> edit </span>
               </button>
               <button (click)="delete(user.id)" id="mat-button-custom">
