@@ -16,7 +16,6 @@ import { UserService } from '../user.service';
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent implements OnDestroy {
-
   #userService = inject(UserService);
   #route = inject(Router);
   dialog = inject(MatDialog);
@@ -33,14 +32,13 @@ export class UserListComponent implements OnDestroy {
 
   displayedColumns: string[] = ['name', 'password', 'role', 'actions'];
 
-
   subscription: Subscription = new Subscription();
 
   constructor() {
     this.#userService
       .list()
       .pipe()
-      .subscribe((users: IUsuarios) => (this.users.set(users)));
+      .subscribe((users: IUsuarios) => this.users.set(users));
   }
 
   oneUser(matricula: string) {}
@@ -49,8 +47,8 @@ export class UserListComponent implements OnDestroy {
     this.#route.navigate(['userForm']);
   }
   edit(id: string) {
-    this.#route.navigate(['edit'], {
-      queryParams: { id: id},
+    this.#route.navigate(['userForm'], {
+      queryParams: { id: id },
     });
   }
   delete(id: string) {
@@ -62,20 +60,19 @@ export class UserListComponent implements OnDestroy {
           this.#userService
             .deleteUser(id)
             .then(() => {
-              alert('Registro excluído!')
+              alert('Registro excluído com sucesso!');
             })
             .catch((err) => {
               console.log(err);
             });
         }
       });
-
   }
   voltar() {
     this.#route.navigate(['login']);
   }
 
   ngOnDestroy(): void {
-   this.subscription.unsubscribe()
+    this.subscription.unsubscribe();
   }
 }

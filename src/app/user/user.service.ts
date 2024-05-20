@@ -8,10 +8,7 @@ import {
   deleteDoc,
   doc,
   docData,
-  getDocs,
-  query,
-  setDoc,
-  where,
+  updateDoc
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { IUsuario, IUsuarios } from '../interface/usuario';
@@ -39,8 +36,8 @@ export class UserService {
     }) as Observable<IUsuarios>;
   }
 
-  oneUser(matricula: string) {
-    let $certificateRef = doc(this.firestore, 'users', matricula);
+  oneUser(id: string) {
+    let $certificateRef = doc(this.firestore, 'users', id);
     return docData($certificateRef, {
       idField: 'id',
     }) as Observable<IUsuario>;
@@ -51,10 +48,14 @@ export class UserService {
     return addDoc($userRef, usuario);
   }
 
-  updateUser(id: string) {
-    let $userRef = doc(this.firestore, 'users', id);
-    const user = docData($userRef) as Observable<IUsuario>
-    return setDoc($userRef, user);
+  async updateUser(usuario: IUsuario,) {
+    const $userRef = doc(this.firestore, 'users', usuario.id);
+    await updateDoc($userRef, {
+      usuario: usuario.matricula,
+      nome: usuario.nome,
+      perfil: usuario.perfil,
+      senha: usuario.senha,
+    });
   }
 
   async deleteUser(id: string) {

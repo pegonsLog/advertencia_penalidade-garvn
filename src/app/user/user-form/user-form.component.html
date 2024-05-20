@@ -29,12 +29,12 @@
     </mat-card-content>
 
     <mat-card-actions>
-      @if(user().id === ''){
+      @if(typeForm() === 'edit'){
       <ng-container>
         <button
           type="button"
           id="button-salvar"
-          (click)="onNew()"
+          (click)="onUpdate()"
           mat-raised-button
         >
           Salvar
@@ -44,7 +44,7 @@
         <button
           type="button"
           id="button-salvar"
-          (click)="onUpdate()"
+          (click)="onNew()"
           mat-raised-button
         >
           Salvar
