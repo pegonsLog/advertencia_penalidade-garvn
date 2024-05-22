@@ -1,5 +1,6 @@
 export interface IConsorcios extends Array<IConsorcio> {}
 export interface IConsorcio {
-numeroConsorcio: string;
-nomeConsorcio: string;
+  id: '';
+  numeroConsorcio: string;
+  nomeConsorcio: string;
 }

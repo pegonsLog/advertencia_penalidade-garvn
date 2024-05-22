@@ -14,6 +14,7 @@ import { VeiculoListaComponent } from './componentes/veiculo/veiculo-lista/veicu
 import { LoginComponent } from './login/login.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
+import { HomeComponent } from './componentes/home/home.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   },
   {
     path: 'userLista',

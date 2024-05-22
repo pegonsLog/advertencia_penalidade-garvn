@@ -1,5 +1,6 @@
 export interface IInfracoes extends Array<IInfracao> {}
 export interface IInfracao {
-    codigoInfracao: string;
-    nomeInfracao: string;
+  id: '';
+  codigoInfracao: string;
+  nomeInfracao: string;
 }

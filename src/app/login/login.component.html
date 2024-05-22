@@ -7,31 +7,27 @@
       <input
         matInput
         placeholder="Usuário"
-        inputmode="numeric"
-        name="user"
-        pattern="[0-9]*"
+        type="text"
+        [(ngModel)]="matricula"
+        required="true"
       />
     </mat-form-field>
-    <!-- [(ngModel)]="user" -->
-
     <mat-form-field class="full-width">
       <input
         matInput
         placeholder="Senha"
         type="password"
-        inputmode="numeric"
-        name="password"
-        pattern="[0-9]*"
+        [(ngModel)]="senha"
+        required="true"
       />
-      <!-- [(ngModel)]="password" -->
     </mat-form-field>
     <div id="centralizar">
       <mat-card-actions>
-        <button color="primary"
+        <button
+          color="primary"
           mat-raised-button
           id="button-entrar"
-          (click)="entrar('drhs')"
-          name="drh"
+          (click)="entrar(matricula(), senha())"
         >
           ENTRAR
         </button>

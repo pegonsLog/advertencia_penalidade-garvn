@@ -1,0 +1,23 @@
+.linha1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.linha2 {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  padding: 30px;
+  width: 150px;
+  align-items: center;
+  margin: 0px 5px 15px 10px;
+}
+.painel {
+  display: flex;
+  margin: 0 auto;
+  margin-top: 100px;
+  width: fit-content;
+  padding: 10px;
+}
