@@ -94,15 +94,6 @@ export class UserFormComponent implements OnInit, OnDestroy {
     this.#route.navigate(['userLista']);
   }
   ngOnInit(): void {
-    // let teste = this.user();
-    // this.#userService
-    //   .list()
-    //   .pipe()
-    //   .subscribe((dados: IUsuarios) => console.log(dados));
-    // this.#userService
-    //   .oneUser('564')
-    //   .pipe()
-    //   .subscribe((user: IUsuario) => (teste = user));
   }
 
   userFormEdit(user: IUsuario) {

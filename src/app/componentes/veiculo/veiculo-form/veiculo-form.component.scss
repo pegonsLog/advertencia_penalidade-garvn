@@ -1,0 +1,82 @@
+
+@media (mix-width: 600px) {
+  mat-card {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 600px) and (max-width: 2000px) {
+  mat-card {
+    width: 40%;
+    margin: 0 auto;
+  }
+}
+
+#user-list {
+  width: 40%;
+  margin: 0 auto;
+}
+
+#altura {
+  overflow-y: auto;
+  height: 450px;
+}
+
+* {
+  font-family: Montserrat;
+  font-weight: 300;
+}
+
+table {
+  padding: 10px;
+}
+
+#toolbar{
+  display: flex;
+  justify-content: space-between;
+  font-family: "Montserrat";
+  font-weight: 300;
+}
+
+#delete {
+  cursor: pointer;
+  color: rgb(255, 71, 71);
+  display: flex;
+  align-items: center;
+}
+
+.new{
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+#edit {
+  cursor: pointer;
+  color: rgb(5, 167, 5);
+  display: flex;
+  align-items: center;
+}
+#actions {
+  display: flex;
+  justify-content: center;
+}
+
+#mat-button-custom {
+  border: 0px;
+  background-color: white;
+}
+#mat-button-custom-adm {
+  display: flex;
+  align-items: center;
+  border: 0px;
+  background-color: rgba(0, 0, 0, 0);
+}
+#loading-spinner {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.15);
+}
