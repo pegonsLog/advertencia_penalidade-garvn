@@ -19,17 +19,26 @@
     </mat-toolbar>
   </mat-card-header>
   <mat-card-content>
-    @if(consorcios()){
+    @if(dataSource){
     <div id="altura">
-      <table mat-table [dataSource]="consorcios()">
+      <mat-form-field class="filtro">
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="" #input />
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="numeroConsorcio">
           <th mat-header-cell *matHeaderCellDef>Número da Consórcio</th>
-          <td mat-cell *matCellDef="let consorcio">{{ consorcio.numeroConsorcio }}</td>
+          <td mat-cell *matCellDef="let consorcio">
+            {{ consorcio.numeroConsorcio }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="nomeConsorcio">
           <th mat-header-cell *matHeaderCellDef>Nome do Consórcio</th>
-          <td mat-cell *matCellDef="let consorcio">{{ consorcio.nomeConsorcio }}</td>
+          <td mat-cell *matCellDef="let consorcio">
+            {{ consorcio.nomeConsorcio }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
@@ -52,8 +61,16 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">
+            Nenhum registro encontrado com o filtro: "{{ input.value }}"
+          </td>
+        </tr>
       </table>
-      <mat-divider></mat-divider>
+      <div class="divisor">
+        <mat-divider></mat-divider>
+      </div>
     </div>
     }@else{
     <ng-template #loading>
@@ -63,7 +80,9 @@
     </ng-template>
     }
   </mat-card-content>
-  <mat-divider></mat-divider>
+  <div class="divisor">
+    <mat-divider class="divisor"></mat-divider>
+  </div>
   <mat-card-actions>
     <button
       style="margin: 10px 8px"

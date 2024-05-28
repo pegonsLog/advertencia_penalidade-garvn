@@ -6,6 +6,7 @@ import { IVeiculo, IVeiculos } from '../../../interface/veiculo';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { VeiculoService } from '../veiculo.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-veiculo-lista',
@@ -19,7 +20,7 @@ export class VeiculoListaComponent implements OnDestroy {
   #route = inject(Router);
   dialog = inject(MatDialog);
 
-  veiculos = signal<IVeiculos>([]);
+  veiculos: IVeiculos = [];
 
   veiculo = signal<IVeiculo>({
     id: '',
@@ -28,6 +29,7 @@ export class VeiculoListaComponent implements OnDestroy {
   });
 
   displayedColumns: string[] = ['numeroVeiculo', 'placaVeiculo', 'actions'];
+  dataSource = new MatTableDataSource(this.veiculos);
 
   subscription: Subscription = new Subscription();
 
@@ -35,7 +37,9 @@ export class VeiculoListaComponent implements OnDestroy {
     this.#veiculoService
       .list()
       .pipe()
-      .subscribe((veiculos: IVeiculos) => this.veiculos.set(veiculos));
+      .subscribe((veiculos: IVeiculos) => {
+        this.veiculos = veiculos;
+        this.dataSource = new MatTableDataSource(this.veiculos)});
   }
 
   add(veiculo: IVeiculo) {
@@ -65,6 +69,11 @@ export class VeiculoListaComponent implements OnDestroy {
   }
   voltar() {
     this.#route.navigate(['home']);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy(): void {

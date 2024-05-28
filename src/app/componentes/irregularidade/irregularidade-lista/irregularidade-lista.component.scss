@@ -20,15 +20,12 @@
 #altura {
   overflow-y: auto;
   height: 450px;
+  padding: 0px;
 }
 
 * {
   font-family: Montserrat;
   font-weight: 300;
-}
-
-table {
-  padding: 10px;
 }
 
 #toolbar{
@@ -80,3 +77,12 @@ table {
   justify-content: center;
   background: rgba(0, 0, 0, 0.15);
 }
+.filtro {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.divisor {
+  padding: 20px;
+}
+

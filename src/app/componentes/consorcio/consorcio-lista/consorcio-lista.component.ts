@@ -1,5 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, OnDestroy, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IConsorcio, IConsorcios } from '../../../interface/consorcio';
@@ -14,31 +15,35 @@ import { ConsorcioService } from '../consorcio.service';
   templateUrl: './consorcio-lista.component.html',
   styleUrl: './consorcio-lista.component.scss',
 })
-export class ConsorcioListaComponent {
+export class ConsorcioListaComponent implements OnDestroy {
+
   #consorcioService = inject(ConsorcioService);
   #route = inject(Router);
   dialog = inject(MatDialog);
 
-  consorcios = signal<IConsorcio[]>([]);
+  consorcios: IConsorcios = [];
 
   consorcio = signal<IConsorcio>({
     id: '',
-    numeroConsorcio: '',
-    nomeConsorcio: '',
-  });
+  numeroConsorcio: '',
+  nomeConsorcio: '',
+});
 
-  displayedColumns: string[] = ['numeroConsorcio', 'nomeConsorcio', 'actions'];
+    displayedColumns: string[] = ['numeroConsorcio', 'nomeConsorcio', 'actions'];
+    dataSource = new MatTableDataSource(this.consorcios);
 
   subscription: Subscription = new Subscription();
 
   constructor() {
     this.#consorcioService
-      .list()
+    .list()
       .pipe()
-      .subscribe((consorcios: IConsorcios) => this.consorcios.set(consorcios));
-  }
+      .subscribe((consorcios: IConsorcios) => {
+        this.consorcios = consorcios;
+        this.dataSource = new MatTableDataSource(this.consorcios)});
+    }
 
-  add(consorcio: IConsorcio) {
+    add(consorcio: IConsorcio) {
     this.#route.navigate(['consorcioForm']);
   }
   edit(id: string) {
@@ -65,6 +70,11 @@ export class ConsorcioListaComponent {
   }
   voltar() {
     this.#route.navigate(['home']);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy(): void {

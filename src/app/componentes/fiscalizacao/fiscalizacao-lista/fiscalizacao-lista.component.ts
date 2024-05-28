@@ -6,6 +6,7 @@ import { IFiscalizacao, IFiscalizacoes } from '../../../interface/fiscalizacao';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { FiscalizacaoService } from '../fiscalizacao.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-fiscalizacao-lista',
@@ -15,11 +16,21 @@ import { FiscalizacaoService } from '../fiscalizacao.service';
   styleUrl: './fiscalizacao-lista.component.scss',
 })
 export class FiscalizacaoListaComponent implements OnDestroy {
+
   #fiscalizacaoService = inject(FiscalizacaoService);
   #route = inject(Router);
   dialog = inject(MatDialog);
 
-  fiscalizacoes = signal<IFiscalizacoes>([]);
+  fiscalizacoes: IFiscalizacoes = []
+
+  displayedColumns: string[] = [
+    'matriculaAgente',
+    'nomeAgente',
+    'dataEmissao',
+    'dataConferencia',
+    'actions',
+  ];
+  dataSource = new MatTableDataSource(this.fiscalizacoes);
 
   fiscalizacao = signal<IFiscalizacao>({
     id: '',
@@ -29,13 +40,6 @@ export class FiscalizacaoListaComponent implements OnDestroy {
     dataConferencia: '',
   });
 
-  displayedColumns: string[] = [
-    'matriculaAgente',
-    'nomeAgente',
-    'dataEmissao',
-    'dataConferencia',
-    'actions',
-  ];
 
   subscription: Subscription = new Subscription();
 
@@ -43,8 +47,9 @@ export class FiscalizacaoListaComponent implements OnDestroy {
     this.#fiscalizacaoService
       .list()
       .pipe()
-      .subscribe((fiscalizacoes: IFiscalizacoes) =>
-        this.fiscalizacoes.set(fiscalizacoes)
+      .subscribe((fiscalizacoes: IFiscalizacoes) =>{
+        this.fiscalizacoes = fiscalizacoes;
+        this.dataSource = new MatTableDataSource(this.fiscalizacoes)}
       );
   }
 
@@ -77,6 +82,10 @@ export class FiscalizacaoListaComponent implements OnDestroy {
     this.#route.navigate(['home']);
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

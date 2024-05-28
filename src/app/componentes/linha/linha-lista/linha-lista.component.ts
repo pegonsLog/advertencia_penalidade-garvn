@@ -7,6 +7,7 @@ import { ILinha, ILinhas } from '../../../interface/linha';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { LinhaService } from '../linha.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-linha-lista',
@@ -20,7 +21,7 @@ export class LinhaListaComponent implements OnDestroy{
   #route = inject(Router);
   dialog = inject(MatDialog);
 
-  linhas = signal<ILinhas>([]);
+  linhas: ILinhas = [];
 
   linha = signal<ILinha>({
     id: '',
@@ -29,6 +30,7 @@ export class LinhaListaComponent implements OnDestroy{
   });
 
   displayedColumns: string[] = ['numeroLinha', 'nomeLinha', 'actions'];
+  dataSource = new MatTableDataSource(this.linhas);
 
   subscription: Subscription = new Subscription();
 
@@ -36,9 +38,10 @@ export class LinhaListaComponent implements OnDestroy{
     this.#linhaService
       .list()
       .pipe()
-      .subscribe((linhas: ILinhas) => this.linhas.set(linhas));
+      .subscribe((linhas: ILinhas) => {
+        this.linhas = linhas;
+        this.dataSource = new MatTableDataSource(this.linhas)});
   }
-
 
   add(linha: ILinha) {
     this.#route.navigate(['linhaForm']);
@@ -67,6 +70,11 @@ export class LinhaListaComponent implements OnDestroy{
   }
   voltar() {
     this.#route.navigate(['home']);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy(): void {

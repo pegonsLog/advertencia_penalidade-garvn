@@ -20,6 +20,7 @@
 #altura {
   overflow-y: auto;
   height: 450px;
+  padding: 0px;
 }
 
 * {
@@ -80,3 +81,13 @@ table {
   justify-content: center;
   background: rgba(0, 0, 0, 0.15);
 }
+
+.filtro {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.divisor {
+padding: 0px;
+}
+

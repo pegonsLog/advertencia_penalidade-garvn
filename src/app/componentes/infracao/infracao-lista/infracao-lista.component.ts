@@ -7,6 +7,7 @@ import { IInfracao, IInfracoes } from '../../../interface/infracao';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { InfracaoService } from '../infracao.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-infracao-lista',
@@ -16,11 +17,15 @@ import { InfracaoService } from '../infracao.service';
   styleUrl: './infracao-lista.component.scss'
 })
 export class InfracaoListaComponent implements OnDestroy{
+
   #infracaoService = inject(InfracaoService);
   #route = inject(Router);
   dialog = inject(MatDialog);
 
-  infracoes = signal<IInfracoes>([]);
+  infracoes: IInfracoes = [];
+
+  displayedColumns: string[] = ['codigoInfracao', 'nomeInfracao', 'actions'];
+  dataSource = new MatTableDataSource(this.infracoes);
 
   infracao = signal<IInfracao>({
     id: '',
@@ -28,14 +33,15 @@ export class InfracaoListaComponent implements OnDestroy{
     nomeInfracao: '',
   });
 
-  displayedColumns: string[] = ['codigoInfracao', 'nomeInfracao', 'actions'];
 
   subscription: Subscription = new Subscription();
 
   constructor() {
     this.#infracaoService.list()
       .pipe()
-      .subscribe((infracoes: IInfracoes) => this.infracoes.set(infracoes));
+      .subscribe((infracoes: IInfracoes) => {{
+        this.infracoes = infracoes;
+        this.dataSource = new MatTableDataSource(this.infracoes)}});
   }
 
 
@@ -66,6 +72,11 @@ export class InfracaoListaComponent implements OnDestroy{
   }
   voltar() {
     this.#route.navigate(['home']);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy(): void {
