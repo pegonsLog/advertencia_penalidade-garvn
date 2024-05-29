@@ -30,7 +30,9 @@ export class VeiculoFormComponent implements OnDestroy {
   veiculo = signal<IVeiculo>({
     id: '',
     numeroVeiculo: '',
-    placaVeiculo: '',
+    placa: '',
+    tipo: '',
+    operadora: ''
   });
 
   constructor() {
@@ -44,14 +46,18 @@ export class VeiculoFormComponent implements OnDestroy {
           this.veiculoForm = this.#fb.group({
             id: [result.id],
             numeroVeiculo: [result.numeroVeiculo, Validators.required],
-            placaVeiculo: [result.placaVeiculo, Validators.required],
+            placa: [result.placa, Validators.required],
+            tipo: [result.tipo, Validators.required],
+            operadora: [result.operadora, Validators.required],
           });
         });
     }
 
     this.veiculoForm = this.#fb.group({
       numeroVeiculo: ['', Validators.required],
-      placaVeiculo: ['', Validators.required],
+      placa: ['', Validators.required],
+      tipo: ['', Validators.required],
+      operadora: ['', Validators.required]
     });
   }
 
@@ -87,7 +93,9 @@ export class VeiculoFormComponent implements OnDestroy {
   userFormEdit(veiculo: IVeiculo) {
     this.veiculoForm = this.#fb.group({
       numeroVeiculo: [veiculo.numeroVeiculo, Validators.required],
-      placaVeiculo: [veiculo.placaVeiculo, Validators.required],
+      placa: [veiculo.placa, Validators.required],
+      tipo: [veiculo.tipo, Validators.required],
+      operadora: [veiculo.operadora, Validators.required]
     });
   }
   ngOnDestroy(): void {

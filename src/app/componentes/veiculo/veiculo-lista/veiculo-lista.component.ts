@@ -7,11 +7,12 @@ import { AngularMaterialModule } from '../../../shared/angular-material/angular-
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { VeiculoService } from '../veiculo.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-veiculo-lista',
   standalone: true,
-  imports: [AngularMaterialModule],
+  imports: [AngularMaterialModule, CommonModule],
   templateUrl: './veiculo-lista.component.html',
   styleUrl: './veiculo-lista.component.scss',
 })
@@ -25,7 +26,9 @@ export class VeiculoListaComponent implements OnDestroy {
   veiculo = signal<IVeiculo>({
     id: '',
     numeroVeiculo: '',
-    placaVeiculo: '',
+    placa: '',
+    tipo: '',
+    operadora: ''
   });
 
   displayedColumns: string[] = ['numeroVeiculo', 'placaVeiculo', 'actions'];

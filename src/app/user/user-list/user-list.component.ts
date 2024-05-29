@@ -7,6 +7,7 @@ import { IUsuario, IUsuarios } from '../../interface/usuario';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../shared/dialogs/confirmation/confirmation.component';
 import { UserService } from '../user.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-user',
@@ -20,7 +21,7 @@ export class UserListComponent implements OnDestroy {
   #route = inject(Router);
   dialog = inject(MatDialog);
 
-  users = signal<IUsuarios>([]);
+  users: IUsuarios = [];
 
   user = signal({
     id: '',
@@ -31,6 +32,7 @@ export class UserListComponent implements OnDestroy {
   });
 
   displayedColumns: string[] = ['name', 'password', 'role', 'actions'];
+  dataSource = new MatTableDataSource(this.users);
 
   subscription: Subscription = new Subscription();
 
@@ -38,7 +40,9 @@ export class UserListComponent implements OnDestroy {
     this.#userService
       .list()
       .pipe()
-      .subscribe((users: IUsuarios) => this.users.set(users));
+      .subscribe((users: IUsuarios) => {
+        this.users = users;
+        this.dataSource = new MatTableDataSource(this.users)});
   }
 
   oneUser(matricula: string) {}
@@ -46,11 +50,13 @@ export class UserListComponent implements OnDestroy {
   add(usuario: IUsuario) {
     this.#route.navigate(['userForm']);
   }
+  
   edit(id: string) {
     this.#route.navigate(['userForm'], {
       queryParams: { id: id },
     });
   }
+
   delete(id: string) {
     const dialogReference = this.dialog.open(ConfirmationDialogComponent);
     this.subscription = dialogReference
@@ -68,8 +74,14 @@ export class UserListComponent implements OnDestroy {
         }
       });
   }
+
   voltar() {
     this.#route.navigate(['login']);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy(): void {

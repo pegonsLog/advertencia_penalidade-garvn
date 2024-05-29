@@ -11,18 +11,22 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { IVeiculo, IVeiculos } from '../../interface/veiculo';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VeiculoService {
   firestore: Firestore = inject(Firestore);
+  http: HttpClient = inject(HttpClient);
 
   veiculos: IVeiculos = [];
   veiculo: IVeiculo = {
     id: '',
     numeroVeiculo: '',
-    placaVeiculo: '',
+    placa: '',
+    tipo: '',
+    operadora: ''
   };
   id: string = '';
 
@@ -49,7 +53,9 @@ export class VeiculoService {
     const $veiculoRef = doc(this.firestore, 'veiculos', veiculo.id);
     await updateDoc($veiculoRef, {
       numeroVeiculo: veiculo.numeroVeiculo,
-      placaVeiculo: veiculo.placaVeiculo,
+     placa: '',
+    tipo: '',
+    operadora: ''
     });
   }
 
@@ -58,4 +64,19 @@ export class VeiculoService {
 
     return deleteDoc($veiculoRef);
   }
+
+  loadVehicles() {
+    this.http.get('/home/pegons/apps/advertencia-penalidade/src/app/veiculosJson.ts')
+      .subscribe(data => {
+        const parsedData = JSON.parse(data) as IVeiculos;
+
+        if (!Array.isArray(parsedData)) {
+          throw new Error('Formato de JSON inválido');
+        }
+
+        // Utilize o array parsedData como um array de IVeiculos
+        console.log(parsedData);
+      });
+  }
+
 }
