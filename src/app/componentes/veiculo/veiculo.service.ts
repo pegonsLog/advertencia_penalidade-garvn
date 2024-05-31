@@ -1,4 +1,3 @@
-import { Injectable, inject } from '@angular/core';
 import {
   Firestore,
   addDoc,
@@ -11,14 +10,15 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { IVeiculo, IVeiculos } from '../../interface/veiculo';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { ExportarVeiculos } from '../../veiculosParaFirestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VeiculoService {
   firestore: Firestore = inject(Firestore);
-  http: HttpClient = inject(HttpClient);
+  exportarFirestore: ExportarVeiculos = inject(ExportarVeiculos);
 
   veiculos: IVeiculos = [];
   veiculo: IVeiculo = {
@@ -65,18 +65,8 @@ export class VeiculoService {
     return deleteDoc($veiculoRef);
   }
 
-  loadVehicles() {
-    this.http.get('/home/pegons/apps/advertencia-penalidade/src/app/veiculosJson.ts')
-      .subscribe(data => {
-        const parsedData = JSON.parse(data) as IVeiculos;
-
-        if (!Array.isArray(parsedData)) {
-          throw new Error('Formato de JSON inválido');
-        }
-
-        // Utilize o array parsedData como um array de IVeiculos
-        console.log(parsedData);
-      });
+  async loadVeiculos(): Promise<IVeiculos>{
+    return this.exportarFirestore.veiculos
   }
 
 }

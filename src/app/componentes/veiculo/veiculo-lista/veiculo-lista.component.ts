@@ -35,15 +35,14 @@ export class VeiculoListaComponent implements OnDestroy {
   dataSource = new MatTableDataSource(this.veiculos);
 
   subscription: Subscription = new Subscription();
-
+  
   constructor() {
     this.#veiculoService
-      .list()
-      .pipe()
-      .subscribe((veiculos: IVeiculos) => {
-        this.veiculos = veiculos;
-        this.dataSource = new MatTableDataSource(this.veiculos)});
-  }
+      .loadVeiculos().then((data: IVeiculos) => {
+        this.dataSource = new MatTableDataSource(data)
+      })
+  };
+
 
   add(veiculo: IVeiculo) {
     this.#route.navigate(['veiculoForm']);

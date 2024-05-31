@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class HomeComponent {
   private route = inject(Router)
 sair() {
-this.route.navigate(['login'])
+this.route.navigate(['exportar'])
 }
 usuario() {
 this.route.navigate(['userLista'])
@@ -34,6 +34,9 @@ this.route.navigate(['linhaLista'])
 }
 fiscalizacao() {
 this.route.navigate(['fiscalizacaoLista'])
+}
+exportar() {
+this.route.navigate(['exportar'])
 }
 
 }

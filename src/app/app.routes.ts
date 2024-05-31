@@ -86,4 +86,5 @@ export const routes: Routes = [
     path: 'veiculoLista',
     component: VeiculoListaComponent,
   },
+
 ];
