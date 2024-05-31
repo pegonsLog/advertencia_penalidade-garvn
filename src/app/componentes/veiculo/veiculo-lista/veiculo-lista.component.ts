@@ -8,6 +8,7 @@ import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmatio
 import { VeiculoService } from '../veiculo.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
+import { ExportarVeiculos } from '../../../veiculosParaFirestore';
 
 @Component({
   selector: 'app-veiculo-lista',
@@ -35,12 +36,17 @@ export class VeiculoListaComponent implements OnDestroy {
   dataSource = new MatTableDataSource(this.veiculos);
 
   subscription: Subscription = new Subscription();
-  
+
+  exportarVeiculos = inject(ExportarVeiculos);
+  veiculos2: IVeiculos[] = (this.exportarVeiculos as unknown) as IVeiculos[];
+
   constructor() {
-    this.#veiculoService
-      .loadVeiculos().then((data: IVeiculos) => {
-        this.dataSource = new MatTableDataSource(data)
-      })
+    // this.#veiculoService
+    //   .loadVeiculos().then((data: IVeiculos) => {
+    //     this.dataSource = new MatTableDataSource(data)
+    //   })
+
+
   };
 
 

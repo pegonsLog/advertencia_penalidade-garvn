@@ -65,8 +65,4 @@ export class VeiculoService {
     return deleteDoc($veiculoRef);
   }
 
-  async loadVeiculos(): Promise<IVeiculos>{
-    return this.exportarFirestore.veiculos
-  }
-
 }
