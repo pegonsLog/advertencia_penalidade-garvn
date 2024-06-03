@@ -58,4 +58,5 @@ export class ConsorcioService {
 
     return deleteDoc($consorcioRef);
   }
+
 }

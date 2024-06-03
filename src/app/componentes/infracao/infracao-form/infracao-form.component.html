@@ -1,1 +1,58 @@
-<p>infracao-form works!</p>
+<mat-card>
+  <form [formGroup]="infracaoForm">
+    <mat-card-content>
+      <ng-container>
+        <mat-toolbar color="primary" id="peso-fonte"
+          >Adicionar Usuário</mat-toolbar
+        >
+      </ng-container>
+
+      <!-- #update -->
+      <ng-template>
+        <mat-toolbar color="primary" id="peso-fonte"
+          >Alterar Usuário</mat-toolbar
+        >
+      </ng-template>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Matrícula" formControlName="matricula" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Nome" formControlName="nome" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Senha" formControlName="senha" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Perfil" formControlName="perfil" />
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+      @if(typeForm() === 'edit'){
+      <ng-container>
+        <button
+          type="button"
+          id="button-salvar"
+          (click)="onUpdate()"
+          mat-raised-button
+        >
+          Salvar
+        </button></ng-container
+      >}@else{
+      <ng-template #update_button>
+        <button
+          type="button"
+          id="button-salvar"
+          (click)="onNew()"
+          mat-raised-button
+        >
+          Salvar
+        </button> </ng-template
+      >}
+      <button type="button" mat-raised-button (click)="voltar()">
+        Cancelar
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

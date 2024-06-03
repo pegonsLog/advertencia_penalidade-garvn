@@ -7,11 +7,12 @@ import { IConsorcio, IConsorcios } from '../../../interface/consorcio';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { ConsorcioService } from '../consorcio.service';
+import { MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-consorcio-lista',
   standalone: true,
-  imports: [AngularMaterialModule],
+  imports: [AngularMaterialModule, MatSortModule],
   templateUrl: './consorcio-lista.component.html',
   styleUrl: './consorcio-lista.component.scss',
 })
@@ -40,7 +41,7 @@ export class ConsorcioListaComponent implements OnDestroy {
       .pipe()
       .subscribe((consorcios: IConsorcios) => {
         this.consorcios = consorcios;
-        this.dataSource = new MatTableDataSource(this.consorcios)});
+        this.dataSource = new MatTableDataSource(this.consorcios.sort((a, b) => a.numeroConsorcio.localeCompare(b.numeroConsorcio)))});
     }
 
     add(consorcio: IConsorcio) {
@@ -80,4 +81,5 @@ export class ConsorcioListaComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
 }

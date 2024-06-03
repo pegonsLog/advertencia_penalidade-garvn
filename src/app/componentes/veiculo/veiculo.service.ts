@@ -44,7 +44,7 @@ export class VeiculoService {
     }) as Observable<IVeiculo>;
   }
 
-  addVeiculo(veiculo: IVeiculo) {
+  async addVeiculo(veiculo: IVeiculo) {
     let $veiculoRef = collection(this.firestore, 'veiculos');
     return addDoc($veiculoRef, veiculo);
   }
@@ -63,6 +63,10 @@ export class VeiculoService {
     let $veiculoRef = doc(this.firestore, 'veiculos', id);
 
     return deleteDoc($veiculoRef);
+  }
+
+  loadVeiculos(): IVeiculos{
+    return this.exportarFirestore.veiculos
   }
 
 }

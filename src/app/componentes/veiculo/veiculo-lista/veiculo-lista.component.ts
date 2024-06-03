@@ -29,7 +29,7 @@ export class VeiculoListaComponent implements OnDestroy {
     numeroVeiculo: '',
     placa: '',
     tipo: '',
-    operadora: ''
+    operadora: '',
   });
 
   displayedColumns: string[] = ['numeroVeiculo', 'placaVeiculo', 'actions'];
@@ -38,17 +38,14 @@ export class VeiculoListaComponent implements OnDestroy {
   subscription: Subscription = new Subscription();
 
   exportarVeiculos = inject(ExportarVeiculos);
-  veiculos2: IVeiculos[] = (this.exportarVeiculos as unknown) as IVeiculos[];
+  // veiculos2: IVeiculos[] = (this.exportarVeiculos as unknown) as IVeiculos;
 
   constructor() {
-    // this.#veiculoService
-    //   .loadVeiculos().then((data: IVeiculos) => {
-    //     this.dataSource = new MatTableDataSource(data)
-    //   })
+    this.subscription = this.#veiculoService.list().pipe().subscribe((data: IVeiculos)=> this.dataSource = new MatTableDataSource(data ))
 
-
-  };
-
+    // this.veiculos = this.#veiculoService.loadVeiculos();
+    // console.log(this.veiculos)
+  }
 
   add(veiculo: IVeiculo) {
     this.#route.navigate(['veiculoForm']);
@@ -74,10 +71,10 @@ export class VeiculoListaComponent implements OnDestroy {
             });
         }
       });
-  }
-  voltar() {
-    this.#route.navigate(['home']);
-  }
+    }
+    voltar() {
+      this.#route.navigate(['home']);
+    }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -86,5 +83,12 @@ export class VeiculoListaComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  async exportar() {
+    for(let r of this.veiculos)
+      {
+        await this.#veiculoService.addVeiculo(r).then();
+      }
   }
 }

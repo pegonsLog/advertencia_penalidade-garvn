@@ -30,7 +30,7 @@ export class InfracaoService {
     let $infracoesRef = doc(this.firestore, 'infracoes', id);
     return docData($infracoesRef, {
       idField: 'id',
-    }) as Observable<ILinha>;
+    }) as Observable<IInfracao>;
   }
 
   addInfracao(infracao: IInfracao) {
