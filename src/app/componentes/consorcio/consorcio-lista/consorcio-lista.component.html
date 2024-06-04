@@ -12,7 +12,7 @@
       >Consórcios Cadastrados
 
       <span>
-        <button (click)="add(consorcio())" id="mat-button-custom-adm">
+        <button (click)="add()" id="mat-button-custom-adm">
           <span class="material-symbols-outlined new"> add </span>
         </button>
       </span>
@@ -47,10 +47,10 @@
           </th>
           <td mat-cell *matCellDef="let consorcio">
             <span id="actions">
-              <button (click)="edit(consorcio().id)" id="mat-button-custom">
+              <button (click)="edit(consorcio.id)" id="mat-button-custom">
                 <span class="material-symbols-outlined" id="edit"> edit </span>
               </button>
-              <button (click)="delete(consorcio().id)" id="mat-button-custom">
+              <button (click)="delete(consorcio.id)" id="mat-button-custom">
                 <span class="material-symbols-outlined" id="delete">
                   delete
                 </span>

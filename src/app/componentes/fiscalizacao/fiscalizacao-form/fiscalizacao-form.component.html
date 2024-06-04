@@ -2,35 +2,35 @@
   <form [formGroup]="fiscalizacaoForm">
     <mat-card-content>
       <ng-container>
+        @if(typeForm() !== 'edit'){
         <mat-toolbar color="primary" id="peso-fonte"
-          >Adicionar Usuário</mat-toolbar
+          >Adicionar Fiscalização</mat-toolbar
         >
+
+        }@else {
+        <mat-toolbar color="primary" id="peso-fonte"
+          >Alterar Fiscalização</mat-toolbar
+        >}
       </ng-container>
 
-      <!-- #update -->
-      <ng-template>
-        <mat-toolbar color="primary" id="peso-fonte"
-          >Alterar Usuário</mat-toolbar
-        >
-      </ng-template>
-
       <mat-form-field class="full-width">
-        <input matInput placeholder="Matrícula" formControlName="matricula" />
+        <input matInput placeholder="Matrícula do agente" formControlName="matriculaAgente" />
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput placeholder="Nome" formControlName="nome" />
+        <input matInput placeholder="Nome do agente" formControlName="nomeAgente" />
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput placeholder="Senha" formControlName="senha" />
+        <input matInput placeholder="Data da emissão" formControlName="dataEmissao" />
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput placeholder="Perfil" formControlName="perfil" />
+        <input matInput placeholder="Data da conferência
+        " formControlName="dataConferencia" />
       </mat-form-field>
     </mat-card-content>
 
     <mat-card-actions>
-      @if(typeForm() === 'edit'){
       <ng-container>
+        @if(typeForm() === 'edit'){
         <button
           type="button"
           id="button-salvar"
@@ -38,9 +38,8 @@
           mat-raised-button
         >
           Salvar
-        </button></ng-container
-      >}@else{
-      <ng-template #update_button>
+        </button>
+        }@else{
         <button
           type="button"
           id="button-salvar"
@@ -48,11 +47,13 @@
           mat-raised-button
         >
           Salvar
-        </button> </ng-template
-      >}
-      <button type="button" mat-raised-button (click)="voltar()">
-        Cancelar
-      </button>
+        </button>
+        }
+
+        <button type="button" mat-raised-button (click)="voltar()">
+          Cancelar
+        </button>
+      </ng-container>
     </mat-card-actions>
   </form>
 </mat-card>

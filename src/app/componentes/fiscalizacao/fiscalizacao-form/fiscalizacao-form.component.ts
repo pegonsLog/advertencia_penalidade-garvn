@@ -26,7 +26,7 @@ export class FiscalizacaoFormComponent {
   #activatedRoute = inject(ActivatedRoute);
 
   fiscalizacaoForm: FormGroup;
-  typeForm = signal('');
+  typeForm = signal<string>('');
 
   id = signal<string>('');
 
@@ -70,7 +70,6 @@ export class FiscalizacaoFormComponent {
     this.#fiscalizacaoService
       .addFiscalizacao(this.fiscalizacaoForm.getRawValue())
       .then(() => {
-        console.log('Fiscalização adicionada com sucesso!');
         this.#route.navigate(['fiscalizacaoLista']);
         alert('Registro adicionado com sucesso!');
       })

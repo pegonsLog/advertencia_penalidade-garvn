@@ -26,7 +26,7 @@ export class LinhaFormComponent {
   #activatedRoute = inject(ActivatedRoute);
 
   linhaForm: FormGroup;
-  typeForm = signal('');
+  typeForm = signal<string>('');
 
   id = signal<string>('');
 
@@ -48,6 +48,8 @@ export class LinhaFormComponent {
         .subscribe((result: ILinha) => {
           this.linhaForm = this.#fb.group({
             id: [result.id],
+            numeroLinha: [result.numeroLinha, Validators.required],
+            nomeLinha: [result.nomeLinha, Validators.required],
           });
         });
     }
@@ -62,7 +64,6 @@ export class LinhaFormComponent {
     this.#linhaService
       .addLinha(this.linhaForm.getRawValue())
       .then(() => {
-        console.log('Linha adicionada com sucesso!');
         this.#route.navigate(['linhaLista']);
         alert('Registro adicionado com sucesso!');
       })

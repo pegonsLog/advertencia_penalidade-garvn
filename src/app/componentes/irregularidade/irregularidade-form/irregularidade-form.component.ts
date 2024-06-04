@@ -23,7 +23,7 @@ export class IrregularidadeFormComponent {
   #activatedRoute = inject(ActivatedRoute);
 
   irregularidadeForm: FormGroup;
-  typeForm = signal('');
+  typeForm = signal<string>('');
 
   id = signal<string>('');
 

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -7,7 +8,6 @@ import { IConsorcio, IConsorcios } from '../../../interface/consorcio';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { ConsorcioService } from '../consorcio.service';
-import { MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-consorcio-lista',
@@ -17,7 +17,6 @@ import { MatSortModule } from '@angular/material/sort';
   styleUrl: './consorcio-lista.component.scss',
 })
 export class ConsorcioListaComponent implements OnDestroy {
-
   #consorcioService = inject(ConsorcioService);
   #route = inject(Router);
   dialog = inject(MatDialog);
@@ -26,28 +25,34 @@ export class ConsorcioListaComponent implements OnDestroy {
 
   consorcio = signal<IConsorcio>({
     id: '',
-  numeroConsorcio: '',
-  nomeConsorcio: '',
-});
+    numeroConsorcio: '',
+    nomeConsorcio: '',
+  });
 
-    displayedColumns: string[] = ['numeroConsorcio', 'nomeConsorcio', 'actions'];
-    dataSource = new MatTableDataSource(this.consorcios);
+  displayedColumns: string[] = ['numeroConsorcio', 'nomeConsorcio', 'actions'];
+  dataSource = new MatTableDataSource(this.consorcios);
 
   subscription: Subscription = new Subscription();
 
   constructor() {
     this.#consorcioService
-    .list()
+      .list()
       .pipe()
       .subscribe((consorcios: IConsorcios) => {
         this.consorcios = consorcios;
-        this.dataSource = new MatTableDataSource(this.consorcios.sort((a, b) => a.numeroConsorcio.localeCompare(b.numeroConsorcio)))});
-    }
+        this.dataSource = new MatTableDataSource(
+          this.consorcios.sort((a, b) =>
+            a.numeroConsorcio.localeCompare(b.numeroConsorcio)
+          )
+        );
+      });
+  }
 
-    add(consorcio: IConsorcio) {
+  add() {
     this.#route.navigate(['consorcioForm']);
   }
   edit(id: string) {
+
     this.#route.navigate(['consorcioForm'], {
       queryParams: { id: id },
     });
@@ -81,5 +86,4 @@ export class ConsorcioListaComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

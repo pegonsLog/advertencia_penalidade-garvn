@@ -21,7 +21,7 @@ export class InfracaoFormComponent {
   #activatedRoute = inject(ActivatedRoute);
 
   infracaoForm: FormGroup;
-  typeForm = signal('');
+  typeForm = signal<string>('');
 
   id = signal<string>('');
 

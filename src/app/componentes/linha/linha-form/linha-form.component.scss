@@ -1,0 +1,40 @@
+
+@media (mix-width: 600px) {
+  mat-card {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 600px) and (max-width: 2000px) {
+  mat-card {
+    width: 40%;
+    margin: 0 auto;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-card-actions {
+  margin-left: 10px;
+}
+
+mat-toolbar,
+button {
+  margin-bottom: 1em;
+}
+
+#peso-fonte {
+  font-weight: 300;
+  font-family: Montserrat;
+}
+
+button {
+  margin-right: 10px;
+}
+#button-salvar{
+  background-color: #2b61f5;
+  color: white;
+}
+

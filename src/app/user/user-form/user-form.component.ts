@@ -26,7 +26,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
   #activatedRoute = inject(ActivatedRoute);
 
   userForm: FormGroup;
-  typeForm = signal('');
+  typeForm = signal<string>('');
 
   id = signal<string>('');
 
@@ -57,7 +57,6 @@ export class UserFormComponent implements OnInit, OnDestroy {
           });
         });
     }
-
     this.userForm = this.#fb.group({
       matricula: ['', Validators.required],
       nome: ['', Validators.required],
@@ -70,7 +69,6 @@ export class UserFormComponent implements OnInit, OnDestroy {
     this.#userService
       .addUser(this.userForm.getRawValue())
       .then(() => {
-        console.log('Usuário adicionado com sucesso!');
         this.#route.navigate(['userLista']);
         alert('Registro adicionado com sucesso!');
       })
@@ -93,9 +91,8 @@ export class UserFormComponent implements OnInit, OnDestroy {
   voltar() {
     this.#route.navigate(['userLista']);
   }
-  
-  ngOnInit(): void {
-  }
+
+  ngOnInit(): void {}
 
   userFormEdit(user: IUsuario) {
     this.userForm = this.#fb.group({

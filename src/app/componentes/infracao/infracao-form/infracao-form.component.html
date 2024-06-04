@@ -2,35 +2,28 @@
   <form [formGroup]="infracaoForm">
     <mat-card-content>
       <ng-container>
+        @if(typeForm() !== 'edit'){
         <mat-toolbar color="primary" id="peso-fonte"
-          >Adicionar Usuário</mat-toolbar
+          >Adicionar Infração</mat-toolbar
         >
+
+        }@else {
+        <mat-toolbar color="primary" id="peso-fonte"
+          >Alterar Infração</mat-toolbar
+        >}
       </ng-container>
 
-      <!-- #update -->
-      <ng-template>
-        <mat-toolbar color="primary" id="peso-fonte"
-          >Alterar Usuário</mat-toolbar
-        >
-      </ng-template>
-
       <mat-form-field class="full-width">
-        <input matInput placeholder="Matrícula" formControlName="matricula" />
+        <input matInput placeholder="Código da infração" formControlName="codigoInfracao" />
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput placeholder="Nome" formControlName="nome" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Senha" formControlName="senha" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Perfil" formControlName="perfil" />
+        <input matInput placeholder="Nome da infração" formControlName="nomeInfracao" />
       </mat-form-field>
     </mat-card-content>
 
     <mat-card-actions>
-      @if(typeForm() === 'edit'){
       <ng-container>
+        @if(typeForm() === 'edit'){
         <button
           type="button"
           id="button-salvar"
@@ -38,9 +31,8 @@
           mat-raised-button
         >
           Salvar
-        </button></ng-container
-      >}@else{
-      <ng-template #update_button>
+        </button>
+        }@else{
         <button
           type="button"
           id="button-salvar"
@@ -48,11 +40,13 @@
           mat-raised-button
         >
           Salvar
-        </button> </ng-template
-      >}
-      <button type="button" mat-raised-button (click)="voltar()">
-        Cancelar
-      </button>
+        </button>
+        }
+
+        <button type="button" mat-raised-button (click)="voltar()">
+          Cancelar
+        </button>
+      </ng-container>
     </mat-card-actions>
   </form>
 </mat-card>
