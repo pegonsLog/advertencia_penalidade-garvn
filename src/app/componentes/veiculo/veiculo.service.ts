@@ -26,7 +26,7 @@ export class VeiculoService {
     numeroVeiculo: '',
     placa: '',
     tipo: '',
-    operadora: ''
+    operadora: '',
   };
   id: string = '';
 
@@ -53,9 +53,9 @@ export class VeiculoService {
     const $veiculoRef = doc(this.firestore, 'veiculos', veiculo.id);
     await updateDoc($veiculoRef, {
       numeroVeiculo: veiculo.numeroVeiculo,
-     placa: '',
-    tipo: '',
-    operadora: ''
+      placa: veiculo.placa,
+      tipo: veiculo.tipo,
+      operadora: veiculo.operadora,
     });
   }
 
@@ -65,8 +65,7 @@ export class VeiculoService {
     return deleteDoc($veiculoRef);
   }
 
-  loadVeiculos(): IVeiculos{
-    return this.exportarFirestore.veiculos
+  loadVeiculos(): IVeiculos {
+    return this.exportarFirestore.veiculos;
   }
-
 }

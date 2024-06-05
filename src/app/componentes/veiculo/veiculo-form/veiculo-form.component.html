@@ -2,9 +2,15 @@
   <form [formGroup]="veiculoForm">
     <mat-card-content>
       <ng-container>
+        @if(typeForm() !== 'edit'){
         <mat-toolbar color="primary" id="peso-fonte"
           >Adicionar Veículo</mat-toolbar
         >
+
+        }@else {
+        <mat-toolbar color="primary" id="peso-fonte"
+          >Alterar Veículo</mat-toolbar
+        >}
       </ng-container>
 
       <!-- #update -->
@@ -29,8 +35,8 @@
     </mat-card-content>
 
     <mat-card-actions>
-      @if(typeForm() === 'edit'){
       <ng-container>
+        @if(typeForm() === 'edit'){
         <button
           type="button"
           id="button-salvar"
@@ -38,9 +44,8 @@
           mat-raised-button
         >
           Salvar
-        </button> </ng-container
-      >}@else{
-      <ng-template #update_button>
+        </button>
+        }@else{
         <button
           type="button"
           id="button-salvar"
@@ -48,11 +53,13 @@
           mat-raised-button
         >
           Salvar
-        </button> </ng-template
-      >}
-      <button type="button" mat-raised-button (click)="voltar()">
-        Cancelar
-      </button>
+        </button>
+        }
+
+        <button type="button" mat-raised-button (click)="voltar()">
+          Cancelar
+        </button>
+      </ng-container>
     </mat-card-actions>
   </form>
 </mat-card>

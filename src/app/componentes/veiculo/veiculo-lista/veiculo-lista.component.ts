@@ -32,7 +32,7 @@ export class VeiculoListaComponent implements OnDestroy {
     operadora: '',
   });
 
-  displayedColumns: string[] = ['numeroVeiculo', 'placaVeiculo', 'actions'];
+  displayedColumns: string[] = ['numeroVeiculo', 'placa', 'tipo', 'operadora', 'actions'];
   dataSource = new MatTableDataSource(this.veiculos);
 
   subscription: Subscription = new Subscription();

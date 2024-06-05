@@ -49,8 +49,8 @@ export class LinhaService {
   async updateLinha(linha: ILinha) {
     const $linhaRef = doc(this.firestore, 'linhas', linha.id);
     await updateDoc($linhaRef, {
-      numero: linha.numeroLinha,
-      nome: linha.nomeLinha,
+      numeroLinha: linha.numeroLinha,
+      nomeLinha: linha.nomeLinha,
     });
   }
 

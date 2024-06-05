@@ -21,7 +21,7 @@ export class VeiculoFormComponent implements OnDestroy {
   #activatedRoute = inject(ActivatedRoute);
 
   veiculoForm: FormGroup;
-  typeForm = signal('');
+  typeForm = signal<string>('');
 
   id = signal<string>('');
 
