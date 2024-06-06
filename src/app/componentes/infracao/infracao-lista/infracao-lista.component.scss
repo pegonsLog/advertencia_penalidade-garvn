@@ -1,19 +1,21 @@
-
 @media (mix-width: 600px) {
   mat-card {
     width: 100%;
     margin: 0 auto;
   }
+
 }
 @media (min-width: 600px) and (max-width: 2000px) {
   mat-card {
-    width: 40%;
+    width: 60%;
     margin: 0 auto;
   }
+
+
 }
 
 #user-list {
-  width: 40%;
+  width: 60%;
   margin: 0 auto;
 }
 
@@ -28,7 +30,7 @@
   font-weight: 300;
 }
 
-#toolbar{
+#toolbar {
   display: flex;
   justify-content: space-between;
   font-family: "Montserrat";
@@ -42,7 +44,7 @@
   align-items: center;
 }
 
-.new{
+.new {
   cursor: pointer;
   color: white;
   display: flex;
@@ -87,3 +89,6 @@
   padding: 0px;
 }
 
+.contador {
+padding-left: 65%;
+}

@@ -27,13 +27,19 @@
       </mat-form-field>
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="codigoInfracao">
-          <th mat-header-cell *matHeaderCellDef>Código da Infração</th>
-          <td mat-cell *matCellDef="let infracao">{{ infracao.codigoInfracao }}</td>
+          <th mat-header-cell *matHeaderCellDef>
+            Código
+          </th>
+          <td mat-cell *matCellDef="let infracao" style="text-align: center;">
+            {{ infracao.codigoInfracao }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="nomeInfracao">
           <th mat-header-cell *matHeaderCellDef>Nome da Infração</th>
-          <td mat-cell *matCellDef="let infracao">{{ infracao.nomeInfracao }}</td>
+          <td mat-cell *matCellDef="let infracao">
+            {{ infracao.nomeInfracao }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
@@ -67,6 +73,7 @@
         <mat-divider></mat-divider>
       </div>
     </div>
+
     }@else{
     <ng-template #loading>
       <div id="loading-spinner">
@@ -85,5 +92,18 @@
     >
       VOLTAR
     </button>
+    <div class="contador">
+      <span
+        >Qte de infrações: <strong>{{ contador }}</strong></span
+      >
+    </div>
+    <!-- <button
+      style="margin: 10px 8px"
+      (click)="expo()"
+      mat-raised-button
+      color="primary"
+    >
+      EXPORTAR
+    </button> -->
   </mat-card-actions>
 </mat-card>

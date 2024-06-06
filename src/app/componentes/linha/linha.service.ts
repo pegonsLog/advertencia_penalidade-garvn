@@ -11,6 +11,7 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ILinha, ILinhas } from '../../interface/linha';
+import { ExportarLinhas } from '../../linhasParaFirestore';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ import { ILinha, ILinhas } from '../../interface/linha';
 export class LinhaService {
 
   firestore: Firestore = inject(Firestore);
+  exportarFirestore: ExportarLinhas = inject(ExportarLinhas);
 
   linhas: ILinhas = [];
   linha: ILinha = {
@@ -41,9 +43,9 @@ export class LinhaService {
     }) as Observable<ILinha>;
   }
 
-  addLinha(linha: ILinha) {
+  async addLinha(linha: ILinha) {
     let $linhaRef = collection(this.firestore, 'linhas');
-    return addDoc($linhaRef, linha);
+    return await addDoc($linhaRef, linha as ILinha);
   }
 
   async updateLinha(linha: ILinha) {
@@ -58,5 +60,10 @@ export class LinhaService {
     let $linhaRef = doc(this.firestore, 'linhas', id);
 
     return deleteDoc($linhaRef);
+  }
+
+
+  loadLinhas(): ILinhas {
+    return this.exportarFirestore.linhas;
   }
 }

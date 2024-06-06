@@ -1,23 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IInfracao, IInfracoes } from '../../../interface/infracao';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { InfracaoService } from '../infracao.service';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-infracao-lista',
   standalone: true,
   imports: [AngularMaterialModule, CommonModule],
   templateUrl: './infracao-lista.component.html',
-  styleUrl: './infracao-lista.component.scss'
+  styleUrl: './infracao-lista.component.scss',
 })
-export class InfracaoListaComponent implements OnDestroy{
-
+export class InfracaoListaComponent implements OnDestroy {
   #infracaoService = inject(InfracaoService);
   #route = inject(Router);
   dialog = inject(MatDialog);
@@ -26,6 +25,8 @@ export class InfracaoListaComponent implements OnDestroy{
 
   displayedColumns: string[] = ['codigoInfracao', 'nomeInfracao', 'actions'];
   dataSource = new MatTableDataSource(this.infracoes);
+  private intervalId: any;
+  contador = 0;
 
   infracao = signal<IInfracao>({
     id: '',
@@ -33,17 +34,19 @@ export class InfracaoListaComponent implements OnDestroy{
     nomeInfracao: '',
   });
 
-
   subscription: Subscription = new Subscription();
 
   constructor() {
-    this.#infracaoService.list()
+    // this.infracoes = this.#infracaoService.loadInfracoes();
+    this.#infracaoService
+      .list()
       .pipe()
-      .subscribe((infracoes: IInfracoes) => {{
+      .subscribe((infracoes: IInfracoes) => {
         this.infracoes = infracoes;
-        this.dataSource = new MatTableDataSource(this.infracoes)}});
+        this.dataSource = new MatTableDataSource(this.infracoes);
+        this.contador = infracoes.length;
+      });
   }
-
 
   add(infracao: IInfracao) {
     this.#route.navigate(['infracaoForm']);
@@ -73,14 +76,29 @@ export class InfracaoListaComponent implements OnDestroy{
   voltar() {
     this.#route.navigate(['home']);
   }
+  // expo() {
+  //   this.exportar()
+  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  // ngOnInit() {
+  // this.exportar()
+  // }
+
   ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
     this.subscription.unsubscribe();
   }
-}
 
+  // exportar() {
+  //   for (let infracao of this.infracoes) {
+  //     this.#infracaoService.addInfracao(infracao).then(() => console.log(infracao.codigoInfracao));
+  //   }
+  // }
+}

@@ -1,15 +1,24 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, docData, updateDoc } from '@angular/fire/firestore';
-import { IInfracao, IInfracoes } from '../../interface/infracao';
+import {
+  Firestore,
+  addDoc,
+  collection,
+  collectionData,
+  deleteDoc,
+  doc,
+  docData,
+  updateDoc,
+} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { ILinhas, ILinha } from '../../interface/linha';
+import { ExportarInfracoes } from '../../infracoesParaFirestore';
+import { IInfracao, IInfracoes } from '../../interface/infracao';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InfracaoService {
-
   firestore: Firestore = inject(Firestore);
+  exportarFirestore: ExportarInfracoes = inject(ExportarInfracoes);
 
   infracoes: IInfracoes = [];
   linha: IInfracao = {
@@ -33,9 +42,9 @@ export class InfracaoService {
     }) as Observable<IInfracao>;
   }
 
-  addInfracao(infracao: IInfracao) {
+  async addInfracao(infracao: IInfracao) {
     let $infracaoRef = collection(this.firestore, 'infracoes');
-    return addDoc($infracaoRef, infracao);
+    return await addDoc($infracaoRef, infracao);
   }
 
   async updateInfracao(infracao: IInfracao) {
@@ -50,5 +59,9 @@ export class InfracaoService {
     let $infracoesRef = doc(this.firestore, 'infracoes', id);
 
     return deleteDoc($infracoesRef);
+  }
+
+  loadInfracoes(): IInfracoes {
+    return this.exportarFirestore.infracoes;
   }
 }

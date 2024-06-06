@@ -33,14 +33,18 @@ export class LinhaListaComponent implements OnDestroy{
   dataSource = new MatTableDataSource(this.linhas);
 
   subscription: Subscription = new Subscription();
+  private intervalId: any;
 
   constructor() {
-    this.#linhaService
-      .list()
-      .pipe()
-      .subscribe((linhas: ILinhas) => {
-        this.linhas = linhas;
-        this.dataSource = new MatTableDataSource(this.linhas)});
+    console.log(this.#linhaService.loadLinhas());
+
+
+    // this.#linhaService
+    //   .list()
+    //   .pipe()
+    //   .subscribe((linhas: ILinhas) => {
+    //     this.linhas = linhas;
+    //     this.dataSource = new MatTableDataSource(this.linhas)});
   }
 
   add(linha: ILinha) {
@@ -77,8 +81,25 @@ export class LinhaListaComponent implements OnDestroy{
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  ngOnInit() {
+    // Inicia o intervalo quando o componente é inicializado
+    // this.intervalId = setInterval(() => this.exportar(), 10000); // 10 segundos
   }
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+    // this.subscription.unsubscribe();
+  }
+
+// exportar(){
+//   let contador = 0;
+//   const linhas = this.#linhaService.loadLinhas();
+// for(let linha of linhas){
+
+//   this.#linhaService.addLinha(linha).then(()=> contador++)
+// }
+// }
+
 }
 
