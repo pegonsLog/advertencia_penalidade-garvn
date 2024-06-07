@@ -63,7 +63,7 @@ export class LinhaService {
   }
 
 
-  loadLinhas(): ILinhas {
-    return this.exportarFirestore.linhas;
-  }
+  // loadLinhas(): ILinhas {
+  //   return this.exportarFirestore.linhas;
+  // }
 }

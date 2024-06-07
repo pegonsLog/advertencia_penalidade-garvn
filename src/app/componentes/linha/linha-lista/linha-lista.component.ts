@@ -1,5 +1,5 @@
 import { CommonModule, NgIf } from '@angular/common';
-import { Component, OnDestroy, inject, signal } from '@angular/core';
+import { Component, OnDestroy, ViewChild, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -8,15 +8,16 @@ import { AngularMaterialModule } from '../../../shared/angular-material/angular-
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { LinhaService } from '../linha.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-linha-lista',
   standalone: true,
   imports: [AngularMaterialModule, CommonModule],
   templateUrl: './linha-lista.component.html',
-  styleUrl: './linha-lista.component.scss'
+  styleUrl: './linha-lista.component.scss',
 })
-export class LinhaListaComponent implements OnDestroy{
+export class LinhaListaComponent implements OnDestroy {
   #linhaService = inject(LinhaService);
   #route = inject(Router);
   dialog = inject(MatDialog);
@@ -31,20 +32,28 @@ export class LinhaListaComponent implements OnDestroy{
 
   displayedColumns: string[] = ['numeroLinha', 'nomeLinha', 'actions'];
   dataSource = new MatTableDataSource(this.linhas);
+  contador = 0;
 
   subscription: Subscription = new Subscription();
-  private intervalId: any;
+
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator | null = null;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor() {
-    console.log(this.#linhaService.loadLinhas());
+    // console.log(this.#linhaService.loadLinhas());
+    //     this.linhas = this.#linhaService.loadLinhas();
 
-
-    // this.#linhaService
-    //   .list()
-    //   .pipe()
-    //   .subscribe((linhas: ILinhas) => {
-    //     this.linhas = linhas;
-    //     this.dataSource = new MatTableDataSource(this.linhas)});
+    this.#linhaService
+      .list()
+      .pipe()
+      .subscribe((linhas: ILinhas) => {
+        this.linhas = linhas;
+        this.dataSource = new MatTableDataSource(this.linhas);
+        this.contador = linhas.length;
+      });
   }
 
   add(linha: ILinha) {
@@ -79,27 +88,19 @@ export class LinhaListaComponent implements OnDestroy{
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    this.contador = this.dataSource._filterData(this.linhas).length;
   }
 
-  ngOnInit() {
-    // Inicia o intervalo quando o componente é inicializado
-    // this.intervalId = setInterval(() => this.exportar(), 10000); // 10 segundos
-  }
   ngOnDestroy(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
-    // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
-// exportar(){
-//   let contador = 0;
-//   const linhas = this.#linhaService.loadLinhas();
-// for(let linha of linhas){
-
-//   this.#linhaService.addLinha(linha).then(()=> contador++)
-// }
-// }
-
+  // exportar() {
+  //   for (let veiculo of this.linhas) {
+  //     this.#linhaService
+  //       .addLinha(veiculo)
+  //       .then(() => console.log(veiculo.numeroLinha));
+  //   }
+  // }
 }
-

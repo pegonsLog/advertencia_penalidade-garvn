@@ -8,7 +8,7 @@
 />
 <mat-card>
   <mat-card-header>
-    <mat-toolbar id="toolbar" color="primary"
+    <mat-toolbar id="toolbar"
       >Usuários Cadastrados
 
       <span>
@@ -84,13 +84,23 @@
     <mat-divider></mat-divider>
   </div>
   <mat-card-actions>
+    <div>
     <button
-      style="margin: 10px 8px"
+      style="
+        margin: 10px 8px;
+        background-color: rgb(63, 154, 196);
+        color: white;
+      "
       (click)="voltar()"
       mat-raised-button
-      color="primary"
     >
       VOLTAR
     </button>
+    </div>
+    <div class="contador">
+      <span
+        >Qte de usuários: <strong>{{ contador }}</strong></span
+      >
+    </div>
   </mat-card-actions>
 </mat-card>

@@ -33,6 +33,8 @@
   justify-content: space-between;
   font-family: "Montserrat";
   font-weight: 300;
+  background-color: rgb(63, 154, 196);
+  color: white;
 }
 
 #delete {
@@ -87,3 +89,11 @@
 padding: 0px;
 }
 
+.contador {
+  margin-right: 10px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+}

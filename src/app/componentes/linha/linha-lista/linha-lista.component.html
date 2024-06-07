@@ -6,6 +6,7 @@
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 />
+<div style="margin-top: 20px">
 <mat-card>
   <mat-card-header>
     <mat-toolbar id="toolbar" color="primary"
@@ -80,13 +81,32 @@
     <mat-divider></mat-divider>
   </div>
   <mat-card-actions>
-    <button
+    <div>
+      <button
+        style="
+          margin: 10px 8px;
+          background-color: rgb(63, 154, 196);
+          color: white;
+        "
+        (click)="voltar()"
+        mat-raised-button
+      >
+        VOLTAR
+      </button>
+    </div>
+    <div class="contador">
+      <span
+        >Qte de infrações: <strong>{{ contador }}</strong></span
+      >
+    </div>
+         <!-- <button
       style="margin: 10px 8px"
-      (click)="voltar()"
+      (click)="exportar()"
       mat-raised-button
       color="primary"
     >
-      VOLTAR
-    </button>
+      EXPORTAR
+    </button> -->
   </mat-card-actions>
 </mat-card>
+</div>

@@ -6,6 +6,7 @@
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 />
+<div style="margin-top: 20px">
 <mat-card>
   <mat-card-header>
     <mat-toolbar id="toolbar" color="primary"
@@ -25,7 +26,6 @@
         <mat-label>Filtro</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="" #input />
       </mat-form-field>
-
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="numeroConsorcio">
           <th mat-header-cell *matHeaderCellDef>Número da Consórcio</th>
@@ -80,17 +80,26 @@
     </ng-template>
     }
   </mat-card-content>
-
-    <mat-divider></mat-divider>
-
+  <mat-divider></mat-divider>
   <mat-card-actions>
-    <button
-      style="margin: 10px 8px"
-      (click)="voltar()"
-      mat-raised-button
-      color="primary"
-    >
-      VOLTAR
-    </button>
+    <div>
+      <button
+        style="
+          margin: 10px 8px;
+          background-color: rgb(63, 154, 196);
+          color: white;
+        "
+        (click)="voltar()"
+        mat-raised-button
+      >
+        VOLTAR
+      </button>
+    </div>
+    <div class="contador">
+      <span
+        >Qte de infrações: <strong>{{ contador }}</strong></span
+      >
+    </div>
   </mat-card-actions>
 </mat-card>
+</div>

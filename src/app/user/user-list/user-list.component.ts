@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, inject, signal } from '@angular/core';
+import { Component, OnDestroy, ViewChild, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,7 @@ import { AngularMaterialModule } from '../../shared/angular-material/angular-mat
 import { ConfirmationDialogComponent } from '../../shared/dialogs/confirmation/confirmation.component';
 import { UserService } from '../user.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-user',
@@ -33,6 +34,13 @@ export class UserListComponent implements OnDestroy {
 
   displayedColumns: string[] = ['name', 'password', 'role', 'actions'];
   dataSource = new MatTableDataSource(this.users);
+  contador = 0;
+
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator | null = null;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   subscription: Subscription = new Subscription();
 
@@ -42,7 +50,10 @@ export class UserListComponent implements OnDestroy {
       .pipe()
       .subscribe((users: IUsuarios) => {
         this.users = users;
-        this.dataSource = new MatTableDataSource(this.users)});
+        this.dataSource = new MatTableDataSource(this.users);
+
+        this.contador = users.length;
+      });
   }
 
   oneUser(matricula: string) {}
@@ -50,7 +61,7 @@ export class UserListComponent implements OnDestroy {
   add(usuario: IUsuario) {
     this.#route.navigate(['userForm']);
   }
-  
+
   edit(id: string) {
     this.#route.navigate(['userForm'], {
       queryParams: { id: id },
@@ -82,6 +93,8 @@ export class UserListComponent implements OnDestroy {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    this.contador = this.dataSource._filterData(this.users).length;
   }
 
   ngOnDestroy(): void {

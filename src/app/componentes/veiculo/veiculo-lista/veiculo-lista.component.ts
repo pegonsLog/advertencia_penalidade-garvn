@@ -1,19 +1,20 @@
-import { Component, OnDestroy, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, ViewChild, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IVeiculo, IVeiculos } from '../../../interface/veiculo';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { VeiculoService } from '../veiculo.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { CommonModule } from '@angular/common';
-import { ExportarVeiculos } from '../../../veiculosParaFirestore';
 
 @Component({
   selector: 'app-veiculo-lista',
   standalone: true,
-  imports: [AngularMaterialModule, CommonModule],
+  imports: [AngularMaterialModule, MatSortModule, CommonModule],
   templateUrl: './veiculo-lista.component.html',
   styleUrl: './veiculo-lista.component.scss',
 })
@@ -24,6 +25,25 @@ export class VeiculoListaComponent implements OnDestroy {
 
   veiculos: IVeiculos = [];
 
+  displayedColumns: string[] = [
+    'numeroVeiculo',
+    'placa',
+    'operadora',
+    'tipo',
+    'actions',
+  ];
+
+  dataSource = new MatTableDataSource(this.veiculos);
+  contador = 0;
+
+  subscription: Subscription = new Subscription();
+
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator | null = null;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   veiculo = signal<IVeiculo>({
     id: '',
     numeroVeiculo: '',
@@ -32,19 +52,17 @@ export class VeiculoListaComponent implements OnDestroy {
     operadora: '',
   });
 
-  displayedColumns: string[] = ['numeroVeiculo', 'placa', 'tipo', 'operadora', 'actions'];
-  dataSource = new MatTableDataSource(this.veiculos);
-
-  subscription: Subscription = new Subscription();
-
-  exportarVeiculos = inject(ExportarVeiculos);
-  // veiculos2: IVeiculos[] = (this.exportarVeiculos as unknown) as IVeiculos;
 
   constructor() {
-    this.subscription = this.#veiculoService.list().pipe().subscribe((data: IVeiculos)=> this.dataSource = new MatTableDataSource(data ))
-
     // this.veiculos = this.#veiculoService.loadVeiculos();
-    // console.log(this.veiculos)
+    this.#veiculoService
+      .list()
+      .pipe()
+      .subscribe((veiculos: IVeiculos) => {
+        this.veiculos = veiculos;
+        this.dataSource = new MatTableDataSource(this.veiculos);
+        this.contador = veiculos.length;
+      });
   }
 
   add(veiculo: IVeiculo) {
@@ -71,24 +89,27 @@ export class VeiculoListaComponent implements OnDestroy {
             });
         }
       });
-    }
-    voltar() {
-      this.#route.navigate(['home']);
-    }
+  }
+  voltar() {
+    this.#route.navigate(['home']);
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    this.contador = this.dataSource._filterData(this.veiculos).length;
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  async exportar() {
-    for(let r of this.veiculos)
-      {
-        await this.#veiculoService.addVeiculo(r).then();
-      }
-  }
+  // exportar() {
+  //   for (let veiculo of this.veiculos) {
+  //     this.#veiculoService
+  //       .addVeiculo(veiculo)
+  //       .then(() => console.log(veiculo.numeroVeiculo));
+  //   }
+  // }
 }

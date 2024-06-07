@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject, signal } from '@angular/core';
+import { Component, OnDestroy, ViewChild, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +8,7 @@ import { IConsorcio, IConsorcios } from '../../../interface/consorcio';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { ConsorcioService } from '../consorcio.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-consorcio-lista',
@@ -31,8 +32,15 @@ export class ConsorcioListaComponent implements OnDestroy {
 
   displayedColumns: string[] = ['numeroConsorcio', 'nomeConsorcio', 'actions'];
   dataSource = new MatTableDataSource(this.consorcios);
+  contador = 0;
 
   subscription: Subscription = new Subscription();
+
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator | null = null;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor() {
     this.#consorcioService
@@ -40,11 +48,8 @@ export class ConsorcioListaComponent implements OnDestroy {
       .pipe()
       .subscribe((consorcios: IConsorcios) => {
         this.consorcios = consorcios;
-        this.dataSource = new MatTableDataSource(
-          this.consorcios.sort((a, b) =>
-            a.numeroConsorcio.localeCompare(b.numeroConsorcio)
-          )
-        );
+        this.dataSource = new MatTableDataSource(this.consorcios);
+        this.contador = consorcios.length;
       });
   }
 
@@ -52,7 +57,6 @@ export class ConsorcioListaComponent implements OnDestroy {
     this.#route.navigate(['consorcioForm']);
   }
   edit(id: string) {
-
     this.#route.navigate(['consorcioForm'], {
       queryParams: { id: id },
     });
@@ -81,6 +85,8 @@ export class ConsorcioListaComponent implements OnDestroy {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    this.contador = this.dataSource._filterData(this.consorcios).length;
   }
 
   ngOnDestroy(): void {

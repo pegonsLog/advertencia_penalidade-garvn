@@ -3,15 +3,12 @@
     width: 100%;
     margin: 0 auto;
   }
-
 }
 @media (min-width: 600px) and (max-width: 2000px) {
   mat-card {
     width: 60%;
     margin: 0 auto;
   }
-
-
 }
 
 #user-list {
@@ -35,6 +32,7 @@
   justify-content: space-between;
   font-family: "Montserrat";
   font-weight: 300;
+  background-color: rgb(63, 154, 196);
 }
 
 #delete {
@@ -90,5 +88,12 @@
 }
 
 .contador {
-padding-left: 65%;
+  margin-right: 10px;
+}
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+mat-button {
+  background-color: rgb(63, 154, 196);
 }

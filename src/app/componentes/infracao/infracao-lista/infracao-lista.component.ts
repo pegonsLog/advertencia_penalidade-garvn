@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, inject, signal } from '@angular/core';
+import { Component, OnDestroy, ViewChild, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -8,11 +8,13 @@ import { IInfracao, IInfracoes } from '../../../interface/infracao';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { InfracaoService } from '../infracao.service';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-infracao-lista',
   standalone: true,
-  imports: [AngularMaterialModule, CommonModule],
+  imports: [AngularMaterialModule, MatSortModule, CommonModule],
   templateUrl: './infracao-lista.component.html',
   styleUrl: './infracao-lista.component.scss',
 })
@@ -25,8 +27,13 @@ export class InfracaoListaComponent implements OnDestroy {
 
   displayedColumns: string[] = ['codigoInfracao', 'nomeInfracao', 'actions'];
   dataSource = new MatTableDataSource(this.infracoes);
-  private intervalId: any;
   contador = 0;
+
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator | null = null;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   infracao = signal<IInfracao>({
     id: '',
@@ -44,6 +51,7 @@ export class InfracaoListaComponent implements OnDestroy {
       .subscribe((infracoes: IInfracoes) => {
         this.infracoes = infracoes;
         this.dataSource = new MatTableDataSource(this.infracoes);
+
         this.contador = infracoes.length;
       });
   }
@@ -83,16 +91,16 @@ export class InfracaoListaComponent implements OnDestroy {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    this.contador = this.dataSource._filterData(this.infracoes).length;
   }
+
 
   // ngOnInit() {
   // this.exportar()
   // }
 
   ngOnDestroy(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
     this.subscription.unsubscribe();
   }
 

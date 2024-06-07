@@ -1,3 +1,4 @@
+import { Injectable, inject } from '@angular/core';
 import {
   Firestore,
   addDoc,
@@ -10,7 +11,6 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { IVeiculo, IVeiculos } from '../../interface/veiculo';
-import { Injectable, inject } from '@angular/core';
 import { ExportarVeiculos } from '../../veiculosParaFirestore';
 
 @Injectable({
@@ -65,7 +65,7 @@ export class VeiculoService {
     return deleteDoc($veiculoRef);
   }
 
-  loadVeiculos(): IVeiculos {
-    return this.exportarFirestore.veiculos;
-  }
+  // loadVeiculos(): IVeiculos {
+  //   return this.exportarFirestore.veiculos;
+  // }
 }
