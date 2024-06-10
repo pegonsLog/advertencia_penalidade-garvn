@@ -15,6 +15,8 @@ import { LoginComponent } from './login/login.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
 import { HomeComponent } from './componentes/home/home.component';
+import { AgenteFormComponent } from './componentes/agente/agente-form/agente-form.component';
+import { AgenteListaComponent } from './componentes/agente/agente-lista/agente-lista.component';
 
 export const routes: Routes = [
   {
@@ -85,6 +87,14 @@ export const routes: Routes = [
   {
     path: 'veiculoLista',
     component: VeiculoListaComponent,
+  },
+  {
+    path: 'agenteForm',
+    component: AgenteFormComponent,
+  },
+  {
+    path: 'agenteLista',
+    component: AgenteListaComponent,
   },
 
 ];

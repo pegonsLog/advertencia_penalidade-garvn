@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject, signal } from '@angular/core';
+import { Component, OnDestroy, ViewChild, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -7,21 +7,22 @@ import { AngularMaterialModule } from '../../../shared/angular-material/angular-
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { FiscalizacaoService } from '../fiscalizacao.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-fiscalizacao-lista',
   standalone: true,
-  imports: [AngularMaterialModule],
+  imports: [AngularMaterialModule, MatSortModule],
   templateUrl: './fiscalizacao-lista.component.html',
   styleUrl: './fiscalizacao-lista.component.scss',
 })
 export class FiscalizacaoListaComponent implements OnDestroy {
-
   #fiscalizacaoService = inject(FiscalizacaoService);
   #route = inject(Router);
   dialog = inject(MatDialog);
 
-  fiscalizacoes: IFiscalizacoes = []
+  fiscalizacoes: IFiscalizacoes = [];
 
   displayedColumns: string[] = [
     'matriculaAgente',
@@ -31,6 +32,7 @@ export class FiscalizacaoListaComponent implements OnDestroy {
     'actions',
   ];
   dataSource = new MatTableDataSource(this.fiscalizacoes);
+  contador = 0;
 
   fiscalizacao = signal<IFiscalizacao>({
     id: '',
@@ -40,17 +42,23 @@ export class FiscalizacaoListaComponent implements OnDestroy {
     dataConferencia: '',
   });
 
-
   subscription: Subscription = new Subscription();
+
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator | null = null;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor() {
     this.#fiscalizacaoService
       .list()
       .pipe()
-      .subscribe((fiscalizacoes: IFiscalizacoes) =>{
+      .subscribe((fiscalizacoes: IFiscalizacoes) => {
         this.fiscalizacoes = fiscalizacoes;
-        this.dataSource = new MatTableDataSource(this.fiscalizacoes)}
-      );
+        this.dataSource = new MatTableDataSource(this.fiscalizacoes);
+        this.contador = fiscalizacoes.length;
+      });
   }
 
   add(fiscalizacao: IFiscalizacao) {

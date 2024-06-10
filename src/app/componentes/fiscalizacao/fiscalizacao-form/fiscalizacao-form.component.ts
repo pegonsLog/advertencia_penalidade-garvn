@@ -32,7 +32,7 @@ export class FiscalizacaoFormComponent {
 
   private subscription = new Subscription();
 
-  public consorcio = signal<IFiscalizacao>({
+  public fiscalizacao = signal<IFiscalizacao>({
     id: '',
     matriculaAgente: '',
     nomeAgente: '',
@@ -95,7 +95,7 @@ export class FiscalizacaoFormComponent {
 
   ngOnInit(): void {}
 
-  consorcioFormEdit(result: IFiscalizacao) {
+  agenteFormEdit(result: IFiscalizacao) {
     this.fiscalizacaoForm = this.#fb.group({
       matriculaAgente: [result.matriculaAgente, Validators.required],
       nomeAgente: [result.nomeAgente, Validators.required],

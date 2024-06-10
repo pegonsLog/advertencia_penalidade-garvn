@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, ViewChild, inject, signal } from '@angular/core';
+import { CommonModule, NgIfContext } from '@angular/common';
+import { Component, OnDestroy, TemplateRef, ViewChild, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { IInfracao, IInfracoes } from '../../../interface/infracao';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
@@ -27,10 +27,12 @@ export class InfracaoListaComponent implements OnDestroy {
 
   displayedColumns: string[] = ['codigoInfracao', 'nomeInfracao', 'actions'];
   dataSource = new MatTableDataSource(this.infracoes);
+  dataSourceTeste = of(this.dataSource);
   contador = 0;
 
   @ViewChild(MatPaginator)
   paginator: MatPaginator | null = null;
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -95,18 +97,15 @@ export class InfracaoListaComponent implements OnDestroy {
     this.contador = this.dataSource._filterData(this.infracoes).length;
   }
 
-
-  // ngOnInit() {
-  // this.exportar()
-  // }
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  // exportar() {
-  //   for (let infracao of this.infracoes) {
-  //     this.#infracaoService.addInfracao(infracao).then(() => console.log(infracao.codigoInfracao));
-  //   }
-  // }
+  exportar() {
+    for (let infracao of this.infracoes) {
+      this.#infracaoService
+        .addInfracao(infracao)
+        .then(() => console.log(infracao.codigoInfracao));
+    }
+  }
 }

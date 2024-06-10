@@ -87,7 +87,7 @@ export class UserListComponent implements OnDestroy {
   }
 
   voltar() {
-    this.#route.navigate(['login']);
+    this.#route.navigate(['home']);
   }
 
   applyFilter(event: Event) {

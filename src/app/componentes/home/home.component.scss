@@ -2,24 +2,35 @@
   display: flex;
   justify-content: center;
   margin-top: 10px;
+  .card{
+    width: 320px;
+
+    background-color: rgb(96, 193, 238);
+  }
 }
 .linha2 {
   display: flex;
   justify-content: center;
 }
+.linha3 {
+  display: flex;
+  justify-content: left;
+}
 .toolbar {
   display: flex;
   justify-content: center;
   padding: 15px 10px 10px 10px;
-
 }
 
 .card {
-  padding: 30px;
+  margin-top: 20px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
   width: 150px;
-  align-items: center;
+  height: 80px;
   margin: 0px 10px 15px 10px;
-  background-color: rgb(96, 193, 238);
+  background-color: rgb(133, 201, 228);
 }
 .painel {
   display: flex;
@@ -27,9 +38,9 @@
   margin-top: 100px;
   width: fit-content;
   padding: 10px;
-  background-color: rgb(205, 245, 252);
+  background-color: rgb(220, 239, 247);
 }
 
-.background-toolbar{
+.background-toolbar {
   background-color: rgb(63, 154, 196);
 }

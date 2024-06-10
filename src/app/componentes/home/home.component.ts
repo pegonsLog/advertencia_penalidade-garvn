@@ -25,6 +25,9 @@ export class HomeComponent {
   sair() {
     this.route.navigate(['login']);
   }
+  agente() {
+    this.route.navigate(['agenteLista']);
+  }
   usuario() {
     this.route.navigate(['userLista']);
   }
