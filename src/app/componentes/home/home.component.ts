@@ -16,12 +16,9 @@ export class HomeComponent {
   private route = inject(Router);
   private veiculoService = inject(VeiculoService);
   exportarVeiculos = inject(ExportarVeiculos);
- veiculos2: IVeiculos = (this.exportarVeiculos as unknown) as IVeiculos;
+  veiculos2: IVeiculos = this.exportarVeiculos as unknown as IVeiculos;
 
-
-  constructor() {
-
-  }
+  constructor() {}
   sair() {
     this.route.navigate(['login']);
   }
@@ -50,7 +47,9 @@ export class HomeComponent {
     this.route.navigate(['fiscalizacaoLista']);
   }
   exportar() {
-
     // this.route.navigate(['exportar'])
+  }
+  impresso() {
+    this.route.navigate(['impresso']);
   }
 }
