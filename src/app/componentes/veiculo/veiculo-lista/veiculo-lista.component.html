@@ -10,7 +10,7 @@
   <mat-card>
     <mat-card-header>
       <mat-toolbar id="toolbar" color="primary"
-        >Veículos Cadastrados
+        >Veículo
 
         <span>
           <button (click)="add(veiculo())" id="mat-button-custom-adm">
@@ -20,79 +20,78 @@
       </mat-toolbar>
     </mat-card-header>
     <mat-card-content>
-      @if(dataSource){
+
       <div id="altura">
         <mat-form-field class="filtro">
           <mat-label>Filtro</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="" #input />
         </mat-form-field>
-
-        <table mat-table [dataSource]="dataSource">
-          <ng-container matColumnDef="numeroVeiculo">
-            <th mat-header-cell *matHeaderCellDef>Número</th>
-            <td mat-cell *matCellDef="let veiculo">
-              {{ veiculo.numeroVeiculo }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="placa">
-            <th mat-header-cell *matHeaderCellDef>Placa</th>
-            <td mat-cell *matCellDef="let veiculo">{{ veiculo.placa }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="operadora">
-            <th mat-header-cell *matHeaderCellDef style="width: 200px">
-              Operadora
-            </th>
-            <td mat-cell *matCellDef="let veiculo">{{ veiculo.operadora }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="tipo">
-            <th mat-header-cell *matHeaderCellDef>Tipo</th>
-            <td mat-cell *matCellDef="let veiculo">
-              {{ veiculo.tipo }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="actions">
-            <th style="text-align: center" mat-header-cell *matHeaderCellDef>
-              Ações
-            </th>
-            <td mat-cell *matCellDef="let veiculo">
-              <span id="actions">
-                <button (click)="edit(veiculo.id)" id="mat-button-custom">
-                  <span class="material-symbols-outlined" id="edit">
-                    edit
-                  </span>
-                </button>
-                <button (click)="delete(veiculo.id)" id="mat-button-custom">
-                  <span class="material-symbols-outlined" id="delete">
-                    delete
-                  </span>
-                </button>
-              </span>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-          <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">
-              Nenhum registro encontrado com o filtro: "{{ input.value }}"
-            </td>
-          </tr>
-        </table>
-        <div class="divisor">
-          <mat-divider></mat-divider>
-        </div>
-      </div>
-      }@else{
-      <ng-template #loading>
-        <div id="loading-spinner">
+        <div *ngIf="isLoading; else dataContent" id="loading-spinner">
           <mat-spinner></mat-spinner>
         </div>
-      </ng-template>
-      }
+        <ng-template #dataContent>
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="numeroVeiculo">
+              <th mat-header-cell *matHeaderCellDef>Número</th>
+              <td mat-cell *matCellDef="let veiculo">
+                {{ veiculo.numeroVeiculo }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="placa">
+              <th mat-header-cell *matHeaderCellDef>Placa</th>
+              <td mat-cell *matCellDef="let veiculo">{{ veiculo.placa }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="operadora">
+              <th mat-header-cell *matHeaderCellDef style="width: 200px">
+                Operadora
+              </th>
+              <td mat-cell *matCellDef="let veiculo">
+                {{ veiculo.operadora }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tipo">
+              <th mat-header-cell *matHeaderCellDef>Tipo</th>
+              <td mat-cell *matCellDef="let veiculo">
+                {{ veiculo.tipo }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th style="text-align: center" mat-header-cell *matHeaderCellDef>
+                Ações
+              </th>
+              <td mat-cell *matCellDef="let veiculo">
+                <span id="actions">
+                  <button (click)="edit(veiculo.id)" id="mat-button-custom">
+                    <span class="material-symbols-outlined" id="edit">
+                      edit
+                    </span>
+                  </button>
+                  <button (click)="delete(veiculo.id)" id="mat-button-custom">
+                    <span class="material-symbols-outlined" id="delete">
+                      delete
+                    </span>
+                  </button>
+                </span>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">
+                Nenhum registro encontrado com o filtro: "{{ input.value }}"
+              </td>
+            </tr>
+          </table>
+          <div class="divisor">
+            <mat-divider></mat-divider>
+          </div>
+        </ng-template>
+      </div>
     </mat-card-content>
     <div class="divisor">
       <mat-divider></mat-divider>
@@ -110,7 +109,6 @@
         >
           VOLTAR
         </button>
-  
       </div>
       <div>
         <div class="contador">
@@ -119,14 +117,6 @@
           >
         </div>
       </div>
-      <!-- <button
-      style="margin: 10px 8px"
-      (click)="exportar()"
-      mat-raised-button
-      color="primary"
-    >
-      EXPORTAR
-    </button> -->
     </mat-card-actions>
   </mat-card>
 </div>

@@ -1,83 +1,135 @@
-  <mat-card class="painel">
-    <div class="toolbar">
-      <mat-toolbar color="primary" class="mat-elevation-z1 background-toolbar"
-        >Advertência de Penalidade</mat-toolbar
-      >
+<mat-card class="painel">
+  <div class="toolbar">
+    <mat-toolbar color="primary" class="mat-elevation-z1 background-toolbar"
+      >Advertência de Penalidade</mat-toolbar
+    >
+  </div>
+  <div class="colunas">
+    <div class="coluna1">
+      <div class="coluna1L1">
+        <mat-card class="card">
+          <mat-card-actions>
+            <button
+              style="color: white; letter-spacing: 1px; font-weight: 400"
+              (click)="fiscalizacao()"
+              mat-button
+            >
+              Fiscalização
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="coluna1L2">
+        <mat-card class="card">
+          <mat-card-actions>
+            <button
+              style="color: white; letter-spacing: 1px; font-weight: 400"
+              (click)="irregularidades()"
+              mat-button
+            >
+              Irregularidade
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="coluna1L3">
+        <mat-card style="background-color: rgb(85, 157, 206)" class="card">
+          <mat-card-actions>
+            <button
+              style="color: white; letter-spacing: 1px; font-weight: 400"
+              (click)="impresso()"
+              mat-button
+            >
+              Notificação
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-card style="background-color: rgb(120, 154, 200)" class="card">
+          <mat-card-actions>
+            <button
+              style="color: white; letter-spacing: 1px; font-weight: 400"
+              (click)="sair()"
+              mat-button
+            >
+              Sair
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
     </div>
-    <div class="linha1">
-      <mat-card class="card">
-        <mat-card-actions>
-          <button style="color: white" (click)="fiscalizacao()" mat-button>
-            Fiscalização
-          </button>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="card">
-        <mat-card-actions>
-          <button style="color: white" (click)="irregularidades()" mat-button>
-            Irregularidades
-          </button>
-        </mat-card-actions>
-      </mat-card>
+    <div class="coluna2">
+      <div class="coluna2L1">
+        <mat-card class="card">
+          <mat-card-actions>
+            <button
+              style="color: white; letter-spacing: 1px; font-weight: 400"
+              (click)="linha()"
+              mat-button
+            >
+              Linha
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-card class="card">
+          <mat-card-actions>
+            <button
+              style="color: white; letter-spacing: 1px; font-weight: 400"
+              (click)="veiculo()"
+              mat-button
+            >
+              Veículo
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="coluna2L2">
+        <mat-card class="card">
+          <mat-card-actions>
+            <button
+              style="color: white; letter-spacing: 1px; font-weight: 400"
+              (click)="consorcio()"
+              mat-button
+            >
+              Consórcio
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-card class="card">
+          <mat-card-actions>
+            <button
+              style="color: white; letter-spacing: 1px; font-weight: 400"
+              (click)="infracao()"
+              mat-button
+            >
+              Infração
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="coluna2L3">
+        <mat-card class="card">
+          <mat-card-actions>
+            <button
+              style="color: white; letter-spacing: 1px; font-weight: 400"
+              (click)="usuario()"
+              mat-button
+            >
+              Usuário
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-card class="card">
+          <mat-card-actions>
+            <button
+              style="color: white; letter-spacing: 1px; font-weight: 400"
+              (click)="agente()"
+              mat-button
+            >
+              Agente
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
     </div>
-    <div class="linha2">
-      <mat-card class="card">
-        <mat-card-actions>
-          <button style="color: white" (click)="linha()" mat-button>
-            Linha
-          </button>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="card">
-        <mat-card-actions>
-          <button style="color: white" (click)="veiculo()" mat-button>
-            Veículo
-          </button>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="card">
-        <mat-card-actions>
-          <button style="color: white" (click)="consorcio()" mat-button>
-            Consórcio
-          </button>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="card">
-        <mat-card-actions>
-          <button style="color: white" (click)="infracao()" mat-button>
-            Infração
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-    <div class="linha3">
-      <mat-card class="card">
-        <mat-card-actions>
-          <button style="color: white" (click)="usuario()" mat-button>
-            Usuário
-          </button>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="card">
-        <mat-card-actions>
-          <button style="color: white" (click)="agente()" mat-button>
-            Agente
-          </button>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="card">
-        <mat-card-actions>
-          <button style="color: white" (click)="impresso()" mat-button>
-            Impresso
-          </button>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="card background-color: rgb(120, 154, 206);">
-        <mat-card-actions>
-          <button style="color: white" (click)="sair()" mat-button>Sair</button>
-        </mat-card-actions>
-      </mat-card>
-
-    </div>
-  </mat-card>
-
+  </div>
+</mat-card>

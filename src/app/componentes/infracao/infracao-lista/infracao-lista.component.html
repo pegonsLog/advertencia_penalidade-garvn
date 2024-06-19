@@ -10,7 +10,7 @@
   <mat-card>
     <mat-card-header>
       <mat-toolbar id="toolbar" color="primary"
-        >Infrações Cadastradas
+        >Infração
 
         <span>
           <button (click)="add(infracao())" id="mat-button-custom-adm">
@@ -20,12 +20,15 @@
       </mat-toolbar>
     </mat-card-header>
     <mat-card-content>
-      <div *ngIf="dataSource">
       <div id="altura">
         <mat-form-field class="filtro">
           <mat-label>Filtro</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="" #input />
         </mat-form-field>
+        <div *ngIf="isLoading; else dataContent" id="loading-spinner">
+          <mat-spinner></mat-spinner>
+        </div>
+        <ng-template #dataContent>
         <table mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="codigoInfracao">
             <th mat-header-cell *matHeaderCellDef>Código</th>
@@ -73,12 +76,6 @@
         <div class="divisor">
           <mat-divider></mat-divider>
         </div>
-      </div>
-
-      <ng-template #loading>
-        <div id="loading-spinner">
-          <mat-spinner></mat-spinner>
-        </div>
       </ng-template>
       </div>
     </mat-card-content>
@@ -104,15 +101,6 @@
           >Qte de infrações: <strong>{{ contador }}</strong></span
         >
       </div>
-
-      <!-- <button
-      style="margin: 10px 8px"
-      (click)="expo()"
-      mat-raised-button
-      color="primary"
-    >
-      EXPORTAR
-    </button> -->
     </mat-card-actions>
   </mat-card>
 </div>

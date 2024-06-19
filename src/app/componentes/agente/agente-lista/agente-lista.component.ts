@@ -22,6 +22,7 @@ export class AgenteListaComponent {
   #agenteService = inject(AgenteService);
   #route = inject(Router);
   dialog = inject(MatDialog);
+  isLoading = true;
 
   agentes: IAgentes = [];
 
@@ -60,6 +61,7 @@ export class AgenteListaComponent {
         this.agentes = agentes;
         this.dataSource = new MatTableDataSource(this.agentes);
         this.contador = agentes.length;
+        this.isLoading = false
       });
   }
 

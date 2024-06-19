@@ -19,7 +19,7 @@
 
 #altura {
   overflow-y: auto;
-  height: 450px;
+  height: 460px;
   padding: 0px;
 }
 
@@ -35,6 +35,7 @@
   font-weight: 300;
   background-color: rgb(63, 154, 196);
   color: white;
+  letter-spacing: 2px;
 }
 
 #delete {
@@ -73,7 +74,7 @@
   background-color: rgba(0, 0, 0, 0);
 }
 #loading-spinner {
-  height: 300px;
+  height: 333px;
   display: flex;
   align-items: center;
   justify-content: center;

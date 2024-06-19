@@ -9,11 +9,12 @@ import { FiscalizacaoService } from '../fiscalizacao.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-fiscalizacao-lista',
   standalone: true,
-  imports: [AngularMaterialModule, MatSortModule],
+  imports: [AngularMaterialModule, MatSortModule, CommonModule],
   templateUrl: './fiscalizacao-lista.component.html',
   styleUrl: './fiscalizacao-lista.component.scss',
 })
@@ -21,6 +22,7 @@ export class FiscalizacaoListaComponent implements OnDestroy {
   #fiscalizacaoService = inject(FiscalizacaoService);
   #route = inject(Router);
   dialog = inject(MatDialog);
+  isLoading = true;
 
   fiscalizacoes: IFiscalizacoes = [];
 
@@ -58,6 +60,7 @@ export class FiscalizacaoListaComponent implements OnDestroy {
         this.fiscalizacoes = fiscalizacoes;
         this.dataSource = new MatTableDataSource(this.fiscalizacoes);
         this.contador = fiscalizacoes.length;
+        this.isLoading = false;
       });
   }
 

@@ -10,7 +10,7 @@
 <mat-card>
   <mat-card-header>
     <mat-toolbar id="toolbar" color="primary"
-      >Consórcios Cadastrados
+      >Consórcio
 
       <span>
         <button (click)="add()" id="mat-button-custom-adm">
@@ -20,12 +20,15 @@
     </mat-toolbar>
   </mat-card-header>
   <mat-card-content>
-    @if(dataSource){
-    <div id="altura">
+      <div id="altura">
       <mat-form-field class="filtro">
         <mat-label>Filtro</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="" #input />
       </mat-form-field>
+      <div *ngIf="isLoading; else dataContent" id="loading-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+      <ng-template #dataContent>
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="numeroConsorcio">
           <th mat-header-cell *matHeaderCellDef>Número da Consórcio</th>
@@ -71,14 +74,8 @@
       <div class="divisor">
         <mat-divider></mat-divider>
       </div>
-    </div>
-    }@else{
-    <ng-template #loading>
-      <div id="loading-spinner">
-        <mat-spinner></mat-spinner>
-      </div>
     </ng-template>
-    }
+    </div>
   </mat-card-content>
   <mat-divider></mat-divider>
   <mat-card-actions>

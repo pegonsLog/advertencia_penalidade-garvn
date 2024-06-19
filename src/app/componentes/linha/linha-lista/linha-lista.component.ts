@@ -21,6 +21,7 @@ export class LinhaListaComponent implements OnDestroy {
   #linhaService = inject(LinhaService);
   #route = inject(Router);
   dialog = inject(MatDialog);
+  isLoading = true;
 
   linhas: ILinhas = [];
 
@@ -53,6 +54,7 @@ export class LinhaListaComponent implements OnDestroy {
         this.linhas = linhas;
         this.dataSource = new MatTableDataSource(this.linhas);
         this.contador = linhas.length;
+        this.isLoading = false;
       });
   }
 

@@ -1,20 +1,66 @@
-.linha1 {
+.coluna1L1 {
   display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  .card{
-    width: 320px;
+  justify-content: left;
 
+  .card {
+    width: 400px;
     background-color: rgb(96, 193, 238);
   }
 }
-.linha2 {
-  display: flex;
-  justify-content: center;
-}
-.linha3 {
+.coluna1L2 {
   display: flex;
   justify-content: left;
+  margin-top: -5px;
+  .card {
+    width: 400px;
+    background-color: rgb(96, 193, 238);
+  }
+}
+.coluna1L3 {
+  display: flex;
+  justify-content: left;
+  margin-top: -5px;
+  .card {
+    width: 200px;
+    background-color: rgb(96, 193, 238);
+  }
+}
+.coluna2L1 {
+  display: flex;
+  justify-content: center;
+  .card {
+    width: 50%;
+    background-color: rgb(145, 189, 214);
+  }
+}
+.coluna2L2 {
+  display: flex;
+  justify-content: center;
+  margin-top: -5px;
+  .card {
+    width: 50%;
+    background-color: rgb(145, 189, 214);
+  }
+}
+.coluna2L3 {
+  display: flex;
+  justify-content: center;
+  margin-top: -5px;
+  .card {
+    width: 50%;
+    background-color: rgb(145, 189, 214);
+  }
+}
+.coluna1{
+  width: 400px;
+}
+.coluna2{
+  width: 400px;
+}
+.colunas{
+  display: flex;
+  justify-content: center;
+  padding: 0px;
 }
 .toolbar {
   display: flex;
@@ -23,14 +69,15 @@
 }
 
 .card {
-  margin-top: 20px;
- display: flex;
- justify-content: center;
- align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 150px;
   height: 80px;
   margin: 0px 10px 15px 10px;
   background-color: rgb(133, 201, 228);
+  letter-spacing: 2px;
+  font-weight: 300;
 }
 .painel {
   display: flex;
@@ -43,4 +90,11 @@
 
 .background-toolbar {
   background-color: rgb(63, 154, 196);
+  font-family: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: 2px;
+  font-weight: 300;
+}
+.background-cards-coluna2
+{
+  background-color: rgb(64, 115, 131);
 }

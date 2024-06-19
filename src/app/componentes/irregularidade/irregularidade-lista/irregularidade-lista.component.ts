@@ -12,11 +12,12 @@ import { IrregularidadeService } from '../irregularidade.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-irregularidade-lista',
   standalone: true,
-  imports: [AngularMaterialModule, MatSortModule],
+  imports: [AngularMaterialModule, MatSortModule, CommonModule],
   templateUrl: './irregularidade-lista.component.html',
   styleUrl: './irregularidade-lista.component.scss',
 })
@@ -24,6 +25,7 @@ export class IrregularidadeListaComponent implements OnDestroy {
   #irregularidadeService = inject(IrregularidadeService);
   #route = inject(Router);
   dialog = inject(MatDialog);
+  isLoading = true;
 
   irregularidades: IIrregularidades = [];
 
@@ -72,6 +74,7 @@ export class IrregularidadeListaComponent implements OnDestroy {
         this.irregularidades = irregularidades;
         this.dataSource = new MatTableDataSource(this.irregularidades);
         this.contador = irregularidades.length;
+        this.isLoading = false;
       });
   }
 

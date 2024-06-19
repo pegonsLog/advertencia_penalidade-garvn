@@ -9,6 +9,7 @@ import { ConfirmationDialogComponent } from '../../shared/dialogs/confirmation/c
 import { UserService } from '../user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { IFiscalizacao } from '../../interface/fiscalizacao';
 
 @Component({
   selector: 'app-user',
@@ -21,6 +22,7 @@ export class UserListComponent implements OnDestroy {
   #userService = inject(UserService);
   #route = inject(Router);
   dialog = inject(MatDialog);
+  isLoading = true;
 
   users: IUsuarios = [];
 
@@ -51,8 +53,8 @@ export class UserListComponent implements OnDestroy {
       .subscribe((users: IUsuarios) => {
         this.users = users;
         this.dataSource = new MatTableDataSource(this.users);
-
         this.contador = users.length;
+        this.isLoading = false;
       });
   }
 

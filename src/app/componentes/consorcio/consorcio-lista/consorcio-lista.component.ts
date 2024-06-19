@@ -9,11 +9,12 @@ import { AngularMaterialModule } from '../../../shared/angular-material/angular-
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { ConsorcioService } from '../consorcio.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-consorcio-lista',
   standalone: true,
-  imports: [AngularMaterialModule, MatSortModule],
+  imports: [AngularMaterialModule, MatSortModule, CommonModule],
   templateUrl: './consorcio-lista.component.html',
   styleUrl: './consorcio-lista.component.scss',
 })
@@ -21,6 +22,7 @@ export class ConsorcioListaComponent implements OnDestroy {
   #consorcioService = inject(ConsorcioService);
   #route = inject(Router);
   dialog = inject(MatDialog);
+  isLoading = true;
 
   consorcios: IConsorcios = [];
 
@@ -50,6 +52,7 @@ export class ConsorcioListaComponent implements OnDestroy {
         this.consorcios = consorcios;
         this.dataSource = new MatTableDataSource(this.consorcios);
         this.contador = consorcios.length;
+        this.isLoading = false;
       });
   }
 

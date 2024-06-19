@@ -22,6 +22,7 @@ export class InfracaoListaComponent implements OnDestroy {
   #infracaoService = inject(InfracaoService);
   #route = inject(Router);
   dialog = inject(MatDialog);
+  isLoading = true;
 
   infracoes: IInfracoes = [];
 
@@ -53,8 +54,8 @@ export class InfracaoListaComponent implements OnDestroy {
       .subscribe((infracoes: IInfracoes) => {
         this.infracoes = infracoes;
         this.dataSource = new MatTableDataSource(this.infracoes);
-
         this.contador = infracoes.length;
+        this.isLoading = false;
       });
   }
 

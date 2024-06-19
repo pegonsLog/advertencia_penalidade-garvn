@@ -10,7 +10,7 @@
   <mat-card>
     <mat-card-header>
       <mat-toolbar id="toolbar" color="primary"
-        >Fiscalizações Cadastradas
+        >Fiscalização
 
         <span>
           <button (click)="add(fiscalizacao())" id="mat-button-custom-adm">
@@ -20,85 +20,84 @@
       </mat-toolbar>
     </mat-card-header>
     <mat-card-content>
-      @if(dataSource){
       <div id="altura">
         <mat-form-field class="filtro">
           <mat-label>Filtro</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="" #input />
         </mat-form-field>
-
-        <table mat-table [dataSource]="dataSource">
-          <ng-container matColumnDef="matriculaAgente">
-            <th mat-header-cell *matHeaderCellDef>Mat. do Agente</th>
-            <td mat-cell *matCellDef="let fiscalizacao">
-              {{ fiscalizacao.matriculaAgente }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="nomeAgente">
-            <th mat-header-cell *matHeaderCellDef>Nome do Agente</th>
-            <td mat-cell *matCellDef="let fiscalizacao">
-              {{ fiscalizacao.nomeAgente }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="dataEmissao">
-            <th mat-header-cell *matHeaderCellDef>Data da Emissão</th>
-            <td mat-cell *matCellDef="let fiscalizacao">
-              {{ fiscalizacao.dataEmissao }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="dataConferencia">
-            <th mat-header-cell *matHeaderCellDef>Data da Conferência</th>
-            <td mat-cell *matCellDef="let fiscalizacao">
-              {{ fiscalizacao.dataConferencia }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="actions">
-            <th style="text-align: center" mat-header-cell *matHeaderCellDef>
-              Ações
-            </th>
-            <td mat-cell *matCellDef="let fiscalizacao">
-              <span id="actions">
-                <button (click)="edit(fiscalizacao.id)" id="mat-button-custom">
-                  <span class="material-symbols-outlined" id="edit">
-                    edit
-                  </span>
-                </button>
-                <button
-                  (click)="delete(fiscalizacao.id)"
-                  id="mat-button-custom"
-                >
-                  <span class="material-symbols-outlined" id="delete">
-                    delete
-                  </span>
-                </button>
-              </span>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
-          <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">
-              Nenhum registro encontrado com o filtro: "{{ input.value }}"
-            </td>
-          </tr>
-        </table>
-        <div class="divisor">
-          <mat-divider></mat-divider>
-        </div>
-      </div>
-      }@else{
-      <ng-template #loading>
-        <div id="loading-spinner">
+        <div *ngIf="isLoading; else dataContent" id="loading-spinner">
           <mat-spinner></mat-spinner>
         </div>
-      </ng-template>
-      }
+        <ng-template #dataContent>
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="matriculaAgente">
+              <th mat-header-cell *matHeaderCellDef>Mat. do Agente</th>
+              <td mat-cell *matCellDef="let fiscalizacao">
+                {{ fiscalizacao.matriculaAgente }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nomeAgente">
+              <th mat-header-cell *matHeaderCellDef>Nome do Agente</th>
+              <td mat-cell *matCellDef="let fiscalizacao">
+                {{ fiscalizacao.nomeAgente }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dataEmissao">
+              <th mat-header-cell *matHeaderCellDef>Data da Emissão</th>
+              <td mat-cell *matCellDef="let fiscalizacao">
+                {{ fiscalizacao.dataEmissao }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dataConferencia">
+              <th mat-header-cell *matHeaderCellDef>Data da Conferência</th>
+              <td mat-cell *matCellDef="let fiscalizacao">
+                {{ fiscalizacao.dataConferencia }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th style="text-align: center" mat-header-cell *matHeaderCellDef>
+                Ações
+              </th>
+              <td mat-cell *matCellDef="let fiscalizacao">
+                <span id="actions">
+                  <button
+                    (click)="edit(fiscalizacao.id)"
+                    id="mat-button-custom"
+                  >
+                    <span class="material-symbols-outlined" id="edit">
+                      edit
+                    </span>
+                  </button>
+                  <button
+                    (click)="delete(fiscalizacao.id)"
+                    id="mat-button-custom"
+                  >
+                    <span class="material-symbols-outlined" id="delete">
+                      delete
+                    </span>
+                  </button>
+                </span>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">
+                Nenhum registro encontrado com o filtro: "{{ input.value }}"
+              </td>
+            </tr>
+          </table>
+          <div class="divisor">
+            <mat-divider></mat-divider>
+          </div>
+        </ng-template>
+      </div>
     </mat-card-content>
     <div class="divisor">
       <mat-divider></mat-divider>

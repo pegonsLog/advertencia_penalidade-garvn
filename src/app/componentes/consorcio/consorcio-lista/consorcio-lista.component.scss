@@ -18,7 +18,7 @@
 
 #altura {
   overflow-y: auto;
-  height: 450px;
+  height: 460px;
   padding: 0px;
 }
 
@@ -33,6 +33,7 @@
   font-family: "Montserrat";
   font-weight: 300;
   background-color: rgb(63, 154, 196);
+  letter-spacing: 2px;
 }
 
 #delete {
@@ -71,7 +72,7 @@
   background-color: rgba(0, 0, 0, 0);
 }
 #loading-spinner {
-  height: 300px;
+  height: 333px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,6 +82,7 @@
 .filtro {
   margin-top: 15px;
   width: 100%;
+  --mat-form-field-subscript-text-line-height: 0px;
 }
 
 .divisor {

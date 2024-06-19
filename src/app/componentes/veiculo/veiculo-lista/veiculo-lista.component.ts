@@ -22,6 +22,7 @@ export class VeiculoListaComponent implements OnDestroy {
   #veiculoService = inject(VeiculoService);
   #route = inject(Router);
   dialog = inject(MatDialog);
+  isLoading = true;
 
   veiculos: IVeiculos = [];
 
@@ -52,17 +53,20 @@ export class VeiculoListaComponent implements OnDestroy {
     operadora: '',
   });
 
-
   constructor() {
     // this.veiculos = this.#veiculoService.loadVeiculos();
-    this.#veiculoService
-      .list()
-      .pipe()
-      .subscribe((veiculos: IVeiculos) => {
-        this.veiculos = veiculos;
-        this.dataSource = new MatTableDataSource(this.veiculos);
-        this.contador = veiculos.length;
-      });
+
+      this.#veiculoService
+        .list()
+        .pipe()
+        .subscribe((veiculos: IVeiculos) => {
+          this.veiculos = veiculos;
+          this.dataSource = new MatTableDataSource(this.veiculos);
+          this.contador = veiculos.length;
+          this.isLoading = false;
+        });
+
+
   }
 
   add(veiculo: IVeiculo) {
