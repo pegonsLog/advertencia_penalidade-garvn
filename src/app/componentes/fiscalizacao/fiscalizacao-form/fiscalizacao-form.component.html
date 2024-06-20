@@ -1,14 +1,15 @@
+<div style="margin-top: 20px">
 <mat-card>
   <form [formGroup]="fiscalizacaoForm">
     <mat-card-content>
       <ng-container>
         @if(typeForm() !== 'edit'){
-        <mat-toolbar color="primary" id="peso-fonte"
+        <mat-toolbar class="background-toolbar"
           >Adicionar Fiscalização</mat-toolbar
         >
 
         }@else {
-        <mat-toolbar color="primary" id="peso-fonte"
+        <mat-toolbar class="background-toolbar"
           >Alterar Fiscalização</mat-toolbar
         >}
       </ng-container>
@@ -50,10 +51,12 @@
         </button>
         }
 
-        <button type="button" mat-raised-button (click)="voltar()">
+        <button type="button" mat-raised-button (click)="voltar()" >
           Cancelar
         </button>
       </ng-container>
     </mat-card-actions>
   </form>
 </mat-card>
+</div>
+

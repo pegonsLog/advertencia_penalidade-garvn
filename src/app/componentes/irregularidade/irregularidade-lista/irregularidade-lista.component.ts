@@ -78,7 +78,7 @@ export class IrregularidadeListaComponent implements OnDestroy {
       });
   }
 
-  add(irregularidade: IIrregularidade) {
+  add() {
     this.#route.navigate(['irregularidadeForm']);
   }
   edit(id: string) {

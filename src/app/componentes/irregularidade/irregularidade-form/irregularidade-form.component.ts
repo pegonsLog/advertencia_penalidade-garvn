@@ -52,7 +52,16 @@ export class IrregularidadeFormComponent {
         .umaIrregularidade(id)
         .subscribe((result: IIrregularidade) => {
           this.irregularidadeForm = this.#fb.group({
-            id: [result.id],
+            dataIrregularidade: [result.dataIrregularidade, Validators.required],
+            horario: [result.horario, Validators.required],
+            local: [result.local, Validators.required],
+            numeroLocal: [result.numeroLocal, Validators.required],
+            bairro: [result.bairro, Validators.required],
+            descricao: [result.descricao, Validators.required],
+            numeroInfracao: [result.numeroInfracao, Validators.required],
+            numeroConsorcio: [result.numeroConsorcio, Validators.required],
+            numeroVeiculo: [result.numeroVeiculo, Validators.required],
+            numeroLinha: [result.numeroLinha, Validators.required],
 
           });
         });
@@ -68,6 +77,7 @@ export class IrregularidadeFormComponent {
       numeroInfracao: ['', Validators.required],
       numeroConsorcio: ['', Validators.required],
       numeroVeiculo: ['', Validators.required],
+      numeroLinha: ['', Validators.required],
     });
   }
 
@@ -75,11 +85,11 @@ export class IrregularidadeFormComponent {
     this.#irregularidadeService
       .addIrregularidade(this.irregularidadeForm.getRawValue())
       .then(() => {
-        console.log('Irregularidade adicionada com sucesso!');
         this.#route.navigate(['irregularidadeLista']);
         alert('Registro adicionado com sucesso!');
       })
       .catch((error) => {
+        console.error('Erro ao adicionar irregularidade:', error);
         alert('Erro ao adicionar o registro');
       });
   }
@@ -103,15 +113,16 @@ export class IrregularidadeFormComponent {
 
   irregularidadeIIrregularidadeFormEdit(irregularidadeIIrregularidade: IIrregularidade) {
     this.irregularidadeForm = this.#fb.group({
-      dataIrregularidade: ['', Validators.required],
-      horario: ['', Validators.required],
-      local: ['', Validators.required],
-      numeroLocal: ['', Validators.required],
-      bairro: ['', Validators.required],
-      descricao: ['', Validators.required],
-      numeroInfracao: ['', Validators.required],
-      numeroConsorcio: ['', Validators.required],
-      numeroVeiculo: ['', Validators.required],
+      dataIrregularidade: [irregularidadeIIrregularidade.dataIrregularidade, Validators.required],
+      horario: [irregularidadeIIrregularidade.horario, Validators.required],
+      local: [irregularidadeIIrregularidade.local, Validators.required],
+      numeroLocal: [irregularidadeIIrregularidade.numeroLocal, Validators.required],
+      bairro: [irregularidadeIIrregularidade.bairro, Validators.required],
+      descricao: [irregularidadeIIrregularidade.descricao, Validators.required],
+      numeroInfracao: [irregularidadeIIrregularidade.numeroInfracao, Validators.required],
+      numeroConsorcio: [irregularidadeIIrregularidade.numeroConsorcio, Validators.required],
+      numeroVeiculo: [irregularidadeIIrregularidade.numeroVeiculo, Validators.required],
+      numeroLinha: [irregularidadeIIrregularidade.numeroLinha, Validators.required],
     });
   }
   ngOnDestroy(): void {

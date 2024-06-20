@@ -65,7 +65,6 @@ export class VeiculoFormComponent implements OnDestroy {
     this.#veiculoService
       .addVeiculo(this.veiculoForm.getRawValue())
       .then(() => {
-        console.log('Veículo adicionado com sucesso!');
         this.#route.navigate(['veiculoLista']);
         alert('Registro adicionado com sucesso!');
       })

@@ -1,52 +1,55 @@
-<mat-card>
-  <form [formGroup]="linhaForm">
-    <mat-card-content>
-      <ng-container>
-        @if(typeForm() !== 'edit'){
-        <mat-toolbar color="primary" id="peso-fonte"
-          >Adicionar Linha</mat-toolbar
-        >
+<div style="margin-top: 20px">
+  <mat-card>
+    <form [formGroup]="linhaForm">
+      <mat-card-content>
+        <ng-container>
+          @if(typeForm() !== 'edit'){
+          <mat-toolbar class="background-toolbar">Adicionar Linha</mat-toolbar>
 
-        }@else {
-        <mat-toolbar color="primary" id="peso-fonte"
-          >Alterar Linha</mat-toolbar
-        >}
-      </ng-container>
+          }@else {
+          <mat-toolbar class="background-toolbar">Alterar Linha</mat-toolbar>}
+        </ng-container>
 
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Linha" formControlName="numeroLinha" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Nome da linha" formControlName="nomeLinha" />
-      </mat-form-field>
-    </mat-card-content>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Linha" formControlName="numeroLinha" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Nome da linha"
+            formControlName="nomeLinha"
+          />
+        </mat-form-field>
+      </mat-card-content>
 
-    <mat-card-actions>
-      <ng-container>
-        @if(typeForm() === 'edit'){
-        <button
-          type="button"
-          id="button-salvar"
-          (click)="onUpdate()"
-          mat-raised-button
-        >
-          Salvar
-        </button>
-        }@else{
-        <button
-          type="button"
-          id="button-salvar"
-          (click)="onNew()"
-          mat-raised-button
-        >
-          Salvar
-        </button>
-        }
+      <mat-card-actions>
+        <ng-container>
+          @if(typeForm() === 'edit'){
+          <button
+            type="button"
+            id="button-salvar"
+            (click)="onUpdate()"
+            mat-raised-button
+          >
+            Salvar
+          </button>
+          }@else{
+          <button
+            type="button"
+            id="button-salvar"
+            (click)="onNew()"
+            mat-raised-button
+          >
+            Salvar
+          </button>
+          }
 
-        <button type="button" mat-raised-button (click)="voltar()">
-          Cancelar
-        </button>
-      </ng-container>
-    </mat-card-actions>
-  </form>
-</mat-card>
+          <button type="button" mat-raised-button (click)="voltar()">
+            Cancelar
+          </button>
+        </ng-container>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
+

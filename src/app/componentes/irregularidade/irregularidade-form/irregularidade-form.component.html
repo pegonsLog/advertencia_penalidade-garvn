@@ -1,77 +1,121 @@
-<mat-card>
-  <form [formGroup]="irregularidadeForm">
-    <mat-card-content>
-      <ng-container>
-        @if(typeForm() !== 'edit'){
-        <mat-toolbar color="primary" id="peso-fonte"
-          >Adicionar Irregularidade</mat-toolbar
-        >
+<div class="container">
+  <mat-card>
+    <form [formGroup]="irregularidadeForm">
+      <mat-card-content>
+        <ng-container>
+          @if(typeForm() !== 'edit'){
+          <mat-toolbar class="background-toolbar" id="peso-fonte"
+            >Adicionar Irregularidade</mat-toolbar
+          >
 
-        }@else {
-        <mat-toolbar color="primary" id="peso-fonte"
-          >Alterar Irregularidade</mat-toolbar
-        >}
-      </ng-container>
+          }@else {
+          <mat-toolbar class="background-toolbar" id="peso-fonte"
+            >Alterar Irregularidade</mat-toolbar
+          >}
+        </ng-container>
 
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Data" formControlName="dataIrregularidade" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Hora" formControlName="horario" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Local" formControlName="local" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Número" formControlName="numeroLocal" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="bairro" formControlName="bairro" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="descricao" formControlName="descricao" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Código da infração" formControlName="numeroInfracao" />
-      </mat-form-field>
-       <mat-form-field class="full-width">
-        <input matInput placeholder="Nº do Consórcio" formControlName="numeroConsorcio" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Nº da linha" formControlName="numeroLinha" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Nº do veiculo" formControlName="numeroVeiculo" />
-      </mat-form-field>
+        <div class="linha1">
+          <mat-form-field class="data">
+            <input
+              matInput
+              placeholder="Data"
+              formControlName="dataIrregularidade"
+            />
+          </mat-form-field>
+          <mat-form-field class="hora">
+            <input matInput placeholder="Hora" formControlName="horario" />
+          </mat-form-field>
+        </div>
 
-    </mat-card-content>
+        <div class="linha2">
+          <mat-form-field class="local">
+            <input matInput placeholder="Local" formControlName="local" />
+          </mat-form-field>
+        </div>
 
-    <mat-card-actions>
-      <ng-container>
-        @if(typeForm() === 'edit'){
-        <button
-          type="button"
-          id="button-salvar"
-          (click)="onUpdate()"
-          mat-raised-button
-        >
-          Salvar
-        </button>
-        }@else{
-        <button
-          type="button"
-          id="button-salvar"
-          (click)="onNew()"
-          mat-raised-button
-        >
-          Salvar
-        </button>
-        }
+        <div class="linha3">
+          <mat-form-field class="numero">
+            <input
+              matInput
+              placeholder="Número"
+              formControlName="numeroLocal"
+            />
+          </mat-form-field>
+          <mat-form-field class="bairro">
+            <input matInput placeholder="Bairro" formControlName="bairro" />
+          </mat-form-field>
+        </div>
 
-        <button type="button" mat-raised-button (click)="voltar()">
-          Cancelar
-        </button>
-      </ng-container>
-    </mat-card-actions>
-  </form>
-</mat-card>
+        <div class="linha4">
+          <mat-form-field class="descricao">
+            <input
+              matInput
+              placeholder="Descricao"
+              formControlName="descricao"
+            />
+          </mat-form-field>
+        </div>
+        <div class="linha5">
+          <mat-form-field class="infracao">
+            <input
+              matInput
+              placeholder="Código da infração"
+              formControlName="numeroInfracao"
+            />
+          </mat-form-field>
+          <mat-form-field class="consorcio">
+            <input
+              matInput
+              placeholder="Nº do Consórcio"
+              formControlName="numeroConsorcio"
+            />
+          </mat-form-field>
+        </div>
+        <div class="linha6">
+          <mat-form-field class="numeroLinha">
+            <input
+              matInput
+              placeholder="Nº da linha"
+              formControlName="numeroLinha"
+            />
+          </mat-form-field>
+          <mat-form-field class="numeroVeiculo">
+            <input
+              matInput
+              placeholder="Nº do veiculo"
+              formControlName="numeroVeiculo"
+            />
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <ng-container>
+          @if(typeForm() === 'edit'){
+          <button
+            type="button"
+            id="button-salvar"
+            (click)="onUpdate()"
+            mat-raised-button
+          >
+            Salvar
+          </button>
+          }@else{
+          <button
+            type="button"
+            id="button-salvar"
+            (click)="onNew()"
+            mat-raised-button
+          >
+            Salvar
+          </button>
+          }
+
+          <button type="button" mat-raised-button (click)="voltar()">
+            Cancelar
+          </button>
+        </ng-container>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

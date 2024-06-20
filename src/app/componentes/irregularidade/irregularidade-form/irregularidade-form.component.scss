@@ -12,7 +12,7 @@
 }
 
 .full-width {
-  width: 100%;
+  width: 45%;
 }
 
 mat-card-actions {
@@ -32,8 +32,90 @@ button {
 button {
   margin-right: 10px;
 }
-#button-salvar{
-  background-color: #2b61f5;
+#button-salvar {
+  background-color: rgb(63, 154, 196);
   color: white;
 }
 
+.background-toolbar {
+  background-color: rgb(63, 154, 196);
+  font-family: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: 2px;
+  font-weight: 300;
+  color: white;
+}
+mat-form-field {
+  margin-bottom: -10px;
+}
+
+.linhas {
+  display: flex;
+  justify-content: space-between;
+}
+
+.linha1 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .data {
+    width: 49%;
+  }
+  .hora {
+    width: 49%;
+  }
+}
+.linha2 {
+  display: flex;
+  justify-content: center;
+  .local {
+    width: 100%;
+  }
+}
+.linha3 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .numero {
+    width: 24%;
+  }
+  .bairro {
+    width: 74%;
+  }
+}
+
+.linha4 {
+  display: flex;
+  justify-content: center;
+  .descricao {
+    width: 100%;
+  }
+}
+.linha5 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .infracao {
+    width: 49%;
+  }
+  .consorcio {
+    width: 49%;
+  }
+}
+.linha6 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .numeroLinha {
+    width: 49%;
+  }
+  .numeroVeiculo {
+    width: 49%;
+  }
+}
+.container {
+  margin-top: 20px;
+}
