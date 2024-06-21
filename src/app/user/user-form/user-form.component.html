@@ -1,14 +1,15 @@
+<div style="margin-top: 20px">
 <mat-card>
   <form [formGroup]="userForm">
     <mat-card-content>
       <ng-container>
         @if(typeForm() !== 'edit'){
-        <mat-toolbar color="primary" id="peso-fonte"
+        <mat-toolbar class="background-toolbar" id="peso-fonte"
           >Adicionar Usuário</mat-toolbar
         >
 
         }@else {
-        <mat-toolbar color="primary" id="peso-fonte"
+        <mat-toolbar class="background-toolbar" id="peso-fonte"
           >Alterar Usuário</mat-toolbar
         >}
       </ng-container>
@@ -56,3 +57,4 @@
     </mat-card-actions>
   </form>
 </mat-card>
+</div>

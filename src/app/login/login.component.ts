@@ -34,7 +34,6 @@ export class LoginComponent implements OnDestroy {
   });
 
   constructor() {
-    console.log('teste')
     this.subscription = this.userService
       .list()
       .subscribe((result: IUsuarios) => this.users.set(result));

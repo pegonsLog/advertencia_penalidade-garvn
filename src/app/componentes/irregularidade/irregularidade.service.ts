@@ -56,11 +56,11 @@ export class IrregularidadeService {
     return addDoc($irregularidadeRef, irregularidade);
   }
 
-  async updateIrregularidade(irregularidade: IIrregularidade) {
+  async updateIrregularidade(id: string, irregularidade: IIrregularidade) {
     const $irregularidadeRef = doc(
       this.firestore,
       'irregularidades',
-      irregularidade.id
+      id
     );
     await updateDoc($irregularidadeRef, {
       dataIrregularidade: irregularidade.dataIrregularidade,

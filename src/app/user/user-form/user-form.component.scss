@@ -33,7 +33,14 @@ button {
   margin-right: 10px;
 }
 #button-salvar{
-  background-color: #2b61f5;
+  background-color: rgb(63, 154, 196);
   color: white;
 }
 
+.background-toolbar {
+  background-color: rgb(63, 154, 196);
+  font-family: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: 2px;
+  font-weight: 300;
+  color: white
+}

@@ -52,8 +52,8 @@ export class AgenteService {
   async updateAgente(agente: IAgente) {
     const $agenteRef = doc(this.firestore, 'agentes', agente.id);
     await updateDoc($agenteRef, {
-      matriculaAgente: agente.matriculaAgenteFiscalizador,
-      nomeAgente: agente.nomeAgenteFiscalizador,
+      matriculaAgenteFiscalizador: agente.matriculaAgenteFiscalizador,
+      nomeAgenteFiscalizador: agente.nomeAgenteFiscalizador,
       cargo: agente.cargo,
       lotacao: agente.lotacao,
     });

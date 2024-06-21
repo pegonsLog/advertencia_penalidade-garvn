@@ -1,3 +1,4 @@
+
 @media (mix-width: 600px) {
   mat-card {
     width: 100%;
@@ -6,94 +7,36 @@
 }
 @media (min-width: 600px) and (max-width: 2000px) {
   mat-card {
-    width: 55%;
+    width: 40%;
     margin: 0 auto;
   }
 }
 
-#user-list {
-  width: 50%;
-  margin: 0 auto;
-}
-
-#altura {
-  overflow-y: auto;
-  height: 450px;
-  padding: 0px;
-}
-
-* {
-  font-family: Montserrat;
-  font-weight: 300;
-}
-
-#toolbar {
-  display: flex;
-  justify-content: space-between;
-  font-family: "Montserrat";
-  font-weight: 300;
-  background-color: rgb(63, 154, 196);
-}
-
-#delete {
-  cursor: pointer;
-  color: rgb(255, 71, 71);
-  display: flex;
-  align-items: center;
-}
-
-.new {
-  cursor: pointer;
-  color: white;
-  display: flex;
-  align-items: center;
-}
-
-#edit {
-  cursor: pointer;
-  color: rgb(5, 167, 5);
-  display: flex;
-  align-items: center;
-}
-#actions {
-  display: flex;
-  justify-content: center;
-}
-
-#mat-button-custom {
-  border: 0px;
-  background-color: white;
-}
-#mat-button-custom-adm {
-  display: flex;
-  align-items: center;
-  border: 0px;
-  background-color: rgba(0, 0, 0, 0);
-}
-#loading-spinner {
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.15);
-}
-
-.filtro {
-  margin-top: 15px;
+.full-width {
   width: 100%;
 }
 
-.divisor {
-  padding: 0px;
+mat-card-actions {
+  margin-left: 10px;
 }
 
-.contador {
+mat-toolbar,
+button {
+  margin-bottom: 1em;
+}
+
+button {
   margin-right: 10px;
 }
-mat-card-actions {
-  display: flex;
-  justify-content: space-between;
-}
-mat-button {
+#button-salvar{
   background-color: rgb(63, 154, 196);
+  color: white;
+}
+
+.background-toolbar {
+  background-color: rgb(63, 154, 196);
+  font-family: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: 2px;
+  font-weight: 300;
+  color: white
 }
