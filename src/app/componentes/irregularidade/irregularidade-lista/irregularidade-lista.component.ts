@@ -31,6 +31,7 @@ export class IrregularidadeListaComponent implements OnDestroy {
 
   irregularidade = signal<IIrregularidade>({
     id: '',
+    numeroIrregularidade: '',
     dataIrregularidade: '',
     horario: '',
     local: '',
@@ -44,6 +45,7 @@ export class IrregularidadeListaComponent implements OnDestroy {
   });
 
   displayedColumns: string[] = [
+    'numeroIrregularidade',
     'dataIrregularidade',
     'horario',
     'local',

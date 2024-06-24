@@ -1,6 +1,7 @@
 export interface IIrregularidades extends Array<IIrregularidade> {}
 export interface IIrregularidade {
   id: string;
+  numeroIrregularidade: string;
   dataIrregularidade: string;
   horario: string;
   local: string;

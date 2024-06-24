@@ -24,6 +24,7 @@ export class IrregularidadeService {
   irregularidades: IIrregularidades = [];
   irregularidade: IIrregularidade = {
     id: '',
+    numeroIrregularidade: '',
     dataIrregularidade: '',
     horario: '',
     local: '',
@@ -63,6 +64,7 @@ export class IrregularidadeService {
       id
     );
     await updateDoc($irregularidadeRef, {
+      numeroIrreguralidade: irregularidade.numeroIrregularidade,
       dataIrregularidade: irregularidade.dataIrregularidade,
       horario: irregularidade.horario,
       local: irregularidade.local,
@@ -80,5 +82,18 @@ export class IrregularidadeService {
     let $irregularidadeRef = doc(this.firestore, 'irregularidades', id);
 
     return deleteDoc($irregularidadeRef);
+  }
+
+  padWithZeros(numeroNotificacao: string): any {
+    // Converter o número para string
+    let numberStr = numeroNotificacao;
+
+    // Verificar se o número está entre 0 e 9999999
+    if (/^\d{1,7}$/.test(numberStr)) {
+        // Preencher com zeros à esquerda até ter 7 dígitos
+        return numberStr.padStart(7, '0')
+    } else {
+        alert("Número fora do intervalo permitido (0-9999999)");
+    }
   }
 }
