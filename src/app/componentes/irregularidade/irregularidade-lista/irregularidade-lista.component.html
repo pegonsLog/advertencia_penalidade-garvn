@@ -30,6 +30,12 @@
         </div>
         <ng-template #dataContent>
           <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="numeroIrregularidade">
+              <th mat-header-cell *matHeaderCellDef>Número</th>
+              <td mat-cell *matCellDef="let irregularidade">
+                {{ irregularidade.numeroIrregularidade }}
+              </td>
+            </ng-container>
             <ng-container matColumnDef="dataIrregularidade">
               <th mat-header-cell *matHeaderCellDef>Data</th>
               <td mat-cell *matCellDef="let irregularidade">
@@ -38,7 +44,7 @@
             </ng-container>
 
             <ng-container matColumnDef="horario">
-              <th mat-header-cell *matHeaderCellDef>horário</th>
+              <th mat-header-cell *matHeaderCellDef>Horário</th>
               <td mat-cell *matCellDef="let irregularidade">
                 {{ irregularidade.horario }}
               </td>

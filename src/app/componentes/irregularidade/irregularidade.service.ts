@@ -64,7 +64,7 @@ export class IrregularidadeService {
       id
     );
     await updateDoc($irregularidadeRef, {
-      numeroIrreguralidade: irregularidade.numeroIrregularidade,
+      numeroIrregularidade: irregularidade.numeroIrregularidade,
       dataIrregularidade: irregularidade.dataIrregularidade,
       horario: irregularidade.horario,
       local: irregularidade.local,

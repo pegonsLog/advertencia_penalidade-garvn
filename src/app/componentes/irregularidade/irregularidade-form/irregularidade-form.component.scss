@@ -58,11 +58,14 @@ mat-form-field {
   display: flex;
   justify-content: space-between;
 
+  .numero {
+    width: 32%;
+  }
   .data {
-    width: 49%;
+    width: 32%;
   }
   .hora {
-    width: 49%;
+    width: 32%;
   }
 }
 .linha2 {

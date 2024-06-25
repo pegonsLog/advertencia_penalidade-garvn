@@ -34,6 +34,7 @@ export class IrregularidadeFormComponent {
 
   public irregularidade = {
     id: '',
+    numeroIrregularidade: '',
     dataIrregularidade: '',
     horario: '',
     local: '',
@@ -56,6 +57,7 @@ export class IrregularidadeFormComponent {
         .umaIrregularidade(this.irregularidade.id)
         .subscribe((result: IIrregularidade) => {
           this.irregularidadeForm = this.#fb.group({
+            numeroIrregularidade: [result.numeroIrregularidade, Validators.required],
             dataIrregularidade: [
               result.dataIrregularidade,
               Validators.required,
@@ -74,6 +76,7 @@ export class IrregularidadeFormComponent {
     }
 
     this.irregularidadeForm = this.#fb.group({
+      numeroIrregularidade: ['', Validators.required],
        dataIrregularidade: ['', Validators.required],
       horario: ['', Validators.required],
       local: ['', Validators.required],
@@ -122,6 +125,7 @@ export class IrregularidadeFormComponent {
     irregularidadeIIrregularidade: IIrregularidade
   ) {
     this.irregularidadeForm = this.#fb.group({
+      numeroIrregularidade: [irregularidadeIIrregularidade.numeroIrregularidade, Validators.required],
       dataIrregularidade: [
         irregularidadeIIrregularidade.dataIrregularidade,
         Validators.required,
