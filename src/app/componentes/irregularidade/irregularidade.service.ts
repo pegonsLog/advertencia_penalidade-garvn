@@ -85,13 +85,14 @@ export class IrregularidadeService {
   }
 
   padWithZeros(numeroNotificacao: string): any {
+    const ano = new Date();
     // Converter o número para string
-    let numberStr = numeroNotificacao;
+    let numberStr = numeroNotificacao
 
     // Verificar se o número está entre 0 e 9999999
     if (/^\d{1,7}$/.test(numberStr)) {
         // Preencher com zeros à esquerda até ter 7 dígitos
-        return numberStr.padStart(7, '0')
+        return ano.getFullYear() + numberStr.padStart(7, '0')
     } else {
         alert("Número fora do intervalo permitido (0-9999999)");
     }

@@ -1,7 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
-import { IIrregularidade } from '../../../interface/irregularidade';
-import { Subscription } from 'rxjs';
+import {
+  IIrregularidade,
+  IIrregularidades,
+} from '../../../interface/irregularidade';
+import { Subscription, map } from 'rxjs';
 import {
   FormBuilder,
   FormGroup,
@@ -19,14 +22,28 @@ import { CommonModule } from '@angular/common';
   templateUrl: './irregularidade-form.component.html',
   styleUrl: './irregularidade-form.component.scss',
 })
-export class IrregularidadeFormComponent {
+export class IrregularidadeFormComponent implements OnDestroy, OnInit{
   #fb = inject(FormBuilder);
   #irregularidadeService = inject(IrregularidadeService);
   #route = inject(Router);
   #activatedRoute = inject(ActivatedRoute);
 
-  irregularidadeForm: FormGroup;
+  irregularidadeForm: FormGroup = this.#fb.group({
+    numeroIrregularidade: ['', Validators.required],
+    dataIrregularidade: ['', Validators.required],
+    horario: ['', Validators.required],
+    local: ['', Validators.required],
+    numeroLocal: ['', Validators.required],
+    bairro: ['', Validators.required],
+    descricao: ['', Validators.required],
+    numeroInfracao: ['', Validators.required],
+    numeroConsorcio: ['', Validators.required],
+    numeroVeiculo: ['', Validators.required],
+    numeroLinha: ['', Validators.required],
+  })
+
   typeForm = signal<string>('');
+  numeroUltimaIrregularidade: number = 0;
 
   id = signal<string>('');
 
@@ -47,17 +64,22 @@ export class IrregularidadeFormComponent {
     numeroVeiculo: '',
   };
 
+
+
   constructor() {
     this.irregularidade.id = this.#activatedRoute.snapshot.queryParams['id'];
 
-    if (this.#activatedRoute.snapshot.queryParams['id']) {
 
+    if (this.#activatedRoute.snapshot.queryParams['id']) {
       this.typeForm.set('edit');
       this.subscription = this.#irregularidadeService
         .umaIrregularidade(this.irregularidade.id)
         .subscribe((result: IIrregularidade) => {
           this.irregularidadeForm = this.#fb.group({
-            numeroIrregularidade: [result.numeroIrregularidade, Validators.required],
+            numeroIrregularidade: [
+              result.numeroIrregularidade,
+              Validators.required,
+            ],
             dataIrregularidade: [
               result.dataIrregularidade,
               Validators.required,
@@ -75,26 +97,31 @@ export class IrregularidadeFormComponent {
         });
     }
 
-    this.irregularidadeForm = this.#fb.group({
-      numeroIrregularidade: ['', Validators.required],
-       dataIrregularidade: ['', Validators.required],
-      horario: ['', Validators.required],
-      local: ['', Validators.required],
-      numeroLocal: ['', Validators.required],
-      bairro: ['', Validators.required],
-      descricao: ['', Validators.required],
-      numeroInfracao: ['', Validators.required],
-      numeroConsorcio: ['', Validators.required],
-      numeroVeiculo: ['', Validators.required],
-      numeroLinha: ['', Validators.required],
-    });
+    this.subscription = this.#irregularidadeService.list().subscribe((irr: IIrregularidades) => {this.numeroUltimaIrregularidade = irr.map(obj => Number(obj.numeroIrregularidade))
+      .reduce((max, current) => (current > max ? current : max), Number.NEGATIVE_INFINITY),     this.irregularidadeForm = this.#fb.group({
+        numeroIrregularidade: [this.numeroUltimaIrregularidade + 1, Validators.required],
+        dataIrregularidade: ['', Validators.required],
+        horario: ['', Validators.required],
+        local: ['', Validators.required],
+        numeroLocal: ['', Validators.required],
+        bairro: ['', Validators.required],
+        descricao: ['', Validators.required],
+        numeroInfracao: ['', Validators.required],
+        numeroConsorcio: ['', Validators.required],
+        numeroVeiculo: ['', Validators.required],
+        numeroLinha: ['', Validators.required],
+      });})
+
   }
 
   onNew() {
     this.#irregularidadeService
+    
       .addIrregularidade(this.irregularidadeForm.getRawValue())
       .then(() => {
+   
         this.#route.navigate(['irregularidadeLista']);
+        this.irregularidadeForm.reset();
         alert('Registro adicionado com sucesso!');
       })
       .catch((error) => {
@@ -105,7 +132,10 @@ export class IrregularidadeFormComponent {
 
   onUpdate() {
     this.#irregularidadeService
-      .updateIrregularidade(this.irregularidade.id, this.irregularidadeForm.getRawValue())
+      .updateIrregularidade(
+        this.irregularidade.id,
+        this.irregularidadeForm.getRawValue()
+      )
       .then(() => {
         this.#route.navigate(['irregularidadeLista']);
         alert('Registro atualizado com sucesso!');
@@ -119,13 +149,18 @@ export class IrregularidadeFormComponent {
     this.#route.navigate(['irregularidadeLista']);
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    // this.numerarNotificacao()
+  }
 
   irregularidadeIIrregularidadeFormEdit(
     irregularidadeIIrregularidade: IIrregularidade
   ) {
     this.irregularidadeForm = this.#fb.group({
-      numeroIrregularidade: [irregularidadeIIrregularidade.numeroIrregularidade, Validators.required],
+      numeroIrregularidade: [
+        irregularidadeIIrregularidade.numeroIrregularidade,
+        Validators.required,
+      ],
       dataIrregularidade: [
         irregularidadeIIrregularidade.dataIrregularidade,
         Validators.required,
@@ -156,7 +191,28 @@ export class IrregularidadeFormComponent {
       ],
     });
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+
+      ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+      }
+
+      numerarNotificacao(){
+        this.irregularidadeForm = this.#fb.group({
+          numeroIrregularidade: [(this.numeroUltimaIrregularidade + 1).toString(), Validators.required],
+          dataIrregularidade: ['', Validators.required],
+          horario: ['', Validators.required],
+          local: ['', Validators.required],
+          numeroLocal: ['', Validators.required],
+          bairro: ['', Validators.required],
+          descricao: ['', Validators.required],
+          numeroInfracao: ['', Validators.required],
+          numeroConsorcio: ['', Validators.required],
+          numeroVeiculo: ['', Validators.required],
+          numeroLinha: ['', Validators.required],
+        });
+
+      }
+
   }
-}
+
+
