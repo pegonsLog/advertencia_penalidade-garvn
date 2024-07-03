@@ -31,10 +31,14 @@ export class IrregularidadeService {
     numeroLocal: '',
     bairro: '',
     descricao: '',
-    numeroInfracao: '',
+    codigoInfracao: '',
     numeroConsorcio: '',
     numeroLinha: '',
     numeroVeiculo: '',
+    dataEmissao: '',
+    prazoCumprimento: '',
+    dataCumprimento: '',
+    matriculaAgente: ''
   };
   id: string = '';
 
@@ -71,7 +75,7 @@ export class IrregularidadeService {
       numeroLocal: irregularidade.numeroLocal,
       bairro: irregularidade.bairro,
       descricao: irregularidade.descricao,
-      numeroInfracao: irregularidade.numeroInfracao,
+      codigoInfracao: irregularidade.codigoInfracao,
       numeroConsorcio: irregularidade.numeroConsorcio,
       numeroLinha: irregularidade.numeroLinha,
       numeroVeiculo: irregularidade.numeroVeiculo,

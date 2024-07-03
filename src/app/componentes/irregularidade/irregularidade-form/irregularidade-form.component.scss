@@ -6,8 +6,9 @@
 }
 @media (min-width: 600px) and (max-width: 2000px) {
   mat-card {
-    width: 40%;
+    width: 60%;
     margin: 0 auto;
+    background-color: rgb(230, 237, 240);
   }
 }
 
@@ -45,7 +46,7 @@ button {
   color: white;
 }
 mat-form-field {
-  margin-bottom: -10px;
+  margin-bottom: -15px;
 }
 
 .linhas {
@@ -59,66 +60,100 @@ mat-form-field {
   justify-content: space-between;
 
   .numero {
-    width: 32%;
+    width: 16%;
   }
   .data {
-    width: 32%;
+    width: 18%;
   }
   .hora {
-    width: 32%;
+    width: 11%;
+  }
+  .matriculaAgente {
+    width: 11%;
+  }
+  .nomeAgente {
+    width: 40%;
   }
 }
 .linha2 {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   .local {
-    width: 100%;
+    width: 50%;
+  }
+  .numeroLocal {
+    width: 12%;
+  }
+  .bairro {
+    width: 36%;
   }
 }
 .linha3 {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  .numero {
-    width: 24%;
-  }
-  .bairro {
-    width: 74%;
-  }
-}
-
-.linha4 {
   display: flex;
   justify-content: center;
   .descricao {
     width: 100%;
   }
 }
+.linha4 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .numeroLinha {
+    width: 20%;
+  }
+}
 .linha5 {
   width: 100%;
   display: flex;
   justify-content: space-between;
-
   .infracao {
-    width: 49%;
-  }
-  .consorcio {
-    width: 49%;
+    width: 20%;
   }
 }
 .linha6 {
   width: 100%;
   display: flex;
   justify-content: space-between;
-
-  .numeroLinha {
-    width: 49%;
-  }
   .numeroVeiculo {
-    width: 49%;
+    width: 20%;
   }
 }
+.linha7 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .consorcio {
+    width: 20%;
+  }
+}
+.linha8 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .dataEmissao {
+    width:32.3%;
+  }
+  .prazoCumprimento {
+    width: 32.3%;
+  }
+  .dataCumprimento {
+    width: 32.3%;
+  }
+}
+
+// .linha6 {
+//   width: 100%;
+//   display: flex;
+//   justify-content: space-between;
+
+// }
 .container {
   margin-top: 20px;
+}
+
+.full-width {
+  margin-left: 10px;
+  width: 100%;
 }

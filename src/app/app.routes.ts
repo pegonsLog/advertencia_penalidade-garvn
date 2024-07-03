@@ -1,8 +1,12 @@
 import { Routes } from '@angular/router';
+import { AgenteFormComponent } from './componentes/agente/agente-form/agente-form.component';
+import { AgenteListaComponent } from './componentes/agente/agente-lista/agente-lista.component';
 import { ConsorcioFormComponent } from './componentes/consorcio/consorcio-form/consorcio-form.component';
 import { ConsorcioListaComponent } from './componentes/consorcio/consorcio-lista/consorcio-lista.component';
 import { FiscalizacaoFormComponent } from './componentes/fiscalizacao/fiscalizacao-form/fiscalizacao-form.component';
 import { FiscalizacaoListaComponent } from './componentes/fiscalizacao/fiscalizacao-lista/fiscalizacao-lista.component';
+import { HomeComponent } from './componentes/home/home.component';
+import { ImprimirComponent } from './componentes/imprimir/imprimir.component';
 import { InfracaoFormComponent } from './componentes/infracao/infracao-form/infracao-form.component';
 import { InfracaoListaComponent } from './componentes/infracao/infracao-lista/infracao-lista.component';
 import { IrregularidadeFormComponent } from './componentes/irregularidade/irregularidade-form/irregularidade-form.component';
@@ -12,12 +16,8 @@ import { LinhaListaComponent } from './componentes/linha/linha-lista/linha-lista
 import { VeiculoFormComponent } from './componentes/veiculo/veiculo-form/veiculo-form.component';
 import { VeiculoListaComponent } from './componentes/veiculo/veiculo-lista/veiculo-lista.component';
 import { LoginComponent } from './login/login.component';
-import { UserListComponent } from './user/user-list/user-list.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
-import { HomeComponent } from './componentes/home/home.component';
-import { AgenteFormComponent } from './componentes/agente/agente-form/agente-form.component';
-import { AgenteListaComponent } from './componentes/agente/agente-lista/agente-lista.component';
-import { ImpressoComponent } from './componentes/irregularidade/impresso/impresso.component';
+import { UserListComponent } from './user/user-list/user-list.component';
 
 export const routes: Routes = [
   {
@@ -99,7 +99,6 @@ export const routes: Routes = [
   },
   {
     path: 'impresso',
-    component: ImpressoComponent,
+    component: ImprimirComponent,
   },
-
 ];

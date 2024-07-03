@@ -1,9 +1,8 @@
 .coluna1L1 {
   display: flex;
   justify-content: left;
-
   .card {
-    width: 400px;
+    width: 300px;
     background-color: rgb(96, 193, 238);
   }
 }
@@ -12,7 +11,7 @@
   justify-content: left;
   margin-top: -5px;
   .card {
-    width: 400px;
+    width: 300px;
     background-color: rgb(96, 193, 238);
   }
 }
@@ -21,7 +20,7 @@
   justify-content: left;
   margin-top: -5px;
   .card {
-    width: 200px;
+    width: 300px;
     background-color: rgb(96, 193, 238);
   }
 }
@@ -52,7 +51,7 @@
   }
 }
 .coluna1{
-  width: 400px;
+  width: 300px;
 }
 .coluna2{
   width: 400px;

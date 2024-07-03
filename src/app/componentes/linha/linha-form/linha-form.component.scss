@@ -9,11 +9,16 @@
   mat-card {
     width: 40%;
     margin: 0 auto;
+    background-color: rgb(230, 237, 240);
   }
 }
 
 .full-width {
   width: 100%;
+}
+
+mat-form-field {
+  margin-bottom: -6px;
 }
 
 mat-card-actions {

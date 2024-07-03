@@ -15,82 +15,222 @@
         </ng-container>
 
         <div class="linha1">
+          @if(typeForm() !== 'edit'){
           <mat-form-field class="numero">
             <input
               matInput
               placeholder="Número"
               formControlName="numeroIrregularidade"
+              tabindex="1"
             />
           </mat-form-field>
+          }@else{
+          <mat-form-field class="numero">
+            <input
+              matInput
+              placeholder="Número"
+              formControlName="numeroIrregularidade"
+              tabindex="-1"
+              readonly="true"
+            />
+          </mat-form-field>
+          }
           <mat-form-field class="data">
             <input
               matInput
               placeholder="Data"
               formControlName="dataIrregularidade"
+              mask="d0/M0/0000"
+              [dropSpecialCharacters]="false"
+              tabindex="2"
             />
           </mat-form-field>
           <mat-form-field class="hora">
-            <input matInput placeholder="Hora" formControlName="horario" />
+            <input
+              type="text"
+              matInput
+              placeholder="Hora"
+              formControlName="horario"
+              mask="Hh:m0"
+              [dropSpecialCharacters]="false"
+              tabindex="3"
+            />
+          </mat-form-field>
+          <mat-form-field class="matriculaAgente">
+            <input
+              matInput
+              placeholder="Mat. Agente"
+              formControlName="matriculaAgente"
+              tabindex="4"
+              (blur)="validarAgente()"
+            />
+          </mat-form-field>
+          <mat-form-field class="nomeAgente">
+            <input
+              matInput
+              readonly="true"
+              value="{{ agenteValidacao }}"
+              tabindex="-1"
+              [ngStyle]="{ color: condicaoValidacaoAgente ? 'black' : 'red' }"
+            />
           </mat-form-field>
         </div>
 
         <div class="linha2">
           <mat-form-field class="local">
-            <input matInput placeholder="Local" formControlName="local" />
-          </mat-form-field>
-        </div>
-
-        <div class="linha3">
-          <mat-form-field class="numero">
             <input
               matInput
-              placeholder="Número"
+              placeholder="Local"
+              formControlName="local"
+              tabindex="5"
+            />
+          </mat-form-field>
+          <mat-form-field class="numeroLocal">
+            <input
+              matInput
+              placeholder="Nº"
               formControlName="numeroLocal"
+              tabindex="6"
             />
           </mat-form-field>
           <mat-form-field class="bairro">
-            <input matInput placeholder="Bairro" formControlName="bairro" />
+            <input
+              matInput
+              placeholder="Bairro"
+              formControlName="bairro"
+              tabindex="7"
+            />
           </mat-form-field>
         </div>
-
-        <div class="linha4">
+        <div class="linha3">
           <mat-form-field class="descricao">
             <input
               matInput
               placeholder="Descricao"
               formControlName="descricao"
+              tabindex="8"
             />
           </mat-form-field>
         </div>
+        <div class="linha4">
+          <mat-form-field class="numeroLinha">
+            <input
+              matInput
+              placeholder="Nº Linha"
+              formControlName="numeroLinha"
+              tabindex="9"
+              (blur)="validarLinha()"
+            />
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Nome da linha</mat-label>
+            <input
+              matInput
+              readonly="true"
+              value="{{ linhaValidacao }}"
+              tabindex="-1"
+              [ngStyle]="{ color: condicaoValidacaoLinha ? 'black' : 'red' }"
+            />
+          </mat-form-field>
+        </div>
+
         <div class="linha5">
           <mat-form-field class="infracao">
             <input
               matInput
-              placeholder="Código da infração"
-              formControlName="numeroInfracao"
+              placeholder="Cód. Infração"
+              formControlName="codigoInfracao"
+              tabindex="10"
+              (blur)="validarInfracao()"
             />
           </mat-form-field>
-          <mat-form-field class="consorcio">
+          <mat-form-field class="full-width">
+            <mat-label>Descrição da infração</mat-label>
             <input
               matInput
-              placeholder="Nº do Consórcio"
-              formControlName="numeroConsorcio"
+              readonly="true"
+              value="{{ infracaoValidacao }}"
+              tabindex="-1"
+              [ngStyle]="{ color: condicaoValidacaoInfracao ? 'black' : 'red' }"
             />
           </mat-form-field>
         </div>
+
         <div class="linha6">
-          <mat-form-field class="numeroLinha">
-            <input
-              matInput
-              placeholder="Nº da linha"
-              formControlName="numeroLinha"
-            />
-          </mat-form-field>
           <mat-form-field class="numeroVeiculo">
             <input
               matInput
-              placeholder="Nº do veiculo"
+              placeholder="Nº Veiculo"
               formControlName="numeroVeiculo"
+              tabindex="11"
+              (blur)="validarVeiculo()"
+            />
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Placa do veículo</mat-label>
+            <input
+              matInput
+              readonly="true"
+              value="{{ veiculoValidacao }}"
+              tabindex="-1"
+              [ngStyle]="{ color: condicaoValidacaoVeiculo ? 'black' : 'red' }"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="linha7">
+          <mat-form-field class="consorcio">
+            <input
+              matInput
+              placeholder="Nº Consórcio"
+              formControlName="numeroConsorcio"
+              tabindex="12"
+              (blur)="validarConsorcio()"
+            />
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Nome do consorcio</mat-label>
+            <input
+              matInput
+              readonly="true"
+              value="{{ consorcioValidacao }}"
+              tabindex="-1"
+              [ngStyle]="{
+                color: condicaoValidacaoConsorcio ? 'black' : 'red'
+              }"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="linha8">
+          <mat-form-field class="dataEmissao">
+            <input
+              matInput
+              placeholder="Data Emissão"
+              formControlName="dataEmissao"
+              tabindex="13"
+              mask="d0/M0/0000"
+              [dropSpecialCharacters]="false"
+            />
+          </mat-form-field>
+          <mat-form-field class="prazoCumprimento">
+            <input
+              matInput
+              placeholder="Prazo Cumprimento"
+              formControlName="prazoCumprimento"
+              tabindex="14"
+              mask="d0/M0/0000"
+              [dropSpecialCharacters]="false"
+            />
+          </mat-form-field>
+          <mat-form-field class="dataCumprimento">
+            <input
+              matInput
+              placeholder="Data Cumprimento"
+              formControlName="dataCumprimento"
+              tabindex="15"
+              mask="d0/M0/0000"
+              [dropSpecialCharacters]="false"
             />
           </mat-form-field>
         </div>
@@ -121,7 +261,6 @@
           <button type="button" mat-raised-button (click)="voltar()">
             Cancelar
           </button>
-  
         </ng-container>
       </mat-card-actions>
     </form>

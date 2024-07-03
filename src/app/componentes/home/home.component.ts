@@ -49,7 +49,7 @@ export class HomeComponent {
   exportar() {
     // this.route.navigate(['exportar'])
   }
-  impresso() {
-    this.route.navigate(['impresso']);
+  menuConsulta() {
+    this.route.navigate(['menuConsulta']);
   }
 }

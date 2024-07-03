@@ -95,7 +95,6 @@ export class UserListComponent implements OnDestroy {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     this.contador = this.dataSource._filterData(this.users).length;
   }
 

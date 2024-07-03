@@ -1,7 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, ViewChild, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import {
   IIrregularidade,
   IIrregularidades,
@@ -9,10 +13,6 @@ import {
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { IrregularidadeService } from '../irregularidade.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-irregularidade-lista',
@@ -32,26 +32,34 @@ export class IrregularidadeListaComponent implements OnDestroy {
   irregularidade = signal<IIrregularidade>({
     id: '',
     numeroIrregularidade: '',
+    matriculaAgente: '',
     dataIrregularidade: '',
     horario: '',
     local: '',
     numeroLocal: '',
     bairro: '',
     descricao: '',
-    numeroInfracao: '',
+    dataEmissao: '',
+    prazoCumprimento: '',
+    dataCumprimento: '',
+    codigoInfracao: '',
     numeroConsorcio: '',
     numeroLinha: '',
-    numeroVeiculo: '',
+    numeroVeiculo: ''
   });
 
   displayedColumns: string[] = [
     'numeroIrregularidade',
+    'matriculaAgente',
     'dataIrregularidade',
     'horario',
     'local',
     'bairro',
     'descricao',
-    'numeroInfracao',
+    'dataEmissao',
+    'prazoCumprimento',
+    'dataCumprimento',
+    'codigoInfracao',
     'numeroConsorcio',
     'numeroLinha',
     'numeroVeiculo',
@@ -71,7 +79,7 @@ export class IrregularidadeListaComponent implements OnDestroy {
   constructor() {
     this.#irregularidadeService
       .list()
-      .pipe()
+      .pipe(map((i: IIrregularidades) => i.filter(irreg => irreg.numeroIrregularidade !== "1")))
       .subscribe((irregularidades: IIrregularidades) => {
         this.irregularidades = irregularidades;
         this.dataSource = new MatTableDataSource(this.irregularidades);
@@ -112,6 +120,7 @@ export class IrregularidadeListaComponent implements OnDestroy {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.contador = this.dataSource._filterData(this.irregularidades).length;
   }
 
   ngOnDestroy(): void {

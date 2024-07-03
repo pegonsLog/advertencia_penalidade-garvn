@@ -100,6 +100,7 @@ export class AgenteListaComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.contador = this.dataSource._filterData(this.agentes).length;
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

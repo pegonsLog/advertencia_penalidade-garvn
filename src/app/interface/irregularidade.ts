@@ -8,7 +8,11 @@ export interface IIrregularidade {
   numeroLocal: string;
   bairro: string;
   descricao: string;
-  numeroInfracao: string;
+  dataEmissao: string;
+  prazoCumprimento: string;
+  dataCumprimento: string;
+  matriculaAgente: string;
+  codigoInfracao: string;
   numeroConsorcio: string;
   numeroLinha: string;
   numeroVeiculo: string;
