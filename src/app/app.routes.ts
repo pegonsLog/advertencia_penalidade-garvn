@@ -98,7 +98,7 @@ export const routes: Routes = [
     component: AgenteListaComponent,
   },
   {
-    path: 'impresso',
+    path: 'imprimir',
     component: ImprimirComponent,
   },
 ];

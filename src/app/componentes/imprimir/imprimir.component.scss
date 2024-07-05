@@ -1,13 +1,27 @@
-body {
-  font-family: Arial, sans-serif;
-  font-size: 12px;
-  margin: 0;
-  padding: 0;
+@media print {
+  body {
+    margin: 0;
+    box-shadow: 0;
+  }
+
+  .page {
+    box-shadow: none;
+    margin: 0;
+    page-break-after: always;
+  }
+
+  button {
+    display: none;
+  }
 }
 
-#container {
-  width: 800px;
-  margin: 0 auto;
-  background-color: white;
+.page {
+  width: 21cm;
+  height: 29.7cm;
+  padding: 2cm;
+  margin: 1cm auto;
+  border: 1px #D3D3D3 solid;
+  border-radius: 5px;
+  background: white;
+  page-break-after: always;
 }
-
