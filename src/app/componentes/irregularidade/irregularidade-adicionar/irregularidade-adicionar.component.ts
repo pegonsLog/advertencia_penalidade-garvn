@@ -83,7 +83,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy, OnInit {
     dataCumprimento: ['', Validators.required],
   });
 
-  typeForm = signal<string>('');
+  // typeForm = signal<string>('');
   numeroUltimaIrregularidade: number = 0;
 
   id = signal<string>('');
@@ -112,7 +112,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy, OnInit {
     this.irregularidade.id = this.#activatedRoute.snapshot.queryParams['id'];
 
     if (this.#activatedRoute.snapshot.queryParams['id']) {
-      this.typeForm.set('edit');
+      // this.typeForm.set('edit');
       this.subscription = this.#irregularidadeService
         .umaIrregularidade(this.irregularidade.id)
         .subscribe((result: IIrregularidade) => {
@@ -201,23 +201,23 @@ export class IrregularidadeAdicionarComponent implements OnDestroy, OnInit {
       });
   }
 
-  onUpdate() {
-    this.#irregularidadeService
-      .updateIrregularidade(
-        this.irregularidade.id,
-        this.irregularidadeForm.getRawValue()
-      )
-      .then(() => {
-        this.#route.navigate(['irregularidadeLista']);
-        alert('Registro atualizado com sucesso!');
-      })
-      .catch((error) => {
-        console.error('Erro ao adicionar irregularidade:', error);
-        alert('Erro ao alterar o registro');
-      });
-  }
+  // onUpdate() {
+  //   this.#irregularidadeService
+  //     .updateIrregularidade(
+  //       this.irregularidade.id,
+  //       this.irregularidadeForm.getRawValue()
+  //     )
+  //     .then(() => {
+  //       this.#route.navigate(['irregularidadeLista']);
+  //       alert('Registro atualizado com sucesso!');
+  //     })
+  //     .catch((error) => {
+  //       console.error('Erro ao adicionar irregularidade:', error);
+  //       alert('Erro ao alterar o registro');
+  //     });
+  // }
   voltar() {
-    this.#route.navigate(['irregularidadeLista']);
+    this.#route.navigate(['home']);
   }
 
   ngOnInit() {

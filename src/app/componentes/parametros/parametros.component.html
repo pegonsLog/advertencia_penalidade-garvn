@@ -1,0 +1,71 @@
+<div style="margin-top: 20px">
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar color="primary" id="peso-fonte"
+      >Parametros de consulta</mat-toolbar
+    >
+    <div>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Data de início"
+          type="text"
+          [(ngModel)]="dataInicio"
+          required="true"
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Data de Término"
+          type="password"
+          [(ngModel)]="dataFim"
+          required="true"
+        />
+      </mat-form-field>
+      <button
+        color="primary"
+        mat-raised-button
+        id="button-entrar"
+        (click)="voltar()"
+      >
+        OK
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <br />
+    <div>
+      <mat-form-field  style="width: 100%;">
+        <input
+          matInput
+          placeholder="Número da Notificação"
+          type="password"
+          [(ngModel)]="numeroNotificacao"
+          required="true"
+        />
+      </mat-form-field>
+      <button
+        color="primary"
+        mat-raised-button
+        id="button-entrar"
+        (click)="consultar()"
+      >
+        OK
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <br />
+    <div>
+      <mat-card-actions  id="centralizar">
+        <button style="width: 100px; background-color: white; color: black;"
+          color="primary"
+          mat-raised-button
+          (click)="voltar()"
+        >
+         Sair
+        </button>
+      </mat-card-actions>
+    </div>
+  </mat-card-content>
+</mat-card>
+</div>

@@ -9,15 +9,17 @@ import { HomeComponent } from './componentes/home/home.component';
 import { ImprimirComponent } from './componentes/imprimir/imprimir.component';
 import { InfracaoFormComponent } from './componentes/infracao/infracao-form/infracao-form.component';
 import { InfracaoListaComponent } from './componentes/infracao/infracao-lista/infracao-lista.component';
+import { IrregularidadeAdicionarComponent } from './componentes/irregularidade/irregularidade-adicionar/irregularidade-adicionar.component';
+import { IrregularidadeAlterarComponent } from './componentes/irregularidade/irregularidade-alterar/irregularidade-alterar.component';
 import { IrregularidadeListaComponent } from './componentes/irregularidade/irregularidade-lista/irregularidade-lista.component';
 import { LinhaFormComponent } from './componentes/linha/linha-form/linha-form.component';
 import { LinhaListaComponent } from './componentes/linha/linha-lista/linha-lista.component';
+import { ParametrosComponent } from './componentes/parametros/parametros.component';
 import { VeiculoFormComponent } from './componentes/veiculo/veiculo-form/veiculo-form.component';
 import { VeiculoListaComponent } from './componentes/veiculo/veiculo-lista/veiculo-lista.component';
 import { LoginComponent } from './login/login.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
 import { UserListComponent } from './user/user-list/user-list.component';
-import { IrregularidadeAdicionarComponent } from './componentes/irregularidade/irregularidade-adicionar/irregularidade-adicionar.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +34,10 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'parametros',
+    component: ParametrosComponent,
   },
   {
     path: 'userLista',
@@ -68,6 +74,10 @@ export const routes: Routes = [
   {
     path: 'irregularidadeAdicionar',
     component: IrregularidadeAdicionarComponent,
+  },
+  {
+    path: 'irregularidadeAlterar',
+    component: IrregularidadeAlterarComponent,
   },
   {
     path: 'irregularidadeLista',

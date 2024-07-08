@@ -34,8 +34,8 @@ export class HomeComponent {
   irregularidades() {
     this.route.navigate(['irregularidadeLista']);
   }
-  novaIrregularidade() {
-    this.route.navigate(['irregularidadeForm']);
+  adicionarIrregularidade() {
+    this.route.navigate(['irregularidadeAdicionar']);
   }
   consorcio() {
     this.route.navigate(['consorcioLista']);
@@ -52,7 +52,7 @@ export class HomeComponent {
   exportar() {
     // this.route.navigate(['exportar'])
   }
-  menuConsulta() {
-    this.route.navigate(['menuConsulta']);
+  parametrosConsulta() {
+    this.route.navigate(['parametros']);
   }
 }

@@ -45,7 +45,7 @@ export class IrregularidadeListaComponent implements OnDestroy {
     codigoInfracao: '',
     numeroConsorcio: '',
     numeroLinha: '',
-    numeroVeiculo: ''
+    numeroVeiculo: '',
   });
 
   displayedColumns: string[] = [
@@ -78,24 +78,28 @@ export class IrregularidadeListaComponent implements OnDestroy {
 
   constructor() {
     this.#irregularidadeService
-    .list()
-    .pipe(map((i: IIrregularidades) => i.filter(irreg => irreg.numeroIrregularidade !== "1")))
+      .list()
+      .pipe(
+        map((i: IIrregularidades) =>
+          i.filter((irreg) => irreg.numeroIrregularidade !== '1')
+        )
+      )
       .subscribe((irregularidades: IIrregularidades) => {
         this.irregularidades = irregularidades;
         this.dataSource = new MatTableDataSource(this.irregularidades);
         this.contador = irregularidades.length;
         this.isLoading = false;
       });
-    }
+  }
 
-    add() {
-      this.#route.navigate(['irregularidadeForm']);
-    }
-    edit(id: string) {
-      this.#route.navigate(['irregularidadeForm'], {
-        queryParams: { id: id },
-      });
-    }
+  add() {
+    this.#route.navigate(['irregularidadeAdicionar']);
+  }
+  edit(id: string) {
+    this.#route.navigate(['irregularidadeAlterar'], {
+      queryParams: { id: id },
+    });
+  }
   delete(id: string) {
     const dialogReference = this.dialog.open(ConfirmationDialogComponent);
     this.subscription = dialogReference
@@ -103,30 +107,30 @@ export class IrregularidadeListaComponent implements OnDestroy {
       .subscribe((result: any) => {
         if (result) {
           this.#irregularidadeService
-          .deleteIrregularidade(id)
-          .then(() => {
-            alert('Registro excluído com sucesso!');
-          })
-          .catch((err) => {
-            console.log(err);
+            .deleteIrregularidade(id)
+            .then(() => {
+              alert('Registro excluído com sucesso!');
+            })
+            .catch((err) => {
+              console.log(err);
             });
-          }
-        });
-      }
-      voltar() {
-        this.#route.navigate(['home']);
-      }
+        }
+      });
+  }
+  voltar() {
+    this.#route.navigate(['home']);
+  }
 
-      applyFilter(event: Event) {
-        const filterValue = (event.target as HTMLInputElement).value;
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-        this.contador = this.dataSource._filterData(this.irregularidades).length;
-      }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.contador = this.dataSource._filterData(this.irregularidades).length;
+  }
 
-      ngOnDestroy(): void {
-        this.subscription.unsubscribe();
-      }
-      imprimir() {
-        this.#route.navigate(['imprimir']);
-      }
-    }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+  imprimir() {
+    this.#route.navigate(['imprimir']);
+  }
+}

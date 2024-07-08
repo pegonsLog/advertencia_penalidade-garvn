@@ -3,19 +3,19 @@
     <form [formGroup]="irregularidadeForm">
       <mat-card-content>
         <ng-container>
-          @if(typeForm() !== 'edit'){
+          <!-- @if(typeForm() !== 'edit'){ -->
           <mat-toolbar class="background-toolbar" id="peso-fonte"
             >Adicionar Irregularidade</mat-toolbar
           >
 
-          }@else {
+          <!-- }@else {
           <mat-toolbar class="background-toolbar" id="peso-fonte"
             >Alterar Irregularidade</mat-toolbar
-          >}
+          >} -->
         </ng-container>
 
         <div class="linha1">
-          @if(typeForm() !== 'edit'){
+          <!-- @if(typeForm() !== 'edit'){ -->
           <mat-form-field class="numero">
             <input
               matInput
@@ -24,8 +24,8 @@
               tabindex="1"
             />
           </mat-form-field>
-          }@else{
-          <mat-form-field class="numero">
+          <!-- }@else{ -->
+          <!-- <mat-form-field class="numero">
             <input
               matInput
               placeholder="Número"
@@ -33,8 +33,8 @@
               tabindex="-1"
               readonly="true"
             />
-          </mat-form-field>
-          }
+          </mat-form-field> -->
+          <!-- } -->
           <mat-form-field class="data">
             <input
               matInput
@@ -238,8 +238,8 @@
 
       <mat-card-actions>
         <ng-container>
-          @if(typeForm() === 'edit'){
-          <button
+          <!-- @if(typeForm() === 'edit'){ -->
+          <!-- <button
             type="button"
             id="button-salvar"
             (click)="onUpdate()"
@@ -247,7 +247,7 @@
           >
             Salvar
           </button>
-          }@else{
+          }@else{ -->
           <button
             type="button"
             id="button-salvar"
@@ -256,7 +256,7 @@
           >
             Salvar
           </button>
-          }
+          <!-- } -->
 
           <button type="button" mat-raised-button (click)="voltar()">
             Cancelar

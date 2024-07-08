@@ -1,0 +1,159 @@
+@media (mix-width: 600px) {
+  mat-card {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 600px) and (max-width: 2000px) {
+  mat-card {
+    width: 60%;
+    margin: 0 auto;
+    background-color: rgb(230, 237, 240);
+  }
+}
+
+.full-width {
+  width: 45%;
+}
+
+mat-card-actions {
+  margin-left: 10px;
+}
+
+mat-toolbar,
+button {
+  margin-bottom: 1em;
+}
+
+#peso-fonte {
+  font-weight: 300;
+  font-family: Montserrat;
+}
+
+button {
+  margin-right: 10px;
+}
+#button-salvar {
+  background-color: rgb(63, 154, 196);
+  color: white;
+}
+
+.background-toolbar {
+  background-color: rgb(63, 154, 196);
+  font-family: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: 2px;
+  font-weight: 300;
+  color: white;
+}
+mat-form-field {
+  margin-bottom: -15px;
+}
+
+.linhas {
+  display: flex;
+  justify-content: space-between;
+}
+
+.linha1 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .numero {
+    width: 16%;
+  }
+  .data {
+    width: 18%;
+  }
+  .hora {
+    width: 11%;
+  }
+  .matriculaAgente {
+    width: 11%;
+  }
+  .nomeAgente {
+    width: 40%;
+  }
+}
+.linha2 {
+  display: flex;
+  justify-content: space-between;
+  .local {
+    width: 50%;
+  }
+  .numeroLocal {
+    width: 12%;
+  }
+  .bairro {
+    width: 36%;
+  }
+}
+.linha3 {
+  display: flex;
+  justify-content: center;
+  .descricao {
+    width: 100%;
+  }
+}
+.linha4 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .numeroLinha {
+    width: 20%;
+  }
+}
+.linha5 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .infracao {
+    width: 20%;
+  }
+}
+.linha6 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .numeroVeiculo {
+    width: 20%;
+  }
+}
+.linha7 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .consorcio {
+    width: 20%;
+  }
+}
+.linha8 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .dataEmissao {
+    width:32.3%;
+  }
+  .prazoCumprimento {
+    width: 32.3%;
+  }
+  .dataCumprimento {
+    width: 32.3%;
+  }
+}
+
+// .linha6 {
+//   width: 100%;
+//   display: flex;
+//   justify-content: space-between;
+
+// }
+.container {
+  margin-top: 20px;
+}
+
+.full-width {
+  margin-left: 10px;
+  width: 100%;
+}
