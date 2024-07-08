@@ -34,6 +34,9 @@ export class HomeComponent {
   irregularidades() {
     this.route.navigate(['irregularidadeLista']);
   }
+  novaIrregularidade() {
+    this.route.navigate(['irregularidadeForm']);
+  }
   consorcio() {
     this.route.navigate(['consorcioLista']);
   }

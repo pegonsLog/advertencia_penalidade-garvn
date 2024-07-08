@@ -9,7 +9,6 @@ import { HomeComponent } from './componentes/home/home.component';
 import { ImprimirComponent } from './componentes/imprimir/imprimir.component';
 import { InfracaoFormComponent } from './componentes/infracao/infracao-form/infracao-form.component';
 import { InfracaoListaComponent } from './componentes/infracao/infracao-lista/infracao-lista.component';
-import { IrregularidadeFormComponent } from './componentes/irregularidade/irregularidade-form/irregularidade-form.component';
 import { IrregularidadeListaComponent } from './componentes/irregularidade/irregularidade-lista/irregularidade-lista.component';
 import { LinhaFormComponent } from './componentes/linha/linha-form/linha-form.component';
 import { LinhaListaComponent } from './componentes/linha/linha-lista/linha-lista.component';
@@ -18,6 +17,7 @@ import { VeiculoListaComponent } from './componentes/veiculo/veiculo-lista/veicu
 import { LoginComponent } from './login/login.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
 import { UserListComponent } from './user/user-list/user-list.component';
+import { IrregularidadeAdicionarComponent } from './componentes/irregularidade/irregularidade-adicionar/irregularidade-adicionar.component';
 
 export const routes: Routes = [
   {
@@ -66,8 +66,8 @@ export const routes: Routes = [
     component: InfracaoListaComponent,
   },
   {
-    path: 'irregularidadeForm',
-    component: IrregularidadeFormComponent,
+    path: 'irregularidadeAdicionar',
+    component: IrregularidadeAdicionarComponent,
   },
   {
     path: 'irregularidadeLista',

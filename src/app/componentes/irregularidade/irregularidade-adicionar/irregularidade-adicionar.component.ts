@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import {
   FormBuilder,
@@ -9,26 +8,27 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { Subscription } from 'rxjs';
+import { IAgentes } from '../../../interface/agente';
+import { IConsorcios } from '../../../interface/consorcio';
+import { IInfracoes } from '../../../interface/infracao';
 import {
   IIrregularidade,
   IIrregularidades,
 } from '../../../interface/irregularidade';
-import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
-import { IrregularidadeService } from '../irregularidade.service';
-import { LinhaService } from '../../linha/linha.service';
 import { ILinhas } from '../../../interface/linha';
-import { IInfracoes } from '../../../interface/infracao';
-import { InfracaoService } from '../../infracao/infracao.service';
 import { IVeiculos } from '../../../interface/veiculo';
-import { VeiculoService } from '../../veiculo/veiculo.service';
-import { IConsorcios } from '../../../interface/consorcio';
-import { ConsorcioService } from '../../consorcio/consorcio.service';
+import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { AgenteService } from '../../agente/agente.service';
-import { IAgentes } from '../../../interface/agente';
+import { ConsorcioService } from '../../consorcio/consorcio.service';
+import { InfracaoService } from '../../infracao/infracao.service';
+import { LinhaService } from '../../linha/linha.service';
+import { VeiculoService } from '../../veiculo/veiculo.service';
+import { IrregularidadeService } from '../irregularidade.service';
 
 @Component({
-  selector: 'app-irregularidade-form',
+  selector: 'app-irregularidade-adicionar',
   standalone: true,
   imports: [
     AngularMaterialModule,
@@ -39,10 +39,10 @@ import { IAgentes } from '../../../interface/agente';
     FormsModule,
   ],
   providers: [provideNgxMask()],
-  templateUrl: './irregularidade-form.component.html',
-  styleUrl: './irregularidade-form.component.scss',
+  templateUrl: './irregularidade-adicionar.component.html',
+  styleUrl: './irregularidade-adicionar.component.scss',
 })
-export class IrregularidadeFormComponent implements OnDestroy, OnInit {
+export class IrregularidadeAdicionarComponent implements OnDestroy, OnInit {
   #fb = inject(FormBuilder);
   #irregularidadeService = inject(IrregularidadeService);
   #linhaService = inject(LinhaService);
