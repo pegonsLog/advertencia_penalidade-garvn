@@ -14,6 +14,7 @@ import {
   IIrregularidade,
   IIrregularidades,
 } from '../../interface/irregularidade';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Injectable({
   providedIn: 'root',
@@ -101,4 +102,14 @@ export class IrregularidadeService {
         alert("Número fora do intervalo permitido (0-9999999)");
     }
   }
+
+  carregarListaPorPeriodoNotificacoes() {
+    // const dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
+
+    // const dataFim = this.#activatedRoute.snapshot.queryParams['dataFim'];
+
+
+  }
+
+
 }

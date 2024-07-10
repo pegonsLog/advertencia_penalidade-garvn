@@ -10,6 +10,8 @@
           matInput
           placeholder="Data de início"
           type="text"
+          mask="d0/M0/0000"
+          [dropSpecialCharacters]="false"
           [(ngModel)]="dataInicio"
           required="true"
         />
@@ -18,7 +20,9 @@
         <input
           matInput
           placeholder="Data de Término"
-          type="password"
+          type="text"
+          mask="d0/M0/0000"
+          [dropSpecialCharacters]="false"
           [(ngModel)]="dataFim"
           required="true"
         />
@@ -27,7 +31,7 @@
         color="primary"
         mat-raised-button
         id="button-entrar"
-        (click)="voltar()"
+        (click)="consultarPorPeriodo(dataInicio, dataFim)"
       >
         OK
       </button>
@@ -39,7 +43,7 @@
         <input
           matInput
           placeholder="Número da Notificação"
-          type="password"
+          type="text"
           [(ngModel)]="numeroNotificacao"
           required="true"
         />
@@ -48,7 +52,7 @@
         color="primary"
         mat-raised-button
         id="button-entrar"
-        (click)="consultar()"
+        (click)="consultarPorNumero(numeroNotificacao)"
       >
         OK
       </button>

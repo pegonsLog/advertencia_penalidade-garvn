@@ -61,6 +61,7 @@
               matInput
               placeholder="Mat. Agente"
               formControlName="matriculaAgente"
+              maxlength="4"
               tabindex="4"
               (blur)="validarAgente()"
             />
@@ -238,6 +239,14 @@
 
       <mat-card-actions>
         <ng-container>
+          @if(irregularidadeForm.valid){       <button
+            type="button"
+            id="button-salvar"
+            (click)="onNew()"
+            mat-raised-button
+          >
+            Salvar
+          </button>}@else{}
           <!-- @if(typeForm() === 'edit'){ -->
           <!-- <button
             type="button"
@@ -248,14 +257,9 @@
             Salvar
           </button>
           }@else{ -->
-          <button
-            type="button"
-            id="button-salvar"
-            (click)="onNew()"
-            mat-raised-button
-          >
-            Salvar
-          </button>
+     
+
+         
           <!-- } -->
 
           <button type="button" mat-raised-button (click)="voltar()">

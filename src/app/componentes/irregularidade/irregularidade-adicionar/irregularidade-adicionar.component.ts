@@ -4,6 +4,7 @@ import {
   FormBuilder,
   FormGroup,
   FormsModule,
+  MaxLengthValidator,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -139,7 +140,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy, OnInit {
             prazoCumprimento: [result.prazoCumprimento, Validators.required],
             dataCumprimento: [result.dataCumprimento, Validators.required],
           });
-          this.validarAgente()
+          this.validarAgente();
           this.validarLinha();
           this.validarInfracao();
           this.validarVeiculo();
@@ -154,7 +155,10 @@ export class IrregularidadeAdicionarComponent implements OnDestroy, OnInit {
             .map((obj) =>
               Number(
                 data.toString() +
-                  obj.numeroIrregularidade.toString().padStart(5, '0').substring(4)
+                  obj.numeroIrregularidade
+                    .toString()
+                    .padStart(5, '0')
+                    .substring(4)
               )
             )
             .reduce(
@@ -172,7 +176,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy, OnInit {
               local: ['', Validators.required],
               numeroLocal: ['', Validators.required],
               bairro: ['', Validators.required],
-              descricao: ['', Validators.required],
+              descricao: [''],
               codigoInfracao: ['', Validators.required],
               numeroConsorcio: ['', Validators.required],
               numeroVeiculo: ['', Validators.required],
@@ -182,25 +186,35 @@ export class IrregularidadeAdicionarComponent implements OnDestroy, OnInit {
               dataCumprimento: ['', Validators.required],
             }));
         });
-      }
-
+    }
   }
 
   onNew() {
-    this.#irregularidadeService
+    if (
+      this.condicaoValidacaoAgente &&
+      this.condicaoValidacaoConsorcio &&
+      this.condicaoValidacaoInfracao &&
+      this.condicaoValidacaoLinha &&
+      this.condicaoValidacaoVeiculo
+    ) {
+      this.#irregularidadeService
 
-      .addIrregularidade(this.irregularidadeForm.getRawValue())
-      .then(() => {
-        this.#route.navigate(['irregularidadeLista']);
-        this.irregularidadeForm.reset();
-        alert('Registro adicionado com sucesso!');
-      })
-      .catch((error) => {
-        console.error('Erro ao adicionar irregularidade:', error);
-        alert('Erro ao adicionar o registro');
-      });
+        .addIrregularidade(this.irregularidadeForm.getRawValue())
+        .then(() => {
+          this.#route.navigate(['irregularidadeLista']);
+          this.irregularidadeForm.reset();
+        })
+        .catch((error) => {
+          console.error('Erro ao adicionar irregularidade:', error);
+          alert('Erro ao adicionar o registro');
+        });
+      alert('Registro adicionado com sucesso!');
+    } else {
+      alert(
+        'Só será possível salvar o registro se todos os campos forem válidos!'
+      );
+    }
   }
-
   // onUpdate() {
   //   this.#irregularidadeService
   //     .updateIrregularidade(

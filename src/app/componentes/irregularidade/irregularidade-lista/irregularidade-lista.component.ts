@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
 import {
   IIrregularidade,
@@ -24,8 +24,10 @@ import { IrregularidadeService } from '../irregularidade.service';
 export class IrregularidadeListaComponent implements OnDestroy {
   #irregularidadeService = inject(IrregularidadeService);
   #route = inject(Router);
+  #activatedRoute = inject(ActivatedRoute);
   dialog = inject(MatDialog);
   isLoading = true;
+  numeroNotificacao = '';
 
   irregularidades: IIrregularidades = [];
 
@@ -77,29 +79,54 @@ export class IrregularidadeListaComponent implements OnDestroy {
   }
 
   constructor() {
-    this.#irregularidadeService
-      .list()
-      .pipe(
-        map((i: IIrregularidades) =>
-          i.filter((irreg) => irreg.numeroIrregularidade !== '1')
+    const porNumero = this.#activatedRoute.snapshot.queryParams['ehPorNumero'];
+    const porPeriodo =
+      this.#activatedRoute.snapshot.queryParams['ehPorPeriodo'];
+    const dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
+    const dataFim = this.#activatedRoute.snapshot.queryParams['dataFim'];
+
+    if (porNumero) {
+      this.carregarListaPorNumeroNotificacao();
+    }
+    if (porPeriodo) {
+      this.#irregularidadeService
+        .list()
+        .pipe(
+          map((irregularidades: IIrregularidade[]) => {
+
+            return irregularidades.filter((irr: IIrregularidade) => {
+              const dataIrregularidade = this.converterStringEmDate(
+                irr.dataIrregularidade
+
+              );
+              // console.log(irr.dataIrregularidade)
+              console.log(dataIrregularidade)
+              // return (
+              //   dataIrregularidade >= dataInicio &&
+              //   dataIrregularidade <= dataFim
+              // );
+
+            });
+          })
         )
-      )
-      .subscribe((irregularidades: IIrregularidades) => {
-        this.irregularidades = irregularidades;
-        this.dataSource = new MatTableDataSource(this.irregularidades);
-        this.contador = irregularidades.length;
-        this.isLoading = false;
-      });
+        .subscribe((i: any) => {
+          this.dataSource = new MatTableDataSource(this.irregularidades);
+          this.contador = this.irregularidades.length;
+          this.isLoading = false;
+        });
+    }
   }
 
   add() {
     this.#route.navigate(['irregularidadeAdicionar']);
   }
+
   edit(id: string) {
     this.#route.navigate(['irregularidadeAlterar'], {
       queryParams: { id: id },
     });
   }
+
   delete(id: string) {
     const dialogReference = this.dialog.open(ConfirmationDialogComponent);
     this.subscription = dialogReference
@@ -108,15 +135,14 @@ export class IrregularidadeListaComponent implements OnDestroy {
         if (result) {
           this.#irregularidadeService
             .deleteIrregularidade(id)
-            .then(() => {
-              alert('Registro excluído com sucesso!');
-            })
+            .then(() => {})
             .catch((err) => {
               console.log(err);
             });
         }
       });
   }
+
   voltar() {
     this.#route.navigate(['home']);
   }
@@ -132,5 +158,37 @@ export class IrregularidadeListaComponent implements OnDestroy {
   }
   imprimir() {
     this.#route.navigate(['imprimir']);
+  }
+
+  carregarListaPorNumeroNotificacao() {
+    const numeroNotificacao =
+      this.#activatedRoute.snapshot.queryParams['numeroNotificacao'];
+    this.#irregularidadeService
+      .list()
+      .pipe(
+        map((i: IIrregularidades) =>
+          i.filter(
+            (irreg) =>
+              irreg.numeroIrregularidade.toString() === numeroNotificacao
+          )
+        )
+      )
+      .subscribe((irregularidades: IIrregularidades) => {
+        this.irregularidades = irregularidades;
+        this.dataSource = new MatTableDataSource(this.irregularidades);
+        this.contador = irregularidades.length;
+        this.isLoading = false;
+      });
+  }
+
+  converterStringEmDate(data: string) {
+    // let customDateString = data;
+    // let parts = customDateString.split('/');
+
+    // let day = parseInt(parts[0], 10);
+    // let month = parseInt(parts[1], 10) - 1;
+    // let year = parseInt(parts[2], 10);
+    let date = new Date(data);
+    return date;
   }
 }
