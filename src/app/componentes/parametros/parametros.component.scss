@@ -43,7 +43,23 @@ button {
   background-color: rgb(63, 154, 196);
 }
 
-#centralizar{
+#centralizar {
   display: flex;
   justify-content: right;
+}
+
+.example-headers-align {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.panelConsultar {
+  margin: 0 auto;
+  width: 100%;
+}
+
+mat-panel-title{
+color: rgb(63, 154, 196);
+font-weight: 500;
 }

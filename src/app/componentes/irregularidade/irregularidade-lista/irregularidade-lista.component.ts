@@ -144,7 +144,7 @@ export class IrregularidadeListaComponent implements OnDestroy {
   }
 
   voltar() {
-    this.#route.navigate(['home']);
+    this.#route.navigate(['parametros']);
   }
 
   applyFilter(event: Event) {

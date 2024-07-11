@@ -1,10 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  viewChild,
+} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { Subscription } from 'rxjs';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
+import { MatAccordion } from '@angular/material/expansion';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-parametros',
@@ -17,31 +24,48 @@ import { AngularMaterialModule } from '../../shared/angular-material/angular-mat
     NgxMaskPipe,
     FormsModule,
   ],
-  providers: [provideNgxMask()],
+  providers: [provideNgxMask(), provideNativeDateAdapter()],
+
   templateUrl: './parametros.component.html',
   styleUrl: './parametros.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ParametrosComponent {
   #route = inject(Router);
+  accordion = viewChild.required(MatAccordion);
 
   dataInicio: any;
   dataFim: any;
   numeroNotificacao: any;
+
+  alertaPreenchimentoPeriodo = false;
 
   private subscription = new Subscription();
 
   constructor() {}
 
   consultarPorPeriodo(dataInicio: string, dataFim: string) {
-    this.#route.navigate(['irregularidadeLista'], {
-      queryParams: { dataInicio:  this.converterStringEmDate(dataInicio), dataFim: this.converterStringEmDate(dataFim), ehPorPeriodo: true},
-    });
+    if (this.dataInicio && this.dataFim) {
+      this.#route.navigate(['irregularidadeLista'], {
+        queryParams: {
+          dataInicio: this.converterStringEmDate(dataInicio),
+          dataFim: this.converterStringEmDate(dataFim),
+          ehPorPeriodo: true,
+        },
+      });
+    } else {
+      alert('Informe o período, preenchendo os dois campos!');
+    }
   }
 
   consultarPorNumero(numeroNotificacao: string) {
+    if (this.numeroNotificacao) {
     this.#route.navigate(['irregularidadeLista'], {
-      queryParams: { numeroNotificacao:  numeroNotificacao, ehPorNumero: true},
+      queryParams: { numeroNotificacao: numeroNotificacao, ehPorNumero: true },
     });
+  }else{
+    alert('Informe o número da notificação!');
+  }
   }
 
   voltar() {
@@ -52,7 +76,7 @@ export class ParametrosComponent {
     this.subscription.unsubscribe;
   }
 
-  converterStringEmDate(data: string){
+  converterStringEmDate(data: string) {
     let customDateString = data;
     let parts = customDateString.split('/');
 

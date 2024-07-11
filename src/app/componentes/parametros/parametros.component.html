@@ -1,75 +1,96 @@
 <div style="margin-top: 20px">
-<mat-card>
-  <mat-card-content>
-    <mat-toolbar color="primary" id="peso-fonte"
-      >Parametros de consulta</mat-toolbar
-    >
-    <div>
-      <mat-form-field class="full-width">
-        <input
-          matInput
-          placeholder="Data de início"
-          type="text"
-          mask="d0/M0/0000"
-          [dropSpecialCharacters]="false"
-          [(ngModel)]="dataInicio"
-          required="true"
-        />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input
-          matInput
-          placeholder="Data de Término"
-          type="text"
-          mask="d0/M0/0000"
-          [dropSpecialCharacters]="false"
-          [(ngModel)]="dataFim"
-          required="true"
-        />
-      </mat-form-field>
-      <button
-        color="primary"
-        mat-raised-button
-        id="button-entrar"
-        (click)="consultarPorPeriodo(dataInicio, dataFim)"
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar color="primary" id="peso-fonte"
+        >Parametros de consulta</mat-toolbar
       >
-        OK
-      </button>
-    </div>
-    <mat-divider></mat-divider>
-    <br />
-    <div>
-      <mat-form-field  style="width: 100%;">
-        <input
-          matInput
-          placeholder="Número da Notificação"
-          type="text"
-          [(ngModel)]="numeroNotificacao"
-          required="true"
-        />
-      </mat-form-field>
-      <button
-        color="primary"
-        mat-raised-button
-        id="button-entrar"
-        (click)="consultarPorNumero(numeroNotificacao)"
-      >
-        OK
-      </button>
-    </div>
-    <mat-divider></mat-divider>
-    <br />
-    <div>
-      <mat-card-actions  id="centralizar">
-        <button style="width: 100px; background-color: white; color: black;"
-          color="primary"
-          mat-raised-button
-          (click)="voltar()"
-        >
-         Sair
-        </button>
-      </mat-card-actions>
-    </div>
-  </mat-card-content>
-</mat-card>
+
+      <div class="panelConsultar">
+        <mat-accordion class="example-headers-align" multi>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Listar por período </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div>
+              <mat-form-field class="full-width">
+                <input
+                  matInput
+                  placeholder="Data de início"
+                  type="text"
+                  mask="d0/M0/0000"
+                  [dropSpecialCharacters]="false"
+                  [(ngModel)]="dataInicio"
+                  required="true"
+                />
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <input
+                  matInput
+                  placeholder="Data de Término"
+                  type="text"
+                  mask="d0/M0/0000"
+                  [dropSpecialCharacters]="false"
+                  [(ngModel)]="dataFim"
+                  required="true"
+                  id="dtIni"
+                />
+              </mat-form-field>
+
+              <button
+                color="primary"
+                mat-raised-button
+                id="button-entrar"
+                (click)="consultarPorPeriodo(dataInicio, dataFim)"
+              >
+                OK
+              </button>
+
+            </div>
+          </mat-expansion-panel>
+          <div style="margin-bottom: 8px;"></div>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Buscar por número de notificação </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+              <mat-form-field style="width: 100%">
+                <input
+                  matInput
+                  placeholder="Número da Notificação"
+                  type="text"
+                  [(ngModel)]="numeroNotificacao"
+                  required="true"
+                />
+              </mat-form-field>
+              <button
+                color="primary"
+                mat-raised-button
+                id="button-entrar"
+                (click)="consultarPorNumero(numeroNotificacao)"
+              >
+                OK
+              </button>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+
+
+      <div>
+        <mat-card-actions id="centralizar">
+          <button
+            style="width: 100px; background-color: white; color: black; margin-top: 10px;"
+            mat-raised-button
+            (click)="voltar()"
+          >
+          Sair
+          </button>
+        </mat-card-actions>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>
+
