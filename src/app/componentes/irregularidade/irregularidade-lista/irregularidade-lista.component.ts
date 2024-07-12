@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, ViewChild, inject, signal } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+  signal,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -21,13 +28,15 @@ import { IrregularidadeService } from '../irregularidade.service';
   templateUrl: './irregularidade-lista.component.html',
   styleUrl: './irregularidade-lista.component.scss',
 })
-export class IrregularidadeListaComponent implements OnDestroy {
+export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   #irregularidadeService = inject(IrregularidadeService);
   #route = inject(Router);
   #activatedRoute = inject(ActivatedRoute);
   dialog = inject(MatDialog);
   isLoading = true;
   numeroNotificacao = '';
+
+  filtradas: IIrregularidades = [];
 
   irregularidades: IIrregularidades = [];
 
@@ -78,42 +87,47 @@ export class IrregularidadeListaComponent implements OnDestroy {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit(): void {
     const porNumero = this.#activatedRoute.snapshot.queryParams['ehPorNumero'];
     const porPeriodo =
       this.#activatedRoute.snapshot.queryParams['ehPorPeriodo'];
-    const dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
     const dataFim = this.#activatedRoute.snapshot.queryParams['dataFim'];
+    const dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
+    const numNotificacao =
+      this.#activatedRoute.snapshot.queryParams['numeroNotificacao'];
 
     if (porNumero) {
-      this.carregarListaPorNumeroNotificacao();
+      this.carregarListaPorNumeroNotificacao(numNotificacao);
     }
+
     if (porPeriodo) {
-      this.#irregularidadeService
-        .list()
-        .pipe(
-          map((irregularidades: IIrregularidade[]) => {
+      if (dataInicio && dataFim) {
+        let dtIni = new Date(dataInicio).getMilliseconds();
+        let dtFim = new Date(dataFim).getMilliseconds();
+        console.log(dtIni);
+        console.log(dtFim);
 
-            return irregularidades.filter((irr: IIrregularidade) => {
-              const dataIrregularidade = this.converterStringEmDate(
-                irr.dataIrregularidade
-
-              );
-              // console.log(irr.dataIrregularidade)
-              console.log(dataIrregularidade)
-              // return (
-              //   dataIrregularidade >= dataInicio &&
-              //   dataIrregularidade <= dataFim
-              // );
-
+        this.#irregularidadeService
+          .list()
+          .subscribe((irregs: IIrregularidades) => {
+            irregs.forEach((irreg: IIrregularidade) => {
+              let dtIrreg = new Date(irreg.dataIrregularidade).getMilliseconds();
+              if (dtIrreg >= dtIni && dtIrreg <= dtFim) {
+                this.filtradas.push(irreg);
+              }
             });
-          })
-        )
-        .subscribe((i: any) => {
-          this.dataSource = new MatTableDataSource(this.irregularidades);
-          this.contador = this.irregularidades.length;
-          this.isLoading = false;
-        });
+            this.dataSource = new MatTableDataSource(this.filtradas);
+            this.contador = this.filtradas.length;
+            this.isLoading = false;
+          });
+      }
+    } else {
+      console.error('Datas de início ou fim não definidas', {
+        dataInicio,
+        dataFim,
+      });
     }
   }
 
@@ -159,10 +173,15 @@ export class IrregularidadeListaComponent implements OnDestroy {
   imprimir() {
     this.#route.navigate(['imprimir']);
   }
+  imprimirUma(id: string) {
+    this.#route.navigate(['imprimir'], {
+      queryParams: { id: id },
+    });
+  }
 
-  carregarListaPorNumeroNotificacao() {
-    const numeroNotificacao =
-      this.#activatedRoute.snapshot.queryParams['numeroNotificacao'];
+  carregarListaPorNumeroNotificacao(numeroNotif: string) {
+    const numeroNotificacao = numeroNotif;
+    this.#activatedRoute.snapshot.queryParams['numeroNotificacao'];
     this.#irregularidadeService
       .list()
       .pipe(
@@ -179,16 +198,5 @@ export class IrregularidadeListaComponent implements OnDestroy {
         this.contador = irregularidades.length;
         this.isLoading = false;
       });
-  }
-
-  converterStringEmDate(data: string) {
-    // let customDateString = data;
-    // let parts = customDateString.split('/');
-
-    // let day = parseInt(parts[0], 10);
-    // let month = parseInt(parts[1], 10) - 1;
-    // let year = parseInt(parts[2], 10);
-    let date = new Date(data);
-    return date;
   }
 }

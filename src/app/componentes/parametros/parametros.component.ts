@@ -34,9 +34,9 @@ export class ParametrosComponent {
   #route = inject(Router);
   accordion = viewChild.required(MatAccordion);
 
-  dataInicio: any;
-  dataFim: any;
-  numeroNotificacao: any;
+  dataInicio: string = '01/01/2020';
+  dataFim: string = '31/12/2026';
+  numeroNotificacao: string = '';
 
   alertaPreenchimentoPeriodo = false;
 
@@ -45,11 +45,14 @@ export class ParametrosComponent {
   constructor() {}
 
   consultarPorPeriodo(dataInicio: string, dataFim: string) {
-    if (this.dataInicio && this.dataFim) {
+    const dtInicio = new Date(dataInicio);
+    const dtFim = new Date(dataFim);
+
+    if (this.dataInicio != '' && this.dataFim != '') {
       this.#route.navigate(['irregularidadeLista'], {
         queryParams: {
-          dataInicio: this.converterStringEmDate(dataInicio),
-          dataFim: this.converterStringEmDate(dataFim),
+          dataInicio: dtInicio,
+          dataFim: dtFim,
           ehPorPeriodo: true,
         },
       });
@@ -60,12 +63,15 @@ export class ParametrosComponent {
 
   consultarPorNumero(numeroNotificacao: string) {
     if (this.numeroNotificacao) {
-    this.#route.navigate(['irregularidadeLista'], {
-      queryParams: { numeroNotificacao: numeroNotificacao, ehPorNumero: true },
-    });
-  }else{
-    alert('Informe o número da notificação!');
-  }
+      this.#route.navigate(['irregularidadeLista'], {
+        queryParams: {
+          numeroNotificacao: numeroNotificacao,
+          ehPorNumero: true,
+        },
+      });
+    } else {
+      alert('Informe o número da notificação!');
+    }
   }
 
   voltar() {

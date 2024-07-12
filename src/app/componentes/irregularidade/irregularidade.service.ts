@@ -103,13 +103,13 @@ export class IrregularidadeService {
     }
   }
 
-  carregarListaPorPeriodoNotificacoes() {
-    // const dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
+  // carregarListaPorPeriodoNotificacoes() {
+  //   // const dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
 
-    // const dataFim = this.#activatedRoute.snapshot.queryParams['dataFim'];
+  //   // const dataFim = this.#activatedRoute.snapshot.queryParams['dataFim'];
 
 
-  }
+  // }
 
 
 }

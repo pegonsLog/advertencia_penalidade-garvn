@@ -33,7 +33,6 @@
                   [dropSpecialCharacters]="false"
                   [(ngModel)]="dataFim"
                   required="true"
-                  id="dtIni"
                 />
               </mat-form-field>
 
@@ -45,14 +44,15 @@
               >
                 OK
               </button>
-
             </div>
           </mat-expansion-panel>
-          <div style="margin-bottom: 8px;"></div>
+          <div style="margin-bottom: 8px"></div>
 
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <mat-panel-title> Buscar por número de notificação </mat-panel-title>
+              <mat-panel-title>
+                Buscar por número de notificação
+              </mat-panel-title>
             </mat-expansion-panel-header>
             <div>
               <mat-form-field style="width: 100%">
@@ -77,20 +77,22 @@
         </mat-accordion>
       </div>
 
-
-
       <div>
         <mat-card-actions id="centralizar">
           <button
-            style="width: 100px; background-color: white; color: black; margin-top: 10px;"
+            style="
+              width: 100px;
+              background-color: white;
+              color: black;
+              margin-top: 10px;
+            "
             mat-raised-button
             (click)="voltar()"
           >
-          Sair
+            Sair
           </button>
         </mat-card-actions>
       </div>
     </mat-card-content>
   </mat-card>
 </div>
-
