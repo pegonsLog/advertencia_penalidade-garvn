@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -25,6 +25,7 @@ import { IrregularidadeService } from '../irregularidade.service';
   selector: 'app-irregularidade-lista',
   standalone: true,
   imports: [AngularMaterialModule, MatSortModule, CommonModule],
+  providers: [DatePipe],
   templateUrl: './irregularidade-lista.component.html',
   styleUrl: './irregularidade-lista.component.scss',
 })
@@ -32,6 +33,7 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   #irregularidadeService = inject(IrregularidadeService);
   #route = inject(Router);
   #activatedRoute = inject(ActivatedRoute);
+  #datePipe = inject(DatePipe);
   dialog = inject(MatDialog);
   isLoading = true;
   numeroNotificacao = '';
@@ -87,9 +89,7 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor() {}
-
-  ngOnInit(): void {
+  constructor() {
     const porNumero = this.#activatedRoute.snapshot.queryParams['ehPorNumero'];
     const porPeriodo =
       this.#activatedRoute.snapshot.queryParams['ehPorPeriodo'];
@@ -103,33 +103,31 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     }
 
     if (porPeriodo) {
-      if (dataInicio && dataFim) {
-        let dtIni = new Date(dataInicio).getMilliseconds();
-        let dtFim = new Date(dataFim).getMilliseconds();
-        console.log(dtIni);
-        console.log(dtFim);
-
-        this.#irregularidadeService
-          .list()
-          .subscribe((irregs: IIrregularidades) => {
+      this.#irregularidadeService
+        .list()
+        .pipe(
+          map((irregs: IIrregularidades) =>
             irregs.forEach((irreg: IIrregularidade) => {
-              let dtIrreg = new Date(irreg.dataIrregularidade).getMilliseconds();
-              if (dtIrreg >= dtIni && dtIrreg <= dtFim) {
+              if (
+                this.formatDate(irreg.dataIrregularidade) >=
+                  this.formatDate(dataInicio) &&
+                this.formatDate(irreg.dataIrregularidade) <=
+                  this.formatDate(dataFim)
+              ) {
                 this.filtradas.push(irreg);
               }
-            });
-            this.dataSource = new MatTableDataSource(this.filtradas);
-            this.contador = this.filtradas.length;
-            this.isLoading = false;
-          });
-      }
-    } else {
-      console.error('Datas de início ou fim não definidas', {
-        dataInicio,
-        dataFim,
-      });
+            })
+          )
+        )
+        .subscribe(() => {
+          this.dataSource = new MatTableDataSource(this.filtradas);
+          this.contador = this.filtradas.length;
+          this.isLoading = false;
+        });
     }
   }
+
+  ngOnInit(): void {}
 
   add() {
     this.#route.navigate(['irregularidadeAdicionar']);
@@ -143,18 +141,14 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
 
   delete(id: string) {
     const dialogReference = this.dialog.open(ConfirmationDialogComponent);
-    this.subscription = dialogReference
-      .afterClosed()
-      .subscribe((result: any) => {
-        if (result) {
-          this.#irregularidadeService
-            .deleteIrregularidade(id)
-            .then(() => {})
-            .catch((err) => {
-              console.log(err);
-            });
-        }
-      });
+    this.subscription = dialogReference.afterClosed().subscribe(() =>
+      this.#irregularidadeService
+        .deleteIrregularidade(id)
+        .then(() => {this.#route.navigate(['parametros'])})
+        .catch((err) => {
+          console.log(err);
+        })
+    );
   }
 
   voltar() {
@@ -198,5 +192,11 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
         this.contador = irregularidades.length;
         this.isLoading = false;
       });
+  }
+
+  formatDate(dateString: string): Date {
+    let [day, month, year] = dateString.split('/').map(Number);
+    let date = new Date(year, month - 1, day);
+    return date;
   }
 }

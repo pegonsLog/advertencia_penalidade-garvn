@@ -34,8 +34,8 @@ export class ParametrosComponent {
   #route = inject(Router);
   accordion = viewChild.required(MatAccordion);
 
-  dataInicio: string = '01/01/2020';
-  dataFim: string = '31/12/2026';
+  dataInicio: string = '';
+  dataFim: string = '';
   numeroNotificacao: string = '';
 
   alertaPreenchimentoPeriodo = false;
@@ -45,14 +45,12 @@ export class ParametrosComponent {
   constructor() {}
 
   consultarPorPeriodo(dataInicio: string, dataFim: string) {
-    const dtInicio = new Date(dataInicio);
-    const dtFim = new Date(dataFim);
 
-    if (this.dataInicio != '' && this.dataFim != '') {
+    if (dataInicio != '' && dataFim != '') {
       this.#route.navigate(['irregularidadeLista'], {
         queryParams: {
-          dataInicio: dtInicio,
-          dataFim: dtFim,
+          dataInicio: dataInicio,
+          dataFim: dataFim,
           ehPorPeriodo: true,
         },
       });

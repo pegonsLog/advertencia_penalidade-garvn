@@ -1,37 +1,33 @@
-<div
-  id="container"
-  *ngFor="let notificacao of notificacoes; let i = index"
-  class="page"
->
+<div id="container" class="page">
   <header>
     <h1>ADVERTÊNCIA DE IRREGULARIDADE</h1>
-      <p>Nº da notificação: {{ notificacao.numeroIrregularidade }}</p>
+    <p>Nº da notificação: {{ irregularidade.numeroIrregularidade }}</p>
   </header>
   <h2>VEÍCULO:</h2>
   <section>
-    <p>VEÍCULO: {{ notificacao.numeroVeiculo }}</p>
-    <p>Nº LINHA: {{ notificacao.numeroLinha }}</p>
-    <p>NOME DA LINHA: ...</p>
-    <p>CONSÓRCIO: {{ notificacao.numeroConsorcio }}</p>
-    <p>NOME DA CONSÓRCIO: ...</p>
-    <p>PLACA: ...</p>
+    <p>VEÍCULO: {{ irregularidade.numeroVeiculo }}</p>
+    <p>Nº LINHA: {{ irregularidade.numeroLinha }}</p>
+    <p>NOME DA LINHA: {{ nomeLinha }}</p>
+    <p>CONSÓRCIO: {{ irregularidade.numeroConsorcio }}</p>
+    <p>NOME DO CONSÓRCIO: {{ nomeConsorcio }}</p>
+    <p>PLACA: {{ placaVeiculo }}</p>
   </section>
   <section class="irregularidade">
     <h2>IRREGULARIDADE:</h2>
     <div>
-      <p>DATA: {{ notificacao.dataIrregularidade }}</p>
-      <p>HORÁRIO: {{ notificacao.horario }}</p>
-      <p>LOCAL: {{ notificacao.local }}</p>
-      <p>OBSERVAÇÕES: {{notificacao.descricao}}</p>
-      <p>CÓDIGO DA INFRAÇÃO: {{notificacao.codigoInfracao}}</p>
-      <p>DESCRIÇÃO DA INFRAÇÃO: ...</p>
+      <p>DATA: {{ irregularidade.dataIrregularidade }}</p>
+      <p>HORÁRIO: {{ irregularidade.horario }}</p>
+      <p>LOCAL: {{ irregularidade.local }}</p>
+      <p>OBSERVAÇÕES: {{ irregularidade.descricao }}</p>
+      <p>CÓDIGO DA INFRAÇÃO: {{ irregularidade.codigoInfracao }}</p>
+      <p>DESCRIÇÃO DA INFRAÇÃO: {{ descricaoInfracao }}</p>
     </div>
   </section>
   <section class="fiscalizacao">
     <h2>FISCALIZAÇÃO:</h2>
-      <p>MATRÍCULA: {{notificacao.matriculaAgente}}</p>
-      <p>DATA DE EMISSÃO: {{notificacao.dataEmissao}}</p>
-      <p>DATA DA CONFERÊNCIA: ...</p>
+    <p>MATRÍCULA: {{ irregularidade.matriculaAgente }}</p>
+    <p>DATA DE EMISSÃO: {{ irregularidade.dataEmissao }}</p>
+    <p>DATA DA CONFERÊNCIA: ...</p>
   </section>
   <section class="observacao">
     <p>
@@ -47,7 +43,7 @@
       <p>DATA: ______/ ______/ _____________</p>
       <p>HORA: ______: ______</p>
       <p>CUMPRIU: |__|</p>
-      <p>NÃO CUMPRIU:  |__|</p>
+      <p>NÃO CUMPRIU: |__|</p>
       <p>VEÍCULO:</p>
       <p>VISTO EMPRESA: _______________________</p>
     </div>
@@ -61,3 +57,4 @@
     <p>2ª via - EMPRESA</p>
   </footer>
 </div>
+<!-- *ngFor="let notificacao of notificacoes; let i = index" -->

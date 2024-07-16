@@ -145,63 +145,64 @@ export class IrregularidadeAlterarComponent {
           this.validarVeiculo();
           this.validarConsorcio();
         });
-    } else {
-      this.subscription = this.#irregularidadeService
-        .list()
-        .subscribe((irr: IIrregularidades) => {
-          const data = new Date().getFullYear();
-          (this.numeroUltimaIrregularidade = irr
-            .map((obj) =>
-              Number(
-                data.toString() +
-                  obj.numeroIrregularidade
-                    .toString()
-                    .padStart(5, '0')
-                    .substring(4)
-              )
-            )
-            .reduce(
-              (max, current) => (current > max ? current : max),
-              Number.NEGATIVE_INFINITY
-            )),
-            (this.irregularidadeForm = this.#fb.group({
-              numeroIrregularidade: [
-                this.numeroUltimaIrregularidade + 1,
-                Validators.required,
-              ],
-              dataIrregularidade: ['', Validators.required],
-              horario: ['', Validators.required],
-              matriculaAgente: ['', Validators.required],
-              local: ['', Validators.required],
-              numeroLocal: ['', Validators.required],
-              bairro: ['', Validators.required],
-              descricao: ['', Validators.required],
-              codigoInfracao: ['', Validators.required],
-              numeroConsorcio: ['', Validators.required],
-              numeroVeiculo: ['', Validators.required],
-              numeroLinha: ['', Validators.required],
-              dataEmissao: ['', Validators.required],
-              prazoCumprimento: ['', Validators.required],
-              dataCumprimento: ['', Validators.required],
-            }));
-        });
-    }
+    // } else {
+    //   this.subscription = this.#irregularidadeService
+    //     .list()
+    //     .subscribe((irr: IIrregularidades) => {
+    //       const data = new Date().getFullYear();
+    //       (this.numeroUltimaIrregularidade = irr
+    //         .map((obj) =>
+    //           Number(
+    //             data.toString() +
+    //               obj.numeroIrregularidade
+    //                 .toString()
+    //                 .padStart(5, '0')
+    //                 .substring(4)
+    //           )
+    //         )
+    //         .reduce(
+    //           (max, current) => (current > max ? current : max),
+    //           Number.NEGATIVE_INFINITY
+    //         )),
+    //         (this.irregularidadeForm = this.#fb.group({
+    //           numeroIrregularidade: [
+    //             this.numeroUltimaIrregularidade + 1,
+    //             Validators.required,
+    //           ],
+    //           dataIrregularidade: ['', Validators.required],
+    //           horario: ['', Validators.required],
+    //           matriculaAgente: ['', Validators.required],
+    //           local: ['', Validators.required],
+    //           numeroLocal: ['', Validators.required],
+    //           bairro: ['', Validators.required],
+    //           descricao: ['', Validators.required],
+    //           codigoInfracao: ['', Validators.required],
+    //           numeroConsorcio: ['', Validators.required],
+    //           numeroVeiculo: ['', Validators.required],
+    //           numeroLinha: ['', Validators.required],
+    //           dataEmissao: ['', Validators.required],
+    //           prazoCumprimento: ['', Validators.required],
+    //           dataCumprimento: ['', Validators.required],
+    //         }));
+    //     });
+    // }
+      }
   }
 
-  onNew() {
-    this.#irregularidadeService
+  // onNew() {
+  //   this.#irregularidadeService
 
-      .addIrregularidade(this.irregularidadeForm.getRawValue())
-      .then(() => {
-        this.#route.navigate(['irregularidadeLista']);
-        this.irregularidadeForm.reset();
-        alert('Registro adicionado com sucesso!');
-      })
-      .catch((error) => {
-        console.error('Erro ao adicionar irregularidade:', error);
-        alert('Erro ao adicionar o registro');
-      });
-  }
+  //     .addIrregularidade(this.irregularidadeForm.getRawValue())
+  //     .then(() => {
+  //       this.#route.navigate(['irregularidadeLista']);
+  //       this.irregularidadeForm.reset();
+  //       alert('Registro adicionado com sucesso!');
+  //     })
+  //     .catch((error) => {
+  //       console.error('Erro ao adicionar irregularidade:', error);
+  //       alert('Erro ao adicionar o registro');
+  //     });
+  // }
 
   onUpdate() {
     this.#irregularidadeService
@@ -210,7 +211,7 @@ export class IrregularidadeAlterarComponent {
         this.irregularidadeForm.getRawValue()
       )
       .then(() => {
-        this.#route.navigate(['irregularidadeLista']);
+        this.#route.navigate(['parametros']);
         alert('Registro atualizado com sucesso!');
       })
       .catch((error) => {
@@ -223,7 +224,6 @@ export class IrregularidadeAlterarComponent {
   }
 
   ngOnInit() {
-    // this.numerarNotificacao()
   }
 
   irregularidadeIIrregularidadeFormEdit(

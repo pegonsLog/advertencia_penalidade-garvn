@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import { Component, OnDestroy, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
-  MaxLengthValidator,
   ReactiveFormsModule,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
@@ -195,10 +194,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
         .addIrregularidade(irregularidadeData)
         .then(() => {
           this.irregularidadeForm.reset();
-          this.#route.navigate(['irregularidadeLista'], {
-            queryParams: { numeroNotificacao: this.irregularidadeForm.getRawValue().numeroIrregularidade, ehPorNumero: true },
-          }
-          );
+          this.#route.navigate(['parametros'], {});
           alert('Registro adicionado com sucesso!');
         })
         .catch((error) => {
