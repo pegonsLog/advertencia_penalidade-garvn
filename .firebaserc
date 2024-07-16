@@ -1,14 +1,5 @@
 {
   "projects": {
     "default": "notificacao-advertencia"
-  },
-  "targets": {
-    "notificacao-advertencia": {
-      "hosting": {
-        "advertencia-penalidade": [
-          "notificacao-advertencia"
-        ]
-      }
-    }
   }
 }
