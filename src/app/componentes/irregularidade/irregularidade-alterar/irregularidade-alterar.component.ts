@@ -79,8 +79,8 @@ export class IrregularidadeAlterarComponent {
     numeroVeiculo: ['', Validators.required],
     numeroLinha: ['', Validators.required],
     dataEmissao: ['', Validators.required],
-    prazoCumprimento: ['', Validators.required],
-    dataCumprimento: ['', Validators.required],
+    prazoCumprimentoConferencia: ['', Validators.required],
+    matAgenteConferente: ['', Validators.required],
   });
 
   // typeForm = signal<string>('');
@@ -104,12 +104,22 @@ export class IrregularidadeAlterarComponent {
     numeroLinha: '',
     numeroVeiculo: '',
     dataEmissao: '',
-    prazoCumprimento: '',
-    dataCumprimento: '',
+    prazoCumprimentoConferencia: '',
+    matAgenteConferente: '',
   };
+
+  public veiculos: IVeiculos = [];
 
   constructor() {
     this.irregularidade.id = this.#activatedRoute.snapshot.queryParams['id'];
+
+    this.subscription = this.#veiculoService
+    .list()
+    .subscribe((veiculos: IVeiculos) => {
+      for (let v of veiculos) {
+        this.veiculos.push(v);
+      }
+    });
 
     if (this.#activatedRoute.snapshot.queryParams['id']) {
       // this.typeForm.set('edit');
@@ -136,8 +146,11 @@ export class IrregularidadeAlterarComponent {
             numeroVeiculo: [result.numeroVeiculo, Validators.required],
             numeroLinha: [result.numeroLinha, Validators.required],
             dataEmissao: [result.dataEmissao, Validators.required],
-            prazoCumprimento: [result.prazoCumprimento, Validators.required],
-            dataCumprimento: [result.dataCumprimento, Validators.required],
+            prazoCumprimentoConferencia: [
+              result.prazoCumprimentoConferencia,
+              Validators.required,
+            ],
+            matAgenteConferente: [result.matAgenteConferente, Validators.required],
           });
           this.validarAgente();
           this.validarLinha();
@@ -145,64 +158,8 @@ export class IrregularidadeAlterarComponent {
           this.validarVeiculo();
           this.validarConsorcio();
         });
-    // } else {
-    //   this.subscription = this.#irregularidadeService
-    //     .list()
-    //     .subscribe((irr: IIrregularidades) => {
-    //       const data = new Date().getFullYear();
-    //       (this.numeroUltimaIrregularidade = irr
-    //         .map((obj) =>
-    //           Number(
-    //             data.toString() +
-    //               obj.numeroIrregularidade
-    //                 .toString()
-    //                 .padStart(5, '0')
-    //                 .substring(4)
-    //           )
-    //         )
-    //         .reduce(
-    //           (max, current) => (current > max ? current : max),
-    //           Number.NEGATIVE_INFINITY
-    //         )),
-    //         (this.irregularidadeForm = this.#fb.group({
-    //           numeroIrregularidade: [
-    //             this.numeroUltimaIrregularidade + 1,
-    //             Validators.required,
-    //           ],
-    //           dataIrregularidade: ['', Validators.required],
-    //           horario: ['', Validators.required],
-    //           matriculaAgente: ['', Validators.required],
-    //           local: ['', Validators.required],
-    //           numeroLocal: ['', Validators.required],
-    //           bairro: ['', Validators.required],
-    //           descricao: ['', Validators.required],
-    //           codigoInfracao: ['', Validators.required],
-    //           numeroConsorcio: ['', Validators.required],
-    //           numeroVeiculo: ['', Validators.required],
-    //           numeroLinha: ['', Validators.required],
-    //           dataEmissao: ['', Validators.required],
-    //           prazoCumprimento: ['', Validators.required],
-    //           dataCumprimento: ['', Validators.required],
-    //         }));
-    //     });
-    // }
-      }
+    }
   }
-
-  // onNew() {
-  //   this.#irregularidadeService
-
-  //     .addIrregularidade(this.irregularidadeForm.getRawValue())
-  //     .then(() => {
-  //       this.#route.navigate(['irregularidadeLista']);
-  //       this.irregularidadeForm.reset();
-  //       alert('Registro adicionado com sucesso!');
-  //     })
-  //     .catch((error) => {
-  //       console.error('Erro ao adicionar irregularidade:', error);
-  //       alert('Erro ao adicionar o registro');
-  //     });
-  // }
 
   onUpdate() {
     this.#irregularidadeService
@@ -220,11 +177,10 @@ export class IrregularidadeAlterarComponent {
       });
   }
   voltar() {
-    this.#route.navigate(['irregularidadeLista']);
+    this.#route.navigate(['home']);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   irregularidadeIIrregularidadeFormEdit(
     irregularidadeIIrregularidade: IIrregularidade
@@ -270,12 +226,12 @@ export class IrregularidadeAlterarComponent {
         irregularidadeIIrregularidade.dataEmissao,
         Validators.required,
       ],
-      prazoCumprimento: [
-        irregularidadeIIrregularidade.prazoCumprimento,
+      prazoCumprimentoConferencia: [
+        irregularidadeIIrregularidade.prazoCumprimentoConferencia,
         Validators.required,
       ],
-      dataCumprimento: [
-        irregularidadeIIrregularidade.dataCumprimento,
+      matAgenteConferente: [
+        irregularidadeIIrregularidade.matAgenteConferente,
         Validators.required,
       ],
     });
@@ -303,8 +259,8 @@ export class IrregularidadeAlterarComponent {
       numeroVeiculo: ['', Validators.required],
       numeroLinha: ['', Validators.required],
       dataEmissao: ['', Validators.required],
-      prazoCumprimento: ['', Validators.required],
-      dataCumprimento: ['', Validators.required],
+      prazoCumprimentoConferencia: ['', Validators.required],
+      matAgenteConferente: ['', Validators.required],
     });
   }
 
@@ -315,7 +271,7 @@ export class IrregularidadeAlterarComponent {
       .list()
       .subscribe((linhas: ILinhas) => {
         for (let l of linhas) {
-          if (l.numeroLinha === valorCampo) {
+          if (l.numeroLinha == valorCampo) {
             this.linhaValidacao = l.nomeLinha;
             this.condicaoValidacaoLinha = true;
             return;
@@ -334,7 +290,7 @@ export class IrregularidadeAlterarComponent {
       .list()
       .subscribe((infracoes: IInfracoes) => {
         for (let i of infracoes) {
-          if (i.codigoInfracao === valorCampo) {
+          if (i.codigoInfracao == valorCampo) {
             this.infracaoValidacao = i.nomeInfracao;
             this.condicaoValidacaoInfracao = true;
             return;
@@ -349,19 +305,15 @@ export class IrregularidadeAlterarComponent {
     const valorCampo = this.irregularidadeForm.get('numeroVeiculo')?.value;
     this.condicaoValidacaoVeiculo = true;
 
-    this.subscription = this.#veiculoService
-      .list()
-      .subscribe((veiculos: IVeiculos) => {
-        for (let v of veiculos) {
-          if (v.numeroVeiculo === valorCampo) {
-            this.veiculoValidacao = v.placa;
-            this.condicaoValidacaoVeiculo = true;
-            return;
-          }
-          this.condicaoValidacaoVeiculo = false;
-        }
-        this.veiculoValidacao = 'Veículo não cadastrado';
-      });
+    for (let v of this.veiculos) {
+      if (v.numeroVeiculo == valorCampo) {
+        this.veiculoValidacao = v.placa;
+        this.condicaoValidacaoVeiculo = true;
+        return;
+      }
+      this.condicaoValidacaoVeiculo = false;
+    }
+    this.veiculoValidacao = 'Veículo não cadastrado';
   }
   validarConsorcio() {
     const valorCampo = this.irregularidadeForm.get('numeroConsorcio')?.value;

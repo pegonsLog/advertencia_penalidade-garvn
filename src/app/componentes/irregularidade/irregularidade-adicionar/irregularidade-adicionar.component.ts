@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, inject, signal } from '@angular/core';
+import { Component, inject, OnDestroy, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
@@ -79,8 +79,8 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
     numeroVeiculo: ['', Validators.required],
     numeroLinha: ['', Validators.required],
     dataEmissao: ['', Validators.required],
-    prazoCumprimento: ['', Validators.required],
-    dataCumprimento: ['', Validators.required],
+    prazoCumprimentoConferencia: ['', Validators.required],
+    matAgenteConferente: ['', Validators.required],
   });
 
   numeroUltimaIrregularidade: number = 0;
@@ -103,12 +103,22 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
     numeroLinha: '',
     numeroVeiculo: '',
     dataEmissao: '',
-    prazoCumprimento: '',
-    dataCumprimento: '',
+    prazoCumprimentoConferencia: '',
+    matAgenteConferente: '',
   };
+
+  public veiculos: IVeiculos = [];
 
   constructor() {
     this.irregularidade.id = this.#activatedRoute.snapshot.queryParams['id'];
+
+    this.subscription = this.#veiculoService
+      .list()
+      .subscribe((veiculos: IVeiculos) => {
+        for (let v of veiculos) {
+          this.veiculos.push(v);
+        }
+      });
 
     if (this.#activatedRoute.snapshot.queryParams['id']) {
       this.subscription = this.#irregularidadeService
@@ -134,8 +144,14 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
             numeroVeiculo: [result.numeroVeiculo, Validators.required],
             numeroLinha: [result.numeroLinha, Validators.required],
             dataEmissao: [result.dataEmissao, Validators.required],
-            prazoCumprimento: [result.prazoCumprimento, Validators.required],
-            dataCumprimento: [result.dataCumprimento, Validators.required],
+            prazoCumprimentoConferencia: [
+              result.prazoCumprimentoConferencia,
+              Validators.required,
+            ],
+            matAgenteConferente: [
+              result.matAgenteConferente,
+              Validators.required,
+            ],
           });
           this.validarAgente();
           this.validarLinha();
@@ -168,19 +184,19 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
                 Validators.required,
               ],
               dataIrregularidade: ['', Validators.required],
-              horario: ['15:15', Validators.required],
-              matriculaAgente: ['564', Validators.required],
-              local: ['ABCD', Validators.required],
-              numeroLocal: ['1234', Validators.required],
-              bairro: ['Buritis', Validators.required],
-              descricao: ['TESTE'],
-              codigoInfracao: ['01037', Validators.required],
-              numeroConsorcio: ['801', Validators.required],
-              numeroVeiculo: ['40438', Validators.required],
-              numeroLinha: ['2101', Validators.required],
-              dataEmissao: ['11/11/2022', Validators.required],
-              prazoCumprimento: ['11/11/2022', Validators.required],
-              dataCumprimento: ['11/11/2022', Validators.required],
+              horario: ['', Validators.required],
+              matriculaAgente: ['', Validators.required],
+              local: ['', Validators.required],
+              numeroLocal: ['', Validators.required],
+              bairro: ['', Validators.required],
+              descricao: [''],
+              codigoInfracao: ['', Validators.required],
+              numeroConsorcio: ['', Validators.required],
+              numeroVeiculo: ['', Validators.required],
+              numeroLinha: ['', Validators.required],
+              dataEmissao: ['', Validators.required],
+              prazoCumprimentoConferencia: ['', Validators.required],
+              matAgenteConferente: ['', Validators.required],
             }));
         });
     }
@@ -255,11 +271,11 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
         Validators.required,
       ],
       prazoCumprimento: [
-        irregularidadeIIrregularidade.prazoCumprimento,
+        irregularidadeIIrregularidade.prazoCumprimentoConferencia,
         Validators.required,
       ],
       dataCumprimento: [
-        irregularidadeIIrregularidade.dataCumprimento,
+        irregularidadeIIrregularidade.matAgenteConferente,
         Validators.required,
       ],
     });
@@ -287,8 +303,8 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
       numeroVeiculo: ['', Validators.required],
       numeroLinha: ['', Validators.required],
       dataEmissao: ['', Validators.required],
-      prazoCumprimento: ['', Validators.required],
-      dataCumprimento: ['', Validators.required],
+      prazoCumprimentoConferencia: ['', Validators.required],
+      matAgenteConferente: ['', Validators.required],
     });
   }
 
@@ -299,7 +315,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
       .list()
       .subscribe((linhas: ILinhas) => {
         for (let l of linhas) {
-          if (l.numeroLinha === valorCampo) {
+          if (l.numeroLinha == valorCampo) {
             this.linhaValidacao = l.nomeLinha;
             this.condicaoValidacaoLinha = true;
             return;
@@ -318,7 +334,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
       .list()
       .subscribe((infracoes: IInfracoes) => {
         for (let i of infracoes) {
-          if (i.codigoInfracao === valorCampo) {
+          if (i.codigoInfracao == valorCampo) {
             this.infracaoValidacao = i.nomeInfracao;
             this.condicaoValidacaoInfracao = true;
             return;
@@ -333,19 +349,15 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
     const valorCampo = this.irregularidadeForm.get('numeroVeiculo')?.value;
     this.condicaoValidacaoVeiculo = true;
 
-    this.subscription = this.#veiculoService
-      .list()
-      .subscribe((veiculos: IVeiculos) => {
-        for (let v of veiculos) {
-          if (v.numeroVeiculo === valorCampo) {
-            this.veiculoValidacao = v.placa;
-            this.condicaoValidacaoVeiculo = true;
-            return;
-          }
-          this.condicaoValidacaoVeiculo = false;
-        }
-        this.veiculoValidacao = 'Veículo não cadastrado';
-      });
+    for (let v of this.veiculos) {
+      if (v.numeroVeiculo == valorCampo) {
+        this.veiculoValidacao = v.placa;
+        this.condicaoValidacaoVeiculo = true;
+        return;
+      }
+      this.condicaoValidacaoVeiculo = false;
+    }
+    this.veiculoValidacao = 'Veículo não cadastrado';
   }
   validarConsorcio() {
     const valorCampo = this.irregularidadeForm.get('numeroConsorcio')?.value;
@@ -355,7 +367,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
       .list()
       .subscribe((consorcios: IConsorcios) => {
         for (let c of consorcios) {
-          if (c.numeroConsorcio === valorCampo) {
+          if (c.numeroConsorcio == valorCampo) {
             this.consorcioValidacao = c.nomeConsorcio;
             this.condicaoValidacaoConsorcio = true;
             return;
@@ -373,7 +385,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
       .list()
       .subscribe((agentes: IAgentes) => {
         for (let a of agentes) {
-          if (a.matriculaAgenteFiscalizador === valorCampo) {
+          if (a.matriculaAgenteFiscalizador == valorCampo) {
             this.agenteValidacao = a.nomeAgenteFiscalizador;
             this.condicaoValidacaoAgente = true;
             return;

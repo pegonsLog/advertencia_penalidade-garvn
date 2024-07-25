@@ -33,7 +33,6 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   #irregularidadeService = inject(IrregularidadeService);
   #route = inject(Router);
   #activatedRoute = inject(ActivatedRoute);
-  #datePipe = inject(DatePipe);
   dialog = inject(MatDialog);
   isLoading = true;
   numeroNotificacao = '';
@@ -53,8 +52,8 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     bairro: '',
     descricao: '',
     dataEmissao: '',
-    prazoCumprimento: '',
-    dataCumprimento: '',
+    prazoCumprimentoConferencia: '',
+    matAgenteConferente: '',
     codigoInfracao: '',
     numeroConsorcio: '',
     numeroLinha: '',
@@ -69,9 +68,9 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     'local',
     'bairro',
     'descricao',
+    'matAgenteConferente',
     'dataEmissao',
-    'prazoCumprimento',
-    'dataCumprimento',
+    'prazoCumprimentoConferencia',
     'codigoInfracao',
     'numeroConsorcio',
     'numeroLinha',

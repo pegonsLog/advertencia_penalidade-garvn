@@ -105,11 +105,6 @@ mat-form-field {
 }
 .linha5 {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  .infracao {
-    width: 20%;
-  }
 }
 .linha6 {
   width: 100%;
@@ -132,13 +127,13 @@ mat-form-field {
   display: flex;
   justify-content: space-between;
 
-  .dataEmissao {
-    width:32.3%;
-  }
-  .prazoCumprimento {
+  .matAgenteConferente {
     width: 32.3%;
   }
-  .dataCumprimento {
+  .dataEmissao {
+    width: 32.3%;
+  }
+  .dataConferencia {
     width: 32.3%;
   }
 }
@@ -155,5 +150,9 @@ mat-form-field {
 
 .full-width {
   margin-left: 10px;
+  width: 100%;
+}
+
+.larguraMaxima{
   width: 100%;
 }

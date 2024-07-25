@@ -77,6 +77,13 @@
               </td>
             </ng-container>
 
+            <ng-container matColumnDef="matAgenteConferente">
+              <th mat-header-cell *matHeaderCellDef>Mat. Ag. Conf.</th>
+              <td mat-cell *matCellDef="let irregularidade">
+                {{ irregularidade.matAgenteConferente }}
+              </td>
+            </ng-container>
+
             <ng-container matColumnDef="dataEmissao">
               <th mat-header-cell *matHeaderCellDef>Data Emissão</th>
               <td mat-cell *matCellDef="let irregularidade">
@@ -84,19 +91,13 @@
               </td>
             </ng-container>
 
-            <ng-container matColumnDef="prazoCumprimento">
-              <th mat-header-cell *matHeaderCellDef>Prazo Cumprimento</th>
+            <ng-container matColumnDef="prazoCumprimentoConferencia">
+              <th mat-header-cell *matHeaderCellDef>Prazo Cumpr/Conf</th>
               <td mat-cell *matCellDef="let irregularidade">
-                {{ irregularidade.prazoCumprimento }}
+                {{ irregularidade.prazoCumprimentoConferencia }}
               </td>
             </ng-container>
 
-            <ng-container matColumnDef="dataCumprimento">
-              <th mat-header-cell *matHeaderCellDef>Data Cumprimento</th>
-              <td mat-cell *matCellDef="let irregularidade">
-                {{ irregularidade.dataCumprimento }}
-              </td>
-            </ng-container>
 
             <ng-container matColumnDef="codigoInfracao">
               <th mat-header-cell *matHeaderCellDef>Nº da Infração</th>

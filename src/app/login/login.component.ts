@@ -18,8 +18,8 @@ export class LoginComponent implements OnDestroy {
   private route = inject(Router);
   private userService = inject(UserService);
 
-  matricula = signal<string>('564');
-  senha = signal<string>('123');
+  matricula = signal<string>('');
+  senha = signal<string>('');
 
   private subscription = new Subscription();
 
@@ -51,8 +51,7 @@ export class LoginComponent implements OnDestroy {
        return
     }
     if (this.user().matricula !== matricula || this.user().senha !== senha) {
-      alert('Registro não encontrado!');
-      this.matricula.set('');
+      alert('Usuário e/ou senha inválido(s)!');
       this.senha.set('');
     }
   }

@@ -37,8 +37,8 @@ export class IrregularidadeService {
     numeroLinha: '',
     numeroVeiculo: '',
     dataEmissao: '',
-    prazoCumprimento: '',
-    dataCumprimento: '',
+    prazoCumprimentoConferencia: '',
+    matAgenteConferente: '',
     matriculaAgente: ''
   };
   id: string = '';
@@ -89,19 +89,19 @@ export class IrregularidadeService {
     return deleteDoc($irregularidadeRef);
   }
 
-  padWithZeros(numeroNotificacao: string): any {
-    const ano = new Date();
-    // Converter o número para string
-    let numberStr = numeroNotificacao
+  // padWithZeros(numeroNotificacao: string): any {
+  //   const ano = new Date();
+  //   // Converter o número para string
+  //   let numberStr = numeroNotificacao
 
-    // Verificar se o número está entre 0 e 9999999
-    if (/^\d{1,7}$/.test(numberStr)) {
-        // Preencher com zeros à esquerda até ter 7 dígitos
-        return ano.getFullYear() + numberStr.padStart(7, '0')
-    } else {
-        alert("Número fora do intervalo permitido (0-9999999)");
-    }
-  }
+  //   // Verificar se o número está entre 0 e 9999999
+  //   if (/^\d{1,7}$/.test(numberStr)) {
+  //       // Preencher com zeros à esquerda até ter 7 dígitos
+  //       return ano.getFullYear() + numberStr.padStart(7, '0')
+  //   } else {
+  //       alert("Número fora do intervalo permitido (0-9999999)");
+  //   }
+  // }
 
   // carregarListaPorPeriodoNotificacoes() {
   //   // const dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];

@@ -133,13 +133,13 @@ mat-form-field {
   justify-content: space-between;
 
   .dataEmissao {
-    width:32.3%;
+    width:32.4%;
   }
-  .prazoCumprimento {
-    width: 32.3%;
+  .matAgenteConferente {
+    width: 32.4%;
   }
-  .dataCumprimento {
-    width: 32.3%;
+  .prazoCumprimentoConferencia {
+    width: 32.4%;
   }
 }
 
@@ -155,5 +155,9 @@ mat-form-field {
 
 .full-width {
   margin-left: 10px;
+  width: 100%;
+}
+
+.larguraMaxima{
   width: 100%;
 }

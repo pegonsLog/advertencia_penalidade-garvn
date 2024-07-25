@@ -52,8 +52,8 @@ export class ImprimirComponent implements OnDestroy {
     bairro: '',
     descricao: '',
     dataEmissao: '',
-    prazoCumprimento: '',
-    dataCumprimento: '',
+    matAgenteConferente: '',
+    prazoCumprimentoConferencia: '',
     codigoInfracao: '',
     numeroConsorcio: '',
     numeroLinha: '',
@@ -77,23 +77,6 @@ export class ImprimirComponent implements OnDestroy {
       .subscribe((arrayIrregularidade) => {
         console.log(arrayIrregularidade);
       });
-
-    // this.subscription = this.#irreguaridadeService
-    //   .list()
-    //   .pipe(
-    //     map((irregularidades: IIrregularidades) =>
-    //       irregularidades
-    //         .filter((i: IIrregularidade) => i.numeroIrregularidade !== '1')
-    //         .sort(
-    //           (a: IIrregularidade, b: IIrregularidade) =>
-    //             Number(b.numeroIrregularidade) - Number(a.numeroIrregularidade)
-    //         )
-    //     )
-    //   )
-    //   .subscribe(
-    //     (irregularidades: IIrregularidades) =>
-    //       (this.notificacoes = irregularidades)
-    //   );
   }
 
   voltar() {
@@ -112,7 +95,7 @@ export class ImprimirComponent implements OnDestroy {
       .pipe(
         map((linhas: ILinhas) =>
           linhas.forEach((linha: ILinha) => {
-            if (linha.numeroLinha === numeroLinha) {
+            if (linha.numeroLinha == numeroLinha) {
               this.nomeLinha = linha.nomeLinha;
             }
           })
@@ -127,7 +110,7 @@ export class ImprimirComponent implements OnDestroy {
       .pipe(
         map((infracoes: IInfracoes) =>
           infracoes.forEach((infracao: IInfracao) => {
-            if (infracao.codigoInfracao === codigoInfracao) {
+            if (infracao.codigoInfracao == codigoInfracao) {
               this.descricaoInfracao = infracao.nomeInfracao;
             }
           })
@@ -142,7 +125,7 @@ export class ImprimirComponent implements OnDestroy {
       .pipe(
         map((veiculos: IVeiculos) =>
           veiculos.forEach((veiculo: IVeiculo) => {
-            if (veiculo.numeroVeiculo === numeroVeiculo) {
+            if (veiculo.numeroVeiculo == numeroVeiculo) {
               this.placaVeiculo = veiculo.placa;
             }
           })
@@ -150,14 +133,14 @@ export class ImprimirComponent implements OnDestroy {
       )
       .subscribe(() => {});
   }
-  
+
   validarConsorcio(numeroConsorcio: string) {
     this.subscription = this.#consorcioService
       .list()
       .pipe(
         map((consorcios: IConsorcios) =>
           consorcios.forEach((consorcio: IConsorcio) => {
-            if (consorcio.numeroConsorcio === numeroConsorcio) {
+            if (consorcio.numeroConsorcio == numeroConsorcio) {
               this.nomeConsorcio = consorcio.nomeConsorcio;
             }
           })

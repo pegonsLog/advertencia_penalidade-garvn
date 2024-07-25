@@ -25,17 +25,7 @@
               id="numeroNotificacao"
             />
           </mat-form-field>
-          <!-- }@else{ -->
-          <!-- <mat-form-field class="numero">
-            <input
-              matInput
-              placeholder="Número"
-              formControlName="numeroIrregularidade"
-              tabindex="-1"
-              readonly="true"
-            />
-          </mat-form-field> -->
-          <!-- } -->
+
           <mat-form-field class="data">
             <input
               matInput
@@ -105,17 +95,8 @@
             />
           </mat-form-field>
         </div>
+
         <div class="linha3">
-          <mat-form-field class="descricao">
-            <input
-              matInput
-              placeholder="Descricao"
-              formControlName="descricao"
-              tabindex="8"
-            />
-          </mat-form-field>
-        </div>
-        <div class="linha4">
           <mat-form-field class="numeroLinha">
             <input
               matInput
@@ -137,7 +118,7 @@
           </mat-form-field>
         </div>
 
-        <div class="linha5">
+        <div class="linha4">
           <mat-form-field class="infracao">
             <input
               matInput
@@ -158,7 +139,16 @@
             />
           </mat-form-field>
         </div>
-
+        <div class="linha5">
+          <mat-form-field class="larguraMaxima">
+            <input
+              matInput
+              placeholder="Observações"
+              formControlName="descricao"
+              tabindex="8"
+            />
+          </mat-form-field>
+        </div>
         <div class="linha6">
           <mat-form-field class="numeroVeiculo">
             <input
@@ -206,31 +196,29 @@
         </div>
 
         <div class="linha8">
+          <mat-form-field class="matAgenteConferente">
+            <input
+            matInput
+            placeholder="Mat. agente conferente"
+            formControlName="matAgenteConferente"
+            tabindex="13"
+            />
+          </mat-form-field>
           <mat-form-field class="dataEmissao">
             <input
-              matInput
-              placeholder="Data Emissão"
-              formControlName="dataEmissao"
-              tabindex="13"
-              mask="d0/M0/0000"
-              [dropSpecialCharacters]="false"
+            matInput
+            placeholder="Data Emissão"
+            formControlName="dataEmissao"
+            tabindex="14"
+            mask="d0/M0/0000"
+            [dropSpecialCharacters]="false"
             />
           </mat-form-field>
-          <mat-form-field class="prazoCumprimento">
+          <mat-form-field class="dataConferencia">
             <input
               matInput
-              placeholder="Prazo Cumprimento"
-              formControlName="prazoCumprimento"
-              tabindex="14"
-              mask="d0/M0/0000"
-              [dropSpecialCharacters]="false"
-            />
-          </mat-form-field>
-          <mat-form-field class="dataCumprimento">
-            <input
-              matInput
-              placeholder="Data Cumprimento"
-              formControlName="dataCumprimento"
+              placeholder="Prazo cumprimento/conferência"
+              formControlName="prazoCumprimentoConferencia"
               tabindex="15"
               mask="d0/M0/0000"
               [dropSpecialCharacters]="false"
@@ -241,28 +229,15 @@
 
       <mat-card-actions>
         <ng-container>
-          @if(irregularidadeForm.valid){       <button
+          @if(irregularidadeForm.valid){
+          <button
             type="button"
             id="button-salvar"
             (click)="onNew()"
             mat-raised-button
           >
-            Salvar
-          </button>}@else{}
-          <!-- @if(typeForm() === 'edit'){ -->
-          <!-- <button
-            type="button"
-            id="button-salvar"
-            (click)="onUpdate()"
-            mat-raised-button
-          >
-            Salvar
-          </button>
-          }@else{ -->
-
-
-
-          <!-- } -->
+            Salvar</button
+          >}@else{}
 
           <button type="button" mat-raised-button (click)="voltar()">
             Cancelar

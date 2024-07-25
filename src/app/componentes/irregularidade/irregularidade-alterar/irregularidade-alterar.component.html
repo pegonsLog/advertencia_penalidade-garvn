@@ -104,16 +104,6 @@
           </mat-form-field>
         </div>
         <div class="linha3">
-          <mat-form-field class="descricao">
-            <input
-              matInput
-              placeholder="Descricao"
-              formControlName="descricao"
-              tabindex="8"
-            />
-          </mat-form-field>
-        </div>
-        <div class="linha4">
           <mat-form-field class="numeroLinha">
             <input
               matInput
@@ -135,7 +125,7 @@
           </mat-form-field>
         </div>
 
-        <div class="linha5">
+        <div class="linha4">
           <mat-form-field class="infracao">
             <input
               matInput
@@ -156,7 +146,16 @@
             />
           </mat-form-field>
         </div>
-
+        <div class="linha5">
+          <mat-form-field class="larguraMaxima">
+            <input
+              matInput
+              placeholder="Descricao"
+              formControlName="descricao"
+              tabindex="8"
+            />
+          </mat-form-field>
+        </div>
         <div class="linha6">
           <mat-form-field class="numeroVeiculo">
             <input
@@ -204,31 +203,29 @@
         </div>
 
         <div class="linha8">
+          <mat-form-field class="matAgenteConferente">
+            <input
+              matInput
+              placeholder="Mat. agente conferente"
+              formControlName="matAgenteConferente"
+              tabindex="13"
+            />
+          </mat-form-field>
           <mat-form-field class="dataEmissao">
             <input
               matInput
               placeholder="Data Emissão"
               formControlName="dataEmissao"
-              tabindex="13"
-              mask="d0/M0/0000"
-              [dropSpecialCharacters]="false"
-            />
-          </mat-form-field>
-          <mat-form-field class="prazoCumprimento">
-            <input
-              matInput
-              placeholder="Prazo Cumprimento"
-              formControlName="prazoCumprimento"
               tabindex="14"
               mask="d0/M0/0000"
               [dropSpecialCharacters]="false"
             />
           </mat-form-field>
-          <mat-form-field class="dataCumprimento">
+          <mat-form-field class="prazoCumprimentoConferencia">
             <input
               matInput
-              placeholder="Data Cumprimento"
-              formControlName="dataCumprimento"
+              placeholder="Prazo Cumprimento/Conferência"
+              formControlName="prazoCumprimentoConferencia"
               tabindex="15"
               mask="d0/M0/0000"
               [dropSpecialCharacters]="false"
@@ -239,7 +236,7 @@
 
       <mat-card-actions>
         <ng-container>
-          <!-- @if(typeForm() === 'edit'){ -->
+
           <button
             type="button"
             id="button-salvar"
@@ -248,18 +245,7 @@
           >
             Salvar
           </button>
-          <!-- }@else{ -->
-          <!-- <button
-            type="button"
-            id="button-salvar"
-            (click)="onNew()"
-            mat-raised-button
-          >
-            Salvar
-          </button>
-          } -->
-
-          <button type="button" mat-raised-button (click)="voltar()">
+              <button type="button" mat-raised-button (click)="voltar()">
             Cancelar
           </button>
         </ng-container>
