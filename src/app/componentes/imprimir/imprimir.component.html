@@ -1,64 +1,296 @@
 <div id="container" class="page">
   <header>
     <h2><strong>ADVERTÊNCIA DE IRREGULARIDADE</strong></h2>
-    <h5>Nº da notificação: {{ irregularidade.numeroIrregularidade }}</h5>
+    <span style="font-size: 10px"
+      ><strong>Nº da notificação:</strong>
+      {{ irregularidade.numeroIrregularidade }}</span
+    >
   </header>
-  <h3><strong>VEÍCULO:</strong></h3>
+  <!-- <span><strong>VEÍCULO:</strong></span> -->
   <section>
-    <h5>VEÍCULO: {{ irregularidade.numeroVeiculo }}</h5>
-    <h5>LINHA: {{ irregularidade.numeroLinha }} - {{ nomeLinha }}</h5>
-    <h5>CONSÓRCIO: {{ irregularidade.numeroConsorcio }} - {{ nomeConsorcio }}</h5>
-    <h5>PLACA: {{ placaVeiculo }}</h5>
+    <span style="font-size: 10px"
+      ><strong>Veículo:</strong> {{ irregularidade.numeroVeiculo }}</span
+    >
+    <span style="margin-left: 40px; font-size: 10px"
+      ><strong>Linha:</strong> {{ irregularidade.numeroLinha }} -
+      {{ nomeLinha }}</span
+    >
+    <span style="margin-left: 30px; font-size: 10px"
+      ><strong>Subconc.:</strong> {{ subconcessionaria }}</span
+    >
+    <span style="margin-left: 40px; font-size: 10px"
+      ><strong>Cnosórcio:</strong> {{ irregularidade.numeroConsorcio }} -
+      {{ nomeConsorcio }}</span
+    >
+    <span style="margin-left: 40px; font-size: 10px"
+      ><strong>Placa:</strong> {{ placaVeiculo }}</span
+    >
   </section>
   <mat-divider></mat-divider>
-  <section class="irregularidade">
-    <h3><strong>IRREGULARIDADE:</strong></h3>
+  <section style="padding: 10px 0px 0px 0px">
+    <!-- <h3><strong>IRREGULARIDADE:</strong></h3> -->
     <div>
-      <h5>DATA: {{ irregularidade.dataIrregularidade }}</h5>
-      <h5>HORÁRIO: {{ irregularidade.horario }}</h5>
-      <h5>LOCAL: {{ irregularidade.local }}</h5>
-      <h5>INFRAÇÃO: {{ irregularidade.codigoInfracao }} - {{ descricaoInfracao }}</h5>
-      <h5>OBSERVAÇÕES: {{ irregularidade.descricao }}</h5>
+      <span style="font-size: 10px"
+        ><strong>Data:</strong> {{ irregularidade.dataIrregularidade }}</span
+      >
+      <span style="margin-left: 40px; font-size: 10px"
+        ><strong>Horário:</strong> {{ irregularidade.horario }}</span
+      >
+      <span style="margin-left: 40px; font-size: 10px"
+        ><strong>Local:</strong> {{ irregularidade.local }}</span
+      >
+      <span style="margin-left: 40px; font-size: 10px"
+        ><strong>Nº:</strong> {{ irregularidade.numeroLocal }}</span
+      >
+      <span style="margin-left: 40px; font-size: 10px"
+        ><strong>Bairro:</strong> {{ irregularidade.bairro }}</span
+      >
+    </div>
+    <div>
+      <span style="font-size: 10px">
+        <strong>Infração:</strong> {{ irregularidade.codigoInfracao }} -
+        {{ descricaoInfracao }}
+      </span>
+    </div>
+    <div>
+      <span style="font-size: 10px"
+        ><strong>Observações:</strong> {{ irregularidade.descricao }}</span
+      >
     </div>
   </section>
   <mat-divider></mat-divider>
-  <section class="fiscalizacao">
+  <section style="padding: 10px 0px 0px 0px">
     <h3><strong>FISCALIZAÇÃO:</strong></h3>
-    <h5>MATRÍCULA DO AGENTE CONFERENTE: {{ irregularidade.matAgenteConferente }}</h5>
-    <h5>DATA DE EMISSÃO: {{ irregularidade.dataEmissao }}</h5>
-    <h5>PRAZO CUMPRIMENTO/CONFERÊNCIA: {{irregularidade.prazoCumprimentoConferencia}}</h5>
-  </section>
-  <section class="observacao">
-    <h5>
-      O veículo deverá estar disponível na garagem no horário de 00:00 às 05:00
-      horas para conferência da irregularidade, conforme determinação
-      SUMOB/BHTRANS.
-    </h5>
-  </section>
-  <mat-divider></mat-divider>
-  <section class="resultado-conferencia">
-    <h3><strong>RESULTADO DA CONFERÊNCIA DA ADVERTÊNCIA DE IRREGULARIDADE:</strong></h3>
-    <div class="dados">
-      <h5>MAT. FISCAL: ______________________</h5>
-      <h5>DATA: ______/ ______/ _____________</h5>
-      <h5>HORA: ______: ______</h5>
-      <h5>CUMPRIU: |__|</h5>
-      <h5>NÃO CUMPRIU: |__|</h5>
-      <h5>VEÍCULO INDISPONÍVEL: |__|</h5>
-      <h5>NÃO VERIFICADO: |__|</h5>
-      <h5>VISTO EMPRESA: _______________________</h5>
+    <div>
+      <span style="font-size: 10px">
+        <strong>Mat. do agente:</strong>
+        {{ irregularidade.matAgenteConferente }}
+      </span>
+      <span style="margin-left: 40px; font-size: 10px"
+        ><strong>Data de emissão:</strong>
+        {{ irregularidade.dataEmissao }}</span
+      >
+      <span style="margin-left: 40px; font-size: 10px">
+        <strong>Prazo Cumprimento/Conferência:</strong>
+        {{ irregularidade.prazoCumprimentoConferencia }}
+      </span>
     </div>
   </section>
   <mat-divider></mat-divider>
-  <footer>
-<span>
-    <h5>Empresa de Transportes e Trânsito de Belo Horizonte - S. A. BHTRANS</h5>
-  </span>
-    <h5>
-      Av. Eng. Carlos Goulart, 900 - Bairro Estoril - CEP: 30455-700 - Belo
-      Horizonte - MG
-    </h5>
-    <h5>2ª via - EMPRESA</h5>
-  </footer>
+  <div style="padding: 5px 0px 5px 0px">
+    <span style="font-size: 10px; padding-top: 10px"
+      ><strong>
+        O veículo deverá estar disponível na garagem no horário de 00:00 às
+        05:00 horas para conferência da irregularidade, conforme determinação
+        SUMOB/BHTRANS.</strong
+      >
+    </span>
+  </div>
+  <mat-divider></mat-divider>
+  <section class="resultado-conferencia" style="padding: 10px 0px 0px 0px">
+    <h3>
+      <strong
+        >RESULTADO DA CONFERÊNCIA DA ADVERTÊNCIA DE IRREGULARIDADE:</strong
+      >
+    </h3>
+    <div>
+      <span style="font-size: 10px"
+        ><strong>Mat. fiscal:</strong> ______________</span
+      >
+      <span style="font-size: 10px; margin-left: 35px"
+        ><strong>Data: </strong> _______/ _______/ _____________</span
+      >
+      <span style="font-size: 10px; margin-left: 35px"
+        ><strong>Hora: </strong> ______ : _______</span
+      >
+      <span style="font-size: 10px; margin-left: 35px"
+        ><strong>Cumpriu:</strong>
+
+        <span class="rounded-square"></span>
+      </span>
+
+      <span style="font-size: 10px; margin-left: 35px"
+        ><strong>Não cumpriu:</strong> <span class="rounded-square"></span
+      ></span>
+    </div>
+    <div>
+      <span style="font-size: 10px"
+        ><strong>Veículo indisponível:</strong>
+        <span class="rounded-square"></span
+      ></span>
+      <span style="font-size: 10px; margin-left: 35px"
+        ><strong>Não verificado:</strong> <span class="rounded-square"></span
+      ></span>
+      <span style="font-size: 10px; margin-left: 35px"
+        ><strong>Visto empresa:</strong> _______________________</span
+      >
+    </div>
+  </section>
+  <mat-divider></mat-divider>
+  <div style="padding: 10px 0px 10px 0px">
+    <div class="centralizar">
+      <span>
+        SUMOB/Empresa de Transportes e Trânsito de Belo Horizonte - S. A.
+        BHTRANS
+      </span>
+    </div>
+    <div class="centralizar">
+      <span>
+        Av. Eng. Carlos Goulart, 900 - Bairro Estoril - CEP: 30455-700 - Belo
+        Horizonte - MG
+      </span>
+    </div>
+    <span style="font-size: 10px">1ª via - BHTRANS</span>
+    <br />
+    <br />
+  </div>
+  <div>
+    <span
+      >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - - - - - - - -
+    </span>
+  </div>
+  <br />
+  <br />
+  <header>
+    <h2><strong>ADVERTÊNCIA DE IRREGULARIDADE</strong></h2>
+    <span style="font-size: 10px"
+      ><strong>Nº da notificação:</strong>
+      {{ irregularidade.numeroIrregularidade }}</span
+    >
+  </header>
+  <!-- <span><strong>VEÍCULO:</strong></span> -->
+  <section>
+    <span style="font-size: 10px"
+      ><strong>Veículo:</strong> {{ irregularidade.numeroVeiculo }}</span
+    >
+    <span style="margin-left: 30px; font-size: 10px"
+      ><strong>Linha:</strong> {{ irregularidade.numeroLinha }} -
+      {{ nomeLinha }}</span
+    >
+    <span style="margin-left: 30px; font-size: 10px"
+      ><strong>Subconc.:</strong> {{ subconcessionaria }}</span
+    >
+    <span style="margin-left: 30px; font-size: 10px"
+      ><strong>Consórcio:</strong> {{ irregularidade.numeroConsorcio }} -
+      {{ nomeConsorcio }}</span
+    >
+    <span style="margin-left: 30px; font-size: 10px"
+      ><strong>Placa:</strong> {{ placaVeiculo }}</span
+    >
+  </section>
+  <mat-divider></mat-divider>
+  <section style="padding: 10px 0px 0px 0px">
+    <!-- <h3><strong>IRREGULARIDADE:</strong></h3> -->
+    <div>
+      <span style="font-size: 10px"
+        ><strong>Data:</strong> {{ irregularidade.dataIrregularidade }}</span
+      >
+      <span style="margin-left: 40px; font-size: 10px"
+        ><strong>Horário:</strong> {{ irregularidade.horario }}</span
+      >
+      <span style="margin-left: 40px; font-size: 10px"
+        ><strong>Local:</strong> {{ irregularidade.local }}</span
+      >
+      <span style="margin-left: 40px; font-size: 10px"
+      ><strong>Nº:</strong> {{ irregularidade.numeroLocal }}</span
+    >
+    <span style="margin-left: 40px; font-size: 10px"
+      ><strong>Bairro:</strong> {{ irregularidade.bairro }}</span
+    >
+    </div>
+    <div>
+      <span style="font-size: 10px">
+        <strong>Infração:</strong> {{ irregularidade.codigoInfracao }} -
+        {{ descricaoInfracao }}
+      </span>
+    </div>
+    <div>
+      <span style="font-size: 10px"
+        ><strong>Observações:</strong> {{ irregularidade.descricao }}</span
+      >
+    </div>
+  </section>
+  <mat-divider></mat-divider>
+  <section style="padding: 10px 0px 0px 0px">
+    <h3><strong>FISCALIZAÇÃO:</strong></h3>
+    <div>
+      <span style="font-size: 10px">
+        <strong>Mat. do agente:</strong>
+        {{ irregularidade.matAgenteConferente }}
+      </span>
+      <span style="margin-left: 40px; font-size: 10px"
+        ><strong>Data de emissão:</strong>
+        {{ irregularidade.dataEmissao }}</span
+      >
+      <span style="margin-left: 40px; font-size: 10px">
+        <strong>Prazo Cumprimento/Conferência:</strong>
+        {{ irregularidade.prazoCumprimentoConferencia }}
+      </span>
+    </div>
+  </section>
+  <mat-divider></mat-divider>
+  <div style="padding: 5px 0px 5px 0px">
+    <span style="font-size: 10px; padding-top: 10px"
+      ><strong>
+        O veículo deverá estar disponível na garagem no horário de 00:00 às
+        05:00 horas para conferência da irregularidade, conforme determinação
+        SUMOB/BHTRANS.</strong
+      >
+    </span>
+  </div>
+  <mat-divider></mat-divider>
+  <section class="resultado-conferencia" style="padding: 10px 0px 0px 0px">
+    <h3>
+      <strong
+        >RESULTADO DA CONFERÊNCIA DA ADVERTÊNCIA DE IRREGULARIDADE:</strong
+      >
+    </h3>
+    <div>
+      <span style="font-size: 10px"
+        ><strong>Mat. fiscal:</strong> ______________</span
+      >
+      <span style="font-size: 10px; margin-left: 35px"
+        ><strong>Data: </strong> _______/ _______/ _____________</span
+      >
+      <span style="font-size: 10px; margin-left: 35px"
+        ><strong>Hora: </strong> ______ : _______</span
+      >
+      <span style="font-size: 10px; margin-left: 35px"
+        ><strong>Cumpriu:</strong> <span class="rounded-square"></span
+      ></span>
+      <span style="font-size: 10px; margin-left: 35px"
+        ><strong>Não cumpriu:</strong> <span class="rounded-square"></span
+      ></span>
+    </div>
+    <div>
+      <span style="font-size: 10px"
+        ><strong>Veículo indisponível:</strong>
+        <span class="rounded-square"></span
+      ></span>
+      <span style="font-size: 10px; margin-left: 35px"
+        ><strong>Não verificado:</strong> <span class="rounded-square"></span
+      ></span>
+      <span style="font-size: 10px; margin-left: 35px"
+        ><strong>Visto empresa:</strong> _______________________</span
+      >
+    </div>
+  </section>
+  <mat-divider></mat-divider>
+  <div style="padding: 10px 0px 10px 0px">
+    <div class="centralizar">
+      <span>
+        SUMOB/Empresa de Transportes e Trânsito de Belo Horizonte - S. A.
+        BHTRANS
+      </span>
+    </div>
+    <div class="centralizar">
+      <span>
+        Av. Eng. Carlos Goulart, 900 - Bairro Estoril - CEP: 30455-700 - Belo
+        Horizonte - MG
+      </span>
+    </div>
+    <span style="font-size: 10px">2ª via - EMPRESA</span>
+  </div>
 </div>
-<!-- *ngFor="let notificacao of notificacoes; let i = index" -->

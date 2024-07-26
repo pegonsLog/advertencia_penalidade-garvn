@@ -20,7 +20,7 @@
   width: 21cm;
   height: 29.7cm;
   padding-top: -5px;
-  margin: 1cm auto;
+  margin: 0 auto;
   border-radius: 5px;
   background: white;
   page-break-after: always;
@@ -33,4 +33,29 @@ h1, h2, h3, h4, h5{
 footer{
 display: inline-block;
 justify-items: center;
+}
+
+section{
+  margin-bottom: 10px;
+}
+
+h3{
+  margin-bottom: 1px;
+}
+
+.centralizar{
+  width: 100%;
+display: flex;
+justify-content: center;
+margin: 0 auto;
+font-size: 10px;
+}
+
+.rounded-square {
+  width: 10px;
+  height: 10px;
+  border-radius: 1px;
+  border: 1px solid gray;
+  margin-left: 6px;
+  padding: 0px 7px ;
 }

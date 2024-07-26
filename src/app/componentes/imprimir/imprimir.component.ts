@@ -37,6 +37,7 @@ export class ImprimirComponent implements OnDestroy {
   descricaoInfracao: string = '';
   placaVeiculo: string = '';
   nomeConsorcio: string = '';
+  subconcessionaria: string = '';
 
   private subscription = new Subscription();
 
@@ -127,6 +128,7 @@ export class ImprimirComponent implements OnDestroy {
           veiculos.forEach((veiculo: IVeiculo) => {
             if (veiculo.numeroVeiculo == numeroVeiculo) {
               this.placaVeiculo = veiculo.placa;
+              this.subconcessionaria = veiculo.operadora
             }
           })
         )
