@@ -1,0 +1,28 @@
+<div id="container" class="page">
+
+<div class="centralizar">
+  <h2>Protocolo de Advertência de Irregularidade - GARBO</h2>
+</div>
+<div class="centralizar">
+  <h4>Belo Horizonte, {{dataCabecalho}}</h4>
+</div>
+<div class="centralizar">
+  <span *ngFor="let irregularidade of numeroNotificacoesProtocolo; let i = index">
+    <span style="font-size: 10px; padding: 5px; border: 1px solid">{{i+1}} </span>
+    <span style="font-size: 10px; padding: 5px; border: 1px solid">{{
+      irregularidade
+    }}</span>
+  </span>
+</div>
+  <!-- <button
+  style="
+    margin: 10px 8px;
+    background-color: rgb(63, 154, 196);
+    color: white;
+  "
+  (click)="formatarData(dataProtocolo)"
+  mat-raised-button
+>
+  testar
+</button> -->
+</div>

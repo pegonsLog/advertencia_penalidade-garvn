@@ -36,8 +36,13 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   dialog = inject(MatDialog);
   isLoading = true;
   numeroNotificacao = '';
+  dataInicio: string = '';
+  dataFim: string = '';
+  tipo: string = '';
+  numNotificacao: string = '';
 
   filtradas: IIrregularidades = [];
+  notificacoesProtocolo: string[] = [];
 
   irregularidades: IIrregularidades = [];
 
@@ -92,13 +97,14 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     const porNumero = this.#activatedRoute.snapshot.queryParams['ehPorNumero'];
     const porPeriodo =
       this.#activatedRoute.snapshot.queryParams['ehPorPeriodo'];
-    const dataFim = this.#activatedRoute.snapshot.queryParams['dataFim'];
-    const dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
-    const numNotificacao =
+    this.dataFim = this.#activatedRoute.snapshot.queryParams['dataFim'];
+    this.dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
+    this.numNotificacao =
       this.#activatedRoute.snapshot.queryParams['numeroNotificacao'];
 
     if (porNumero) {
-      this.carregarListaPorNumeroNotificacao(numNotificacao);
+      this.carregarListaPorNumeroNotificacao(this.numNotificacao);
+      return;
     }
 
     if (porPeriodo) {
@@ -109,9 +115,9 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
             irregs.forEach((irreg: IIrregularidade) => {
               if (
                 this.formatDate(irreg.dataIrregularidade) >=
-                  this.formatDate(dataInicio) &&
+                  this.formatDate(this.dataInicio) &&
                 this.formatDate(irreg.dataIrregularidade) <=
-                  this.formatDate(dataFim)
+                  this.formatDate(this.dataFim)
               ) {
                 this.filtradas.push(irreg);
               }
@@ -132,9 +138,9 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     this.#route.navigate(['irregularidadeAdicionar']);
   }
 
-  edit(id: string) {
+  edit(numeroNotificacao: string) {
     this.#route.navigate(['irregularidadeAlterar'], {
-      queryParams: { id: id },
+      queryParams: { numeroNotificacao: numeroNotificacao },
     });
   }
 
@@ -143,7 +149,9 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     this.subscription = dialogReference.afterClosed().subscribe(() =>
       this.#irregularidadeService
         .deleteIrregularidade(id)
-        .then(() => {this.#route.navigate(['parametros'])})
+        .then(() => {
+          this.#route.navigate(['parametros']);
+        })
         .catch((err) => {
           console.log(err);
         })
@@ -164,11 +172,17 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     this.subscription.unsubscribe();
   }
   imprimir() {
-    this.#route.navigate(['imprimir']);
-  }
-  imprimirUma(id: string) {
     this.#route.navigate(['imprimir'], {
-      queryParams: { id: id },
+      queryParams: {
+        dataInicio: this.dataInicio,
+        dataFim: this.dataFim,
+        tipo: 'lote',
+      },
+    });
+  }
+  imprimirUma(numeroNotificacao: string) {
+    this.#route.navigate(['imprimir'], {
+      queryParams: { numeroNotificacao: numeroNotificacao, tipo: 'unitaria' },
     });
   }
 
@@ -181,7 +195,7 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
         map((i: IIrregularidades) =>
           i.filter(
             (irreg) =>
-              irreg.numeroIrregularidade.toString() === numeroNotificacao
+              irreg.numeroIrregularidade.toString() == numeroNotificacao
           )
         )
       )
@@ -197,5 +211,14 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     let [day, month, year] = dateString.split('/').map(Number);
     let date = new Date(year, month - 1, day);
     return date;
+  }
+
+  imprimirProtocolo() {
+    for (let f of this.filtradas) {
+      this.notificacoesProtocolo.push(f.codigoInfracao);
+    }
+    this.#route.navigate(['imprimirProtocolo'], {
+      queryParams: { protocolosNotificacao: this.notificacoesProtocolo },
+    });
   }
 }

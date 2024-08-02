@@ -1,12 +1,11 @@
-<div id="container" class="page">
+<div *ngFor="let irregularidade of filtradas" id="container" class="page">
   <header>
-    <h2><strong>ADVERTÊNCIA DE IRREGULARIDADE</strong></h2>
+    <h2><strong>ADVERTÊNCIA DE IRREGULARIDADE - TRANSPORTE COLETIVO</strong></h2>
     <span style="font-size: 10px"
       ><strong>Nº da notificação:</strong>
       {{ irregularidade.numeroIrregularidade }}</span
     >
   </header>
-  <!-- <span><strong>VEÍCULO:</strong></span> -->
   <section>
     <span style="font-size: 10px"
       ><strong>Veículo:</strong> {{ irregularidade.numeroVeiculo }}</span
@@ -19,7 +18,7 @@
       ><strong>Subconc.:</strong> {{ subconcessionaria }}</span
     >
     <span style="margin-left: 40px; font-size: 10px"
-      ><strong>Cnosórcio:</strong> {{ irregularidade.numeroConsorcio }} -
+      ><strong>Consórcio:</strong> {{ irregularidade.numeroConsorcio }} -
       {{ nomeConsorcio }}</span
     >
     <span style="margin-left: 40px; font-size: 10px"
@@ -28,7 +27,6 @@
   </section>
   <mat-divider></mat-divider>
   <section style="padding: 10px 0px 0px 0px">
-    <!-- <h3><strong>IRREGULARIDADE:</strong></h3> -->
     <div>
       <span style="font-size: 10px"
         ><strong>Data:</strong> {{ irregularidade.dataIrregularidade }}</span
@@ -60,7 +58,7 @@
   </section>
   <mat-divider></mat-divider>
   <section style="padding: 10px 0px 0px 0px">
-    <h3><strong>FISCALIZAÇÃO:</strong></h3>
+    <h4><strong>FISCALIZAÇÃO:</strong></h4>
     <div>
       <span style="font-size: 10px">
         <strong>Mat. do agente:</strong>
@@ -88,11 +86,11 @@
   </div>
   <mat-divider></mat-divider>
   <section class="resultado-conferencia" style="padding: 10px 0px 0px 0px">
-    <h3>
+    <h4>
       <strong
         >RESULTADO DA CONFERÊNCIA DA ADVERTÊNCIA DE IRREGULARIDADE:</strong
       >
-    </h3>
+    </h4>
     <div>
       <span style="font-size: 10px"
         ><strong>Mat. fiscal:</strong> ______________</span
@@ -142,7 +140,6 @@
     </div>
     <span style="font-size: 10px">1ª via - BHTRANS</span>
     <br />
-    <br />
   </div>
   <div>
     <span
@@ -152,9 +149,8 @@
     </span>
   </div>
   <br />
-  <br />
   <header>
-    <h2><strong>ADVERTÊNCIA DE IRREGULARIDADE</strong></h2>
+    <h2><strong>ADVERTÊNCIA DE IRREGULARIDADE - TRANSPORTE COLETIVO</strong></h2>
     <span style="font-size: 10px"
       ><strong>Nº da notificação:</strong>
       {{ irregularidade.numeroIrregularidade }}</span
@@ -194,11 +190,11 @@
         ><strong>Local:</strong> {{ irregularidade.local }}</span
       >
       <span style="margin-left: 40px; font-size: 10px"
-      ><strong>Nº:</strong> {{ irregularidade.numeroLocal }}</span
-    >
-    <span style="margin-left: 40px; font-size: 10px"
-      ><strong>Bairro:</strong> {{ irregularidade.bairro }}</span
-    >
+        ><strong>Nº:</strong> {{ irregularidade.numeroLocal }}</span
+      >
+      <span style="margin-left: 40px; font-size: 10px"
+        ><strong>Bairro:</strong> {{ irregularidade.bairro }}</span
+      >
     </div>
     <div>
       <span style="font-size: 10px">
@@ -214,7 +210,7 @@
   </section>
   <mat-divider></mat-divider>
   <section style="padding: 10px 0px 0px 0px">
-    <h3><strong>FISCALIZAÇÃO:</strong></h3>
+    <h4><strong>FISCALIZAÇÃO:</strong></h4>
     <div>
       <span style="font-size: 10px">
         <strong>Mat. do agente:</strong>
@@ -242,11 +238,11 @@
   </div>
   <mat-divider></mat-divider>
   <section class="resultado-conferencia" style="padding: 10px 0px 0px 0px">
-    <h3>
+    <h4>
       <strong
         >RESULTADO DA CONFERÊNCIA DA ADVERTÊNCIA DE IRREGULARIDADE:</strong
       >
-    </h3>
+    </h4>
     <div>
       <span style="font-size: 10px"
         ><strong>Mat. fiscal:</strong> ______________</span
@@ -294,3 +290,4 @@
     <span style="font-size: 10px">2ª via - EMPRESA</span>
   </div>
 </div>
+

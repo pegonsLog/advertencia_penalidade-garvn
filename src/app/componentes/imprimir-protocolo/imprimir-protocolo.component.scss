@@ -1,0 +1,43 @@
+@media print {
+  body {
+    margin: 0;
+    box-shadow: 0;
+    font-family: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .page {
+    box-shadow: none;
+    margin: 0;
+    page-break-after: always;
+  }
+
+  button {
+    display: none;
+  }
+}
+
+.page {
+  width: 21cm;
+  height: 29.7cm;
+  padding-top: -5px;
+  margin: 0 auto;
+  border-radius: 5px;
+  background: white;
+  page-break-after: always;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.centralizar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  font-size: 10px;
+}

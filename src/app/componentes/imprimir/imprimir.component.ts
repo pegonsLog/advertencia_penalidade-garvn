@@ -11,6 +11,7 @@ import {
 import { ILinha, ILinhas } from '../../interface/linha';
 import { IVeiculo, IVeiculos } from '../../interface/veiculo';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
+import { AgenteService } from '../agente/agente.service';
 import { ConsorcioService } from '../consorcio/consorcio.service';
 import { InfracaoService } from '../infracao/infracao.service';
 import { IrregularidadeService } from '../irregularidade/irregularidade.service';
@@ -26,11 +27,12 @@ import { VeiculoService } from '../veiculo/veiculo.service';
 })
 export class ImprimirComponent implements OnDestroy {
   #route = inject(Router);
-  #irreguaridadeService = inject(IrregularidadeService);
+  #irregularidadeService = inject(IrregularidadeService);
   #linhaService = inject(LinhaService);
   #infracaoService = inject(InfracaoService);
   #veiculoService = inject(VeiculoService);
   #consorcioService = inject(ConsorcioService);
+  #agenteService = inject(AgenteService);
   #activatedRoute = inject(ActivatedRoute);
 
   nomeLinha: string = '';
@@ -38,6 +40,8 @@ export class ImprimirComponent implements OnDestroy {
   placaVeiculo: string = '';
   nomeConsorcio: string = '';
   subconcessionaria: string = '';
+
+  filtradas: IIrregularidades = [];
 
   private subscription = new Subscription();
 
@@ -62,22 +66,59 @@ export class ImprimirComponent implements OnDestroy {
   };
 
   constructor() {
-    const id = this.#activatedRoute.snapshot.queryParams['id'];
+    const numeroNotificacao =
+      this.#activatedRoute.snapshot.queryParams['numeroNotificacao'];
+    const dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
+    const dataFim = this.#activatedRoute.snapshot.queryParams['dataFim'];
+    const tipo = this.#activatedRoute.snapshot.queryParams['tipo'];
 
-    this.subscription = this.#irreguaridadeService
-      .umaIrregularidade(id)
-      .pipe(
-        map((irreg: IIrregularidade) => {
-          this.irregularidade = irreg;
-          this.validarLinha(irreg.numeroLinha);
-          this.validarConsorcio(irreg.numeroConsorcio);
-          this.validarInfracao(irreg.codigoInfracao);
-          this.validarVeiculo(irreg.numeroVeiculo);
-        })
-      )
-      .subscribe((arrayIrregularidade) => {
-        console.log(arrayIrregularidade);
-      });
+    if (tipo == 'unitaria') {
+      this.#irregularidadeService
+        .list()
+        .pipe(
+          map((irregs: IIrregularidades) =>
+            irregs.forEach((irreg: IIrregularidade) => {
+              if (irreg.numeroIrregularidade == numeroNotificacao) {
+                this.filtradas.push(irreg);
+                this.validarLinha(irreg.numeroLinha);
+                this.validarInfracao(irreg.codigoInfracao);
+                this.validarVeiculo(irreg.numeroVeiculo);
+                this.validarConsorcio(irreg.numeroConsorcio);
+              }
+            })
+          )
+        )
+        .subscribe(() => {
+          console.log(this.filtradas);
+        });
+    }
+
+    if (tipo == 'lote') {
+      this.#irregularidadeService
+        .list()
+        .pipe(
+          map((irregs: IIrregularidades) =>
+            irregs.forEach((irreg: IIrregularidade) => {
+              if (
+                this.formatDate(irreg.dataIrregularidade) >=
+                  this.formatDate(dataInicio) &&
+                this.formatDate(irreg.dataIrregularidade) <=
+                  this.formatDate(dataFim)
+              ) {
+                this.filtradas.push(irreg);
+                // this.validarAgente(irreg.matriculaAgente);
+                this.validarLinha(irreg.numeroLinha);
+                this.validarInfracao(irreg.codigoInfracao);
+                this.validarVeiculo(irreg.numeroVeiculo);
+                this.validarConsorcio(irreg.numeroConsorcio);
+              }
+            })
+          )
+        )
+        .subscribe(() => {
+          console.log(this.filtradas);
+        });
+    }
   }
 
   voltar() {
@@ -88,6 +129,26 @@ export class ImprimirComponent implements OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  carregarListaPorNumeroNotificacao(numeroNotificacao: string) {
+    this.#activatedRoute.snapshot.queryParams['numeroNotificacao'];
+    this.#irregularidadeService
+      .list()
+      .pipe(
+        map((i: IIrregularidades) =>
+          i.filter((irreg) => {
+            irreg.numeroIrregularidade.toString() == numeroNotificacao;
+          })
+        )
+      )
+      .subscribe(() => {});
+  }
+
+  formatDate(dateString: string): Date {
+    let [day, month, year] = dateString.split('/').map(Number);
+    let date = new Date(year, month - 1, day);
+    return date;
   }
 
   validarLinha(numeroLinha: string) {
@@ -128,7 +189,7 @@ export class ImprimirComponent implements OnDestroy {
           veiculos.forEach((veiculo: IVeiculo) => {
             if (veiculo.numeroVeiculo == numeroVeiculo) {
               this.placaVeiculo = veiculo.placa;
-              this.subconcessionaria = veiculo.operadora
+              this.subconcessionaria = veiculo.operadora;
             }
           })
         )

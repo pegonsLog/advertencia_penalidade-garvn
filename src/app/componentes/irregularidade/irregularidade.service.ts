@@ -7,14 +7,13 @@ import {
   deleteDoc,
   doc,
   docData,
-  updateDoc,
+  updateDoc
 } from '@angular/fire/firestore';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   IIrregularidade,
   IIrregularidades,
 } from '../../interface/irregularidade';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Injectable({
   providedIn: 'root',

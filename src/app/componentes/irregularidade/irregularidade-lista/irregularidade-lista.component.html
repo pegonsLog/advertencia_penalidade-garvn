@@ -134,7 +134,7 @@
               <td mat-cell *matCellDef="let irregularidade">
                 <span id="actions">
                   <button
-                  (click)="imprimirUma(irregularidade.id)"
+                  (click)="imprimirUma(irregularidade.numeroIrregularidade)"
                     id="mat-button-custom"
                   >
                     <span class="material-symbols-outlined" id="print">
@@ -142,7 +142,7 @@
                     </span>
                   </button>
                   <button
-                    (click)="edit(irregularidade.id)"
+                    (click)="edit(irregularidade.numeroIrregularidade)"
                     id="mat-button-custom"
                   >
                     <span class="material-symbols-outlined" id="edit">
@@ -200,6 +200,18 @@
             color: white;
           "
           (click)="imprimir()"
+          mat-raised-button
+        >
+          IMPRIMIR
+        </button>
+
+        <button
+          style="
+            margin: 10px 8px;
+            background-color: rgb(63, 154, 196);
+            color: white;
+          "
+          (click)="imprimirProtocolo()"
           mat-raised-button
         >
           IMPRIMIR

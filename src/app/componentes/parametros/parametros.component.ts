@@ -51,7 +51,8 @@ export class ParametrosComponent {
         queryParams: {
           dataInicio: dataInicio,
           dataFim: dataFim,
-          ehPorPeriodo: true,
+          tipo: 'lote',
+          ehPorPeriodo: 'ehPorPeriodo'
         },
       });
     } else {
@@ -64,7 +65,8 @@ export class ParametrosComponent {
       this.#route.navigate(['irregularidadeLista'], {
         queryParams: {
           numeroNotificacao: numeroNotificacao,
-          ehPorNumero: true,
+          tipo: 'unitária',
+          ehPorNumero: 'ehPorNumero'
         },
       });
     } else {

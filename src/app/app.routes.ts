@@ -7,6 +7,7 @@ import { FiscalizacaoFormComponent } from './componentes/fiscalizacao/fiscalizac
 import { FiscalizacaoListaComponent } from './componentes/fiscalizacao/fiscalizacao-lista/fiscalizacao-lista.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { ImprimirComponent } from './componentes/imprimir/imprimir.component';
+import { ImprimirProtocoloComponent } from './componentes/imprimir-protocolo/imprimir-protocolo.component';
 import { InfracaoFormComponent } from './componentes/infracao/infracao-form/infracao-form.component';
 import { InfracaoListaComponent } from './componentes/infracao/infracao-lista/infracao-lista.component';
 import { IrregularidadeAdicionarComponent } from './componentes/irregularidade/irregularidade-adicionar/irregularidade-adicionar.component';
@@ -111,4 +112,7 @@ export const routes: Routes = [
     path: 'imprimir',
     component: ImprimirComponent,
   },
+  {
+    path: 'imprimirProtocolo', component: ImprimirProtocoloComponent
+  }
 ];
