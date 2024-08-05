@@ -1,28 +1,173 @@
 <div id="container" class="page">
+  <div style="display: flex; justify-content: right; margin-right: 60px;">
+    <img class="bhtrans" src="/assets/BHTrans-logo.jpg" alt="Logomarca da Empresa">
+    <img class="pbh" src="/assets/pbh-logo.png" alt="Logomarca da Empresa">
+  </div>
 
-<div class="centralizar">
-  <h2>Protocolo de Advertência de Irregularidade - GARBO</h2>
-</div>
-<div class="centralizar">
-  <h4>Belo Horizonte, {{dataCabecalho}}</h4>
-</div>
-<div class="centralizar">
-  <span *ngFor="let irregularidade of numeroNotificacoesProtocolo; let i = index">
-    <span style="font-size: 10px; padding: 5px; border: 1px solid">{{i+1}} </span>
-    <span style="font-size: 10px; padding: 5px; border: 1px solid">{{
-      irregularidade
-    }}</span>
-  </span>
-</div>
-  <!-- <button
-  style="
-    margin: 10px 8px;
-    background-color: rgb(63, 154, 196);
-    color: white;
-  "
-  (click)="formatarData(dataProtocolo)"
-  mat-raised-button
->
-  testar
-</button> -->
+
+  <div style="display: flex; justify-content: right; margin-right: 60px;">
+    <h4>Belo Horizonte, {{ dataCabecalho }}</h4>
+  </div>
+  <div class="centralizar">
+    <h2 class="titulo">Protocolo de Advertência de Irregularidade - GARBO</h2>
+  </div>
+  <div style="margin-TOP: 35px">
+    <span style="font-size: 10px; margin-left: 35px"
+      ><span class="rounded-square"></span
+      ><span style="margin-left: 10px">Consórcio 10 / SETRA BJ</span></span
+    >
+  </div>
+  <div>
+    <span style="font-size: 10px; margin-left: 35px"
+      ><span class="rounded-square"></span
+      ><span style="margin-left: 10px"
+        >Wagner David Campos - Supervisor de Apoio Operacional - GAOPE</span
+      ></span
+    >
+  </div>
+  <div>
+    <span style="font-size: 10px; margin-left: 35px"
+      ><span class="rounded-square"></span
+      ><span style="margin-left: 10px"
+        >Data de Conferência na Garagem: ______/ ______/ _______________</span
+      ></span
+    >
+  </div>
+  <br />
+  <br />
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      width: 710px;
+      margin: 0 auto;
+    "
+  >
+    <span
+      *ngFor="let irregularidade of numeroNotificacoesProtocolo; let i = index"
+      style="padding: 10px; font-size: 11px"
+      ><b
+        ><u>{{ i + 1 }}-{{ irregularidade }} </u></b
+      ></span
+    >
+  </div>
+  <div style="margin-top: 30px">
+    <span style="font-size: 10px; margin-left: 35px"
+      ><span style="margin-left: 10px"
+        >Nome Legível _____________________________________________
+      </span>
+      <span style="font-size: 10px; margin-left: 50px"
+        >Assinatura: ____________________________________________</span
+      >
+    </span>
+  </div>
+  <div style="margin-top: 20px">
+    <span style="font-size: 10px; margin-left: 35px"
+      ><span style="margin-left: 10px"
+        >Data: ______/ ______/ _______________
+      </span></span
+    ><span style="font-size: 10px; margin-left: 173px"
+      >Telefone ______________________________________________</span
+    >
+  </div>
+  <div style="margin-top: 60px; display: flex; justify-content: center">
+    <span style="font-size: 12px; margin-left: 35px"
+      ><span>Atenciosamente, </span></span
+    >
+  </div>
+  <div style="margin-top: 25px; display: flex; justify-content: center">
+    <span style="font-size: 15px; margin-left: 35px"
+      ><span>_________________________________________ </span></span
+    >
+  </div>
+  <div style="margin-top: 5px; display: flex; justify-content: center">
+    <span style="font-size: 12px; margin-left: 35px"
+      ><span><b>Júnio Eduardo de Souza </b></span></span
+    >
+  </div>
+  <div style="margin-top: -3px; display: flex; justify-content: center">
+    <span style="font-size: 10px; margin-left: 35px"
+      ><span>Técnico de Transportes e Trânsito </span></span
+    >
+  </div>
+  <div
+    style="
+      margin: 50px 0px 0px 40px;
+      display: flex;
+      justify-content: center;
+      width: 710px;
+    "
+  >
+    <span style="font-size: 12px"
+      >. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    </span>
+  </div>
+  <div style="margin-top: 60px; display: flex; justify-content: center">
+    <span style="font-size: 15px; margin-left: 35px"
+      ><span>_________________________________________ </span></span
+    >
+  </div>
+  <div style="margin-top: 5px; display: flex; justify-content: center">
+    <span style="font-size: 12px; margin-left: 35px"
+      ><span><b>Péricles Simbera Santos - 1197</b> </span></span
+    >
+  </div>
+  <div style="margin-top: -3px; display: flex; justify-content: center">
+    <span style="font-size: 10px; margin-left: 35px"
+      ><span
+        >Gerente de Ação Regional Barreiro/Oeste - GARBO
+      </span></span
+    >
+  </div>
+  <div style="margin-top: -5px; display: flex; justify-content: center">
+    <span style="font-size: 10px; margin-left: 35px"
+      ><span
+        >Empresa de Transportes e Trânsito de Belo Horizonte S/A - BHTRANS
+      </span></span
+    >
+  </div>
+  <footer>
+    <div
+      style="
+        margin: 150px 0px 0px 40px;
+        display: flex;
+        justify-content: center;
+        width: 710px;
+      "
+    >
+      <span style="font-size: 5px"
+        ><b
+          >_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</b
+        >
+      </span>
+    </div>
+    <div style="margin-top: 2px; display: flex; justify-content: center">
+      <span style="font-size: 10px; margin-left: 35px"
+        ><span
+          ><i
+            >Empresa de Transportes e Trânsito de Belo Horizonte S/A - BHTRANS</i
+          >
+        </span></span
+      >
+    </div>
+    <div style="display: flex; justify-content: center">
+      <span style="font-size: 9px; margin-left: 35px"
+        ><span><i>www.bhtrans.pbh.gov.br</i> </span></span
+      >
+    </div>
+    <div style="display: flex; justify-content: center">
+      <span style="font-size: 8px; margin-left: 35px"
+        ><span
+          ><i>Av. Engenheiro Carlos Goulart, nº 900 - Bairro Buritis</i>
+        </span></span
+      >
+    </div>
+    <div style="display: flex; justify-content: center">
+      <span style="font-size: 7px; margin-left: 35px"
+        ><span><i>Belo Horizonte - MG - CEP 30455-902</i> </span></span
+      >
+    </div>
+  </footer>
 </div>

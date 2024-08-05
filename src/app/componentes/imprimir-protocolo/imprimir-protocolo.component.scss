@@ -3,12 +3,13 @@
     margin: 0;
     box-shadow: 0;
     font-family: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+
   }
 
   .page {
     box-shadow: none;
     margin: 0;
-    page-break-after: always;
+    // page-break-after: always;
   }
 
   button {
@@ -23,7 +24,7 @@
   margin: 0 auto;
   border-radius: 5px;
   background: white;
-  page-break-after: always;
+
 }
 
 h1,
@@ -40,4 +41,37 @@ h5 {
   justify-content: center;
   margin: 0 auto;
   font-size: 10px;
+}
+
+.rounded-square {
+  width: 10px;
+  height: 10px;
+  border-radius: 1px;
+  border: 1px solid gray;
+  margin-left: 6px;
+  padding: 0px 7px ;
+}
+/* Garantir que a página ocupe toda a altura da janela */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.bhtrans{
+  width: 70px;
+  height: 70px;
+}
+.pbh{
+  margin-top: 10px;
+  width: 150px;
+  height: 50px;
+}
+
+.titulo{
+margin-top: 30px;
+}
+
+footer{
+  margin: 0;
+  page-break-after: always;
 }

@@ -215,7 +215,7 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
 
   imprimirProtocolo() {
     for (let f of this.filtradas) {
-      this.notificacoesProtocolo.push(f.codigoInfracao);
+      this.notificacoesProtocolo.push(f.numeroIrregularidade);
     }
     this.#route.navigate(['imprimirProtocolo'], {
       queryParams: { protocolosNotificacao: this.notificacoesProtocolo },
