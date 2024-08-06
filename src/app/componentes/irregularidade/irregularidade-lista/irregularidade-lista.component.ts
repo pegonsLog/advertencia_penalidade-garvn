@@ -172,18 +172,24 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     this.subscription.unsubscribe();
   }
   imprimir() {
-    this.#route.navigate(['imprimir'], {
-      queryParams: {
-        dataInicio: this.dataInicio,
-        dataFim: this.dataFim,
-        tipo: 'lote',
-      },
-    });
+    const url = this.#route.serializeUrl(
+      this.#route.createUrlTree(['imprimir'], {
+        queryParams: {
+          dataInicio: this.dataInicio,
+          dataFim: this.dataFim,
+          tipo: 'lote',
+        },
+      })
+    );
+    window.open(url, '_blank');
   }
   imprimirUma(numeroNotificacao: string) {
-    this.#route.navigate(['imprimir'], {
-      queryParams: { numeroNotificacao: numeroNotificacao, tipo: 'unitaria' },
-    });
+      const url = this.#route.serializeUrl(
+      this.#route.createUrlTree(['imprimir'], {
+        queryParams: { numeroNotificacao: numeroNotificacao, tipo: 'unitaria' },
+      })
+    );
+    window.open(url, '_blank');
   }
 
   carregarListaPorNumeroNotificacao(numeroNotif: string) {
@@ -217,8 +223,12 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     for (let f of this.filtradas) {
       this.notificacoesProtocolo.push(f.numeroIrregularidade);
     }
-    this.#route.navigate(['imprimirProtocolo'], {
-      queryParams: { protocolosNotificacao: this.notificacoesProtocolo },
-    });
+    const url = this.#route.serializeUrl(
+      this.#route.createUrlTree(['imprimirProtocolo'], {
+        queryParams: { protocolosNotificacao: this.notificacoesProtocolo },
+      })
+    );
+    window.open(url, '_blank');
+    this.notificacoesProtocolo = [];
   }
 }

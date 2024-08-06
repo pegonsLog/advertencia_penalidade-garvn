@@ -1,26 +1,5 @@
-import { Routes } from '@angular/router';
-import { AgenteFormComponent } from './componentes/agente/agente-form/agente-form.component';
-import { AgenteListaComponent } from './componentes/agente/agente-lista/agente-lista.component';
-import { ConsorcioFormComponent } from './componentes/consorcio/consorcio-form/consorcio-form.component';
-import { ConsorcioListaComponent } from './componentes/consorcio/consorcio-lista/consorcio-lista.component';
-import { FiscalizacaoFormComponent } from './componentes/fiscalizacao/fiscalizacao-form/fiscalizacao-form.component';
-import { FiscalizacaoListaComponent } from './componentes/fiscalizacao/fiscalizacao-lista/fiscalizacao-lista.component';
-import { HomeComponent } from './componentes/home/home.component';
-import { ImprimirComponent } from './componentes/imprimir/imprimir.component';
-import { ImprimirProtocoloComponent } from './componentes/imprimir-protocolo/imprimir-protocolo.component';
-import { InfracaoFormComponent } from './componentes/infracao/infracao-form/infracao-form.component';
-import { InfracaoListaComponent } from './componentes/infracao/infracao-lista/infracao-lista.component';
-import { IrregularidadeAdicionarComponent } from './componentes/irregularidade/irregularidade-adicionar/irregularidade-adicionar.component';
-import { IrregularidadeAlterarComponent } from './componentes/irregularidade/irregularidade-alterar/irregularidade-alterar.component';
-import { IrregularidadeListaComponent } from './componentes/irregularidade/irregularidade-lista/irregularidade-lista.component';
-import { LinhaFormComponent } from './componentes/linha/linha-form/linha-form.component';
-import { LinhaListaComponent } from './componentes/linha/linha-lista/linha-lista.component';
-import { ParametrosComponent } from './componentes/parametros/parametros.component';
-import { VeiculoFormComponent } from './componentes/veiculo/veiculo-form/veiculo-form.component';
-import { VeiculoListaComponent } from './componentes/veiculo/veiculo-lista/veiculo-lista.component';
-import { LoginComponent } from './login/login.component';
-import { UserFormComponent } from './user/user-form/user-form.component';
-import { UserListComponent } from './user/user-list/user-list.component';
+import { Routes, CanActivateFn } from '@angular/router';
+import { canActivateGuard } from './guard/can-activate.guard';
 
 export const routes: Routes = [
   {
@@ -30,89 +9,153 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent,
+    loadComponent: () =>
+      import('./login/login.component').then((m) => m.LoginComponent),
   },
   {
     path: 'home',
-    component: HomeComponent,
+    loadComponent: () =>
+      import('./componentes/home/home.component').then((m) => m.HomeComponent),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'parametros',
-    component: ParametrosComponent,
+    loadComponent: () =>
+      import('./componentes/parametros/parametros.component').then(
+        (m) => m.ParametrosComponent
+      ),
   },
   {
     path: 'userLista',
-    component: UserListComponent,
+    loadComponent: () =>
+      import('./user/user-list/user-list.component').then(
+        (m) => m.UserListComponent
+      ),
   },
   {
     path: 'userForm',
-    component: UserFormComponent,
+    loadComponent: () =>
+      import('./user/user-form/user-form.component').then(
+        (m) => m.UserFormComponent
+      ),
   },
   {
     path: 'consorcioLista',
-    component: ConsorcioListaComponent,
+    loadComponent: () =>
+      import(
+        './componentes/consorcio/consorcio-lista/consorcio-lista.component'
+      ).then((m) => m.ConsorcioListaComponent),
   },
   {
     path: 'consorcioForm',
-    component: ConsorcioFormComponent,
+    loadComponent: () =>
+      import(
+        './componentes/consorcio/consorcio-form/consorcio-form.component'
+      ).then((m) => m.ConsorcioFormComponent),
   },
   {
     path: 'fiscalizacaoLista',
-    component: FiscalizacaoListaComponent,
+    loadComponent: () =>
+      import(
+        './componentes/fiscalizacao/fiscalizacao-lista/fiscalizacao-lista.component'
+      ).then((m) => m.FiscalizacaoListaComponent),
   },
   {
     path: 'fiscalizacaoForm',
-    component: FiscalizacaoFormComponent,
+    loadComponent: () =>
+      import(
+        './componentes/fiscalizacao/fiscalizacao-form/fiscalizacao-form.component'
+      ).then((m) => m.FiscalizacaoFormComponent),
   },
   {
     path: 'infracaoForm',
-    component: InfracaoFormComponent,
+    loadComponent: () =>
+      import(
+        './componentes/infracao/infracao-form/infracao-form.component'
+      ).then((m) => m.InfracaoFormComponent),
   },
   {
     path: 'infracaoLista',
-    component: InfracaoListaComponent,
+    loadComponent: () =>
+      import(
+        './componentes/infracao/infracao-lista/infracao-lista.component'
+      ).then((m) => m.InfracaoListaComponent),
   },
   {
     path: 'irregularidadeAdicionar',
-    component: IrregularidadeAdicionarComponent,
+    loadComponent: () =>
+      import(
+        './componentes/irregularidade/irregularidade-adicionar/irregularidade-adicionar.component'
+      ).then((m) => m.IrregularidadeAdicionarComponent),
   },
   {
     path: 'irregularidadeAlterar',
-    component: IrregularidadeAlterarComponent,
+    loadComponent: () =>
+      import(
+        './componentes/irregularidade/irregularidade-alterar/irregularidade-alterar.component'
+      ).then((m) => m.IrregularidadeAlterarComponent),
   },
   {
     path: 'irregularidadeLista',
-    component: IrregularidadeListaComponent,
+    loadComponent: () =>
+      import(
+        './componentes/irregularidade/irregularidade-lista/irregularidade-lista.component'
+      ).then((m) => m.IrregularidadeListaComponent),
   },
   {
     path: 'linhaForm',
-    component: LinhaFormComponent,
+    loadComponent: () =>
+      import('./componentes/linha/linha-form/linha-form.component').then(
+        (m) => m.LinhaFormComponent
+      ),
   },
   {
     path: 'linhaLista',
-    component: LinhaListaComponent,
+    loadComponent: () =>
+      import('./componentes/linha/linha-lista/linha-lista.component').then(
+        (m) => m.LinhaListaComponent
+      ),
   },
   {
     path: 'veiculoForm',
-    component: VeiculoFormComponent,
+    loadComponent: () =>
+      import('./componentes/veiculo/veiculo-form/veiculo-form.component').then(
+        (m) => m.VeiculoFormComponent
+      ),
   },
   {
     path: 'veiculoLista',
-    component: VeiculoListaComponent,
+    loadComponent: () =>
+      import(
+        './componentes/veiculo/veiculo-lista/veiculo-lista.component'
+      ).then((m) => m.VeiculoListaComponent),
   },
   {
     path: 'agenteForm',
-    component: AgenteFormComponent,
+    loadComponent: () =>
+      import('./componentes/agente/agente-form/agente-form.component').then(
+        (m) => m.AgenteFormComponent
+      ),
   },
   {
     path: 'agenteLista',
-    component: AgenteListaComponent,
+    loadComponent: () =>
+      import('./componentes/agente/agente-lista/agente-lista.component').then(
+        (m) => m.AgenteListaComponent
+      ),
   },
   {
     path: 'imprimir',
-    component: ImprimirComponent,
+    loadComponent: () =>
+      import('./componentes/imprimir/imprimir.component').then(
+        (m) => m.ImprimirComponent
+      ),
   },
   {
-    path: 'imprimirProtocolo', component: ImprimirProtocoloComponent
-  }
+    path: 'imprimirProtocolo',
+    loadComponent: () =>
+      import(
+        './componentes/imprimir-protocolo/imprimir-protocolo.component'
+      ).then((m) => m.ImprimirProtocoloComponent),
+  },
 ];
