@@ -1,4 +1,11 @@
+
+
 <div *ngFor="let irregularidade of filtradas" id="container" class="page">
+
+  <span class="watermark-sumob-1via">S U M O B</span>
+  <span class="watermark-bhtrans-1via">B H T R A N S</span>
+  <span class="watermark-sumob-2via">S U M O B</span>
+  <span class="watermark-bhtrans-2via">B H T R A N S</span>
   <header>
     <h2><strong>ADVERTÊNCIA DE IRREGULARIDADE - TRANSPORTE COLETIVO</strong></h2>
     <span style="font-size: 10px"
@@ -7,6 +14,7 @@
     >
   </header>
   <section>
+
     <span style="font-size: 10px"
       ><strong>Veículo:</strong> {{ irregularidade.numeroVeiculo }}</span
     >
@@ -56,6 +64,7 @@
       >
     </div>
   </section>
+
   <mat-divider></mat-divider>
   <section style="padding: 10px 0px 0px 0px">
     <h4><strong>FISCALIZAÇÃO:</strong></h4>
@@ -260,6 +269,11 @@
         ><strong>Não cumpriu:</strong> <span class="rounded-square"></span
       ></span>
     </div>
+
+
+
+
+
     <div>
       <span style="font-size: 10px"
         ><strong>Veículo indisponível:</strong>

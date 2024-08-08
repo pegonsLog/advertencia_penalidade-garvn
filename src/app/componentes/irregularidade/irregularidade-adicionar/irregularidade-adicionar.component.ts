@@ -71,7 +71,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
     horario: ['', Validators.required],
     matriculaAgente: ['', Validators.required],
     local: ['', Validators.required],
-    numeroLocal: ['', Validators.required],
+    numeroLocal: [''],
     bairro: ['', Validators.required],
     descricao: ['', Validators.required],
     codigoInfracao: ['', Validators.required],

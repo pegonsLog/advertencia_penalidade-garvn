@@ -11,14 +11,12 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { IVeiculo, IVeiculos } from '../../interface/veiculo';
-import { ExportarVeiculos } from '../../veiculosParaFirestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VeiculoService {
   firestore: Firestore = inject(Firestore);
-  exportarFirestore: ExportarVeiculos = inject(ExportarVeiculos);
 
   veiculos: IVeiculos = [];
   veiculo: IVeiculo = {
@@ -64,8 +62,4 @@ export class VeiculoService {
 
     return deleteDoc($veiculoRef);
   }
-
-  // loadVeiculos(): IVeiculos {
-  //   return this.exportarFirestore.veiculos;
-  // }
 }

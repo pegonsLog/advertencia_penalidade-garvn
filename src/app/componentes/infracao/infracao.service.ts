@@ -10,7 +10,6 @@ import {
   updateDoc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { ExportarInfracoes } from '../../infracoesParaFirestore';
 import { IInfracao, IInfracoes } from '../../interface/infracao';
 
 @Injectable({
@@ -18,7 +17,6 @@ import { IInfracao, IInfracoes } from '../../interface/infracao';
 })
 export class InfracaoService {
   firestore: Firestore = inject(Firestore);
-  exportarFirestore: ExportarInfracoes = inject(ExportarInfracoes);
 
   infracoes: IInfracoes = [];
   linha: IInfracao = {
@@ -59,9 +57,5 @@ export class InfracaoService {
     let $infracoesRef = doc(this.firestore, 'infracoes', id);
 
     return deleteDoc($infracoesRef);
-  }
-
-  loadInfracoes(): IInfracoes {
-    return this.exportarFirestore.infracoes;
   }
 }

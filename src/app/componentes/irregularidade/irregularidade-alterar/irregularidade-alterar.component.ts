@@ -112,6 +112,7 @@ export class IrregularidadeAlterarComponent {
 
   constructor() {
     this.irregularidade.id = this.#activatedRoute.snapshot.queryParams['id'];
+    // this.irregularidade.id = this.#activatedRoute.snapshot.queryParams['id'];
 
     this.subscription = this.#veiculoService
     .list()

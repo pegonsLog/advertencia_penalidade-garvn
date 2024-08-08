@@ -11,7 +11,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideAnimationsAsync(),
-    // provideEnvironmentNgxMask(),
     importProvidersFrom(
       provideFirebaseApp(() =>
         initializeApp({

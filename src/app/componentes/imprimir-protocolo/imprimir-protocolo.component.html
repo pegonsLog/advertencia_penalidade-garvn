@@ -23,13 +23,13 @@
   </div>
   <div style="margin-top: 35px">
     <span style="font-size: 11px; margin-left: 35px"
-      ><span class="rounded-square"></span
-      ><span style="margin-left: 10px">Consórcio 10 / SETRA BJ</span></span
+      ><label class="rounded-square">X</label>
+      <span style="margin-left: 10px">Consórcio 10 / SETRA BJ</span></span
     >
   </div>
   <div>
     <span style="font-size: 11px; margin-left: 35px"
-      ><span class="rounded-square"></span
+      ><label class="rounded-square">X</label
       ><span style="margin-left: 10px"
         >Wagner David Campos - Supervisor de Apoio Operacional - GAOPE</span
       ></span
@@ -37,11 +37,14 @@
   </div>
   <div>
     <span style="font-size: 11px; margin-left: 35px"
-      ><span class="rounded-square"></span
-      ><span style="margin-left: 10px"
-        >Data de Conferência na Garagem: ______/ ______/ _______________</span
-      ></span
+      ><label class="rounded-square">X</label>
+      <span style="margin-left: 10px"
+        >Data de Conferência na Garagem:
+      </span></span
     >
+    <span style="margin-left: 5px; font-weight: 500"
+      >{{ dataConferencia }}
+    </span>
   </div>
   <br />
   <br />
@@ -49,14 +52,21 @@
     style="width: 710px; margin: 0 auto; margin-bottom: 10px; box-shadow: 0 0 0 0.1 rgb(77, 76, 76);"
   ></mat-divider> -->
   <div
-    style="border: 1px solid rgb(197, 193, 193); width: 710px; margin: 0 auto;"
+    style="border: 1px solid rgb(197, 193, 193); width: 710px; margin: 0 auto"
   >
-    <div style="display: flex; justify-content: center; margin: 0 auto;">
+    <div style="display: flex; justify-content: center; margin: 0 auto">
       <h3 style="margin: 0 auto; margin-bottom: 20px; font-size: 12px">
         <b><u>Números das notificações</u></b>
       </h3>
     </div>
-    <div style="width: 710px; margin: 0 auto; margin-bottom: 20px; display: inline-block;">
+    <div
+      style="
+        width: 710px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        display: inline-block;
+      "
+    >
       <span
         *ngFor="
           let irregularidade of numeroNotificacoesProtocolo;
@@ -72,7 +82,6 @@
           ><u>{{ i + 1 }}-{{ irregularidade }} </u></b
         ></span
       >
-
     </div>
   </div>
   <!-- <mat-divider
@@ -163,7 +172,220 @@
     <div class="centralizar">
       <span style="font-size: 5px"
         ><b
-          >_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</b
+          >________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</b
+        >
+      </span>
+    </div>
+    <div style="margin-top: 2px; display: flex; justify-content: center">
+      <span style="font-size: 10px; margin-left: 35px"
+        ><span
+          ><i
+            >Empresa de Transportes e Trânsito de Belo Horizonte S/A -
+            BHTRANS</i
+          >
+        </span></span
+      >
+    </div>
+    <div style="display: flex; justify-content: center">
+      <span style="font-size: 9px; margin-left: 35px"
+        ><span><i>www.bhtrans.pbh.gov.br</i> </span></span
+      >
+    </div>
+    <div style="display: flex; justify-content: center">
+      <span style="font-size: 8px; margin-left: 35px"
+        ><span
+          ><i>Av. Engenheiro Carlos Goulart, nº 900 - Bairro Buritis</i>
+        </span></span
+      >
+    </div>
+    <div style="display: flex; justify-content: center">
+      <span style="font-size: 7px; margin-left: 35px"
+        ><span><i>Belo Horizonte - MG - CEP 30455-902</i> </span></span
+      >
+    </div>
+  </div>
+</div>
+
+
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+<div id="container" class="page">
+  <div style="display: flex; justify-content: right; margin-right: 60px">
+    <img
+      class="bhtrans"
+      src="/assets/BHTrans-logo.jpg"
+      alt="Logomarca da Bhtrans"
+    />
+    <img class="pbh" src="/assets/pbh-logo.png" alt="Logomarca da PBH" />
+  </div>
+
+  <div
+    style="
+      display: flex;
+      justify-content: right;
+      margin: 15px 60px 0px 0px;
+      font-size: 13px;
+    "
+  >
+    <p>Belo Horizonte, {{ dataCabecalho }}</p>
+  </div>
+  <div class="centralizar">
+    <h2 class="titulo">Protocolo de Advertência de Irregularidade - GARBO</h2>
+  </div>
+  <div style="margin-top: 35px">
+    <span style="font-size: 11px; margin-left: 35px"
+      ><label class="rounded-square" style="color: transparent">X</label>
+      <span style="margin-left: 10px;">Consórcio 10 / SETRA BJ</span></span
+    >
+  </div>
+  <div>
+    <span style="font-size: 11px; margin-left: 35px"
+      ><label class="rounded-square"  style="color: transparent">X</label
+      ><span style="margin-left: 10px"
+        >Wagner David Campos - Supervisor de Apoio Operacional - GAOPE</span
+      ></span
+    >
+  </div>
+  <div>
+    <span style="font-size: 11px; margin-left: 35px"
+      ><label class="rounded-square"  style="color: transparent">X</label>
+      <span style="margin-left: 10px"
+        >Data de Conferência na Garagem:
+      </span></span
+    >
+    <span style="margin-left: 5px; font-weight: 500"
+      >{{ dataConferencia }}
+    </span>
+  </div>
+  <br />
+  <br />
+  <!-- <mat-divider
+    style="width: 710px; margin: 0 auto; margin-bottom: 10px; box-shadow: 0 0 0 0.1 rgb(77, 76, 76);"
+  ></mat-divider> -->
+  <div
+    style="border: 1px solid rgb(197, 193, 193); width: 710px; margin: 0 auto"
+  >
+    <div style="display: flex; justify-content: center; margin: 0 auto">
+      <h3 style="margin: 0 auto; margin-bottom: 20px; font-size: 12px">
+        <b><u>Números das notificações</u></b>
+      </h3>
+    </div>
+    <div
+      style="
+        width: 710px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        display: inline-block;
+      "
+    >
+      <span
+        *ngFor="
+          let irregularidade of numeroNotificacoesProtocolo;
+          let i = index
+        "
+        style="
+          font-size: 12px;
+          margin-bottom: 15px;
+          display: inline-block;
+          padding-left: 25px;
+        "
+        ><b
+          ><u>{{ i + 1 }}-{{ irregularidade }} </u></b
+        ></span
+      >
+    </div>
+  </div>
+  <!-- <mat-divider
+    style="width: 710px; margin: 0 auto; margin-top: 20px; margin-bottom: 40px; box-shadow: 0 0 0 0.1 rgb(77, 76, 76);"
+  ></mat-divider> -->
+  <div
+    style="
+      display: flex;
+      justify-content: space-around;
+      font-size: 10px;
+      width: 710px;
+      margin: 0 auto;
+      margin-top: 50px;
+    "
+  >
+    <span>Nome Legível _____________________________ </span>
+    <span>Assinatura: ______________________</span>
+
+    <span>Data: _____/ _____/ ________ </span
+    ><span style="font-size: 10px">Telefone __________________</span>
+  </div>
+  <div
+    style="
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-around;
+      width: 710px;
+    "
+  ></div>
+  <div style="margin-top: 50px; display: flex; justify-content: center">
+    <span style="font-size: 12px; margin-left: 35px"
+      ><span>Atenciosamente, </span></span
+    >
+  </div>
+  <div style="margin-top: 25px; display: flex; justify-content: center">
+    <span style="font-size: 15px; margin-left: 35px"
+      ><span>_________________________________________ </span></span
+    >
+  </div>
+  <div style="margin-top: 5px; display: flex; justify-content: center">
+    <span style="font-size: 12px; margin-left: 35px"
+      ><span><b>Júnio Eduardo de Souza </b></span></span
+    >
+  </div>
+  <div style="margin-top: -3px; display: flex; justify-content: center">
+    <span style="font-size: 10px; margin-left: 35px"
+      ><span>Técnico de Transportes e Trânsito </span></span
+    >
+  </div>
+  <!-- <div
+    style="
+      margin: 50px 0px 0px 40px;
+      display: flex;
+      justify-content: center;
+      width: 710px;
+    "
+  >
+    <span style="font-size: 12px"
+      >. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    </span>
+  </div> -->
+  <div style="margin-top: 60px; display: flex; justify-content: center">
+    <span style="font-size: 15px; margin-left: 35px"
+      ><span>_________________________________________ </span></span
+    >
+  </div>
+  <div style="margin-top: 5px; display: flex; justify-content: center">
+    <span style="font-size: 12px; margin-left: 35px"
+      ><span><b>Péricles Simbera Santos - 1197</b> </span></span
+    >
+  </div>
+  <div style="margin-top: -3px; display: flex; justify-content: center">
+    <span style="font-size: 10px; margin-left: 35px"
+      ><span>Gerente de Ação Regional Barreiro/Oeste - GARBO </span></span
+    >
+  </div>
+  <div style="margin-top: -5px; display: flex; justify-content: center">
+    <span style="font-size: 10px; margin-left: 35px"
+      ><span
+        >Empresa de Transportes e Trânsito de Belo Horizonte S/A - BHTRANS
+      </span></span
+    >
+  </div>
+
+  <div class="footer">
+    <div class="centralizar">
+      <span style="font-size: 5px"
+        ><b
+          >________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</b
         >
       </span>
     </div>

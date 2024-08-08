@@ -1,9 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 import { Router } from '@angular/router';
-import { ExportarVeiculos } from '../../veiculosParaFirestore';
-import { VeiculoService } from '../veiculo/veiculo.service';
-import { IVeiculos } from '../../interface/veiculo';
+import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +11,10 @@ import { IVeiculos } from '../../interface/veiculo';
 })
 export class HomeComponent {
   private route = inject(Router);
-  private veiculoService = inject(VeiculoService);
-  exportarVeiculos = inject(ExportarVeiculos);
-  veiculos2: IVeiculos = this.exportarVeiculos as unknown as IVeiculos;
 
   constructor() {}
   sair() {
+    sessionStorage.removeItem('isAuthenticated');
     this.route.navigate(['login']);
   }
   agente() {

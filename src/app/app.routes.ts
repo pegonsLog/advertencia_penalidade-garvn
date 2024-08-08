@@ -1,4 +1,4 @@
-import { Routes, CanActivateFn } from '@angular/router';
+import { Routes } from '@angular/router';
 import { canActivateGuard } from './guard/can-activate.guard';
 
 export const routes: Routes = [
@@ -24,6 +24,7 @@ export const routes: Routes = [
       import('./componentes/parametros/parametros.component').then(
         (m) => m.ParametrosComponent
       ),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'userLista',
@@ -31,6 +32,7 @@ export const routes: Routes = [
       import('./user/user-list/user-list.component').then(
         (m) => m.UserListComponent
       ),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'userForm',
@@ -38,6 +40,7 @@ export const routes: Routes = [
       import('./user/user-form/user-form.component').then(
         (m) => m.UserFormComponent
       ),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'consorcioLista',
@@ -45,6 +48,7 @@ export const routes: Routes = [
       import(
         './componentes/consorcio/consorcio-lista/consorcio-lista.component'
       ).then((m) => m.ConsorcioListaComponent),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'consorcioForm',
@@ -52,6 +56,7 @@ export const routes: Routes = [
       import(
         './componentes/consorcio/consorcio-form/consorcio-form.component'
       ).then((m) => m.ConsorcioFormComponent),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'fiscalizacaoLista',
@@ -59,6 +64,7 @@ export const routes: Routes = [
       import(
         './componentes/fiscalizacao/fiscalizacao-lista/fiscalizacao-lista.component'
       ).then((m) => m.FiscalizacaoListaComponent),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'fiscalizacaoForm',
@@ -66,6 +72,7 @@ export const routes: Routes = [
       import(
         './componentes/fiscalizacao/fiscalizacao-form/fiscalizacao-form.component'
       ).then((m) => m.FiscalizacaoFormComponent),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'infracaoForm',
@@ -73,6 +80,7 @@ export const routes: Routes = [
       import(
         './componentes/infracao/infracao-form/infracao-form.component'
       ).then((m) => m.InfracaoFormComponent),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'infracaoLista',
@@ -80,6 +88,7 @@ export const routes: Routes = [
       import(
         './componentes/infracao/infracao-lista/infracao-lista.component'
       ).then((m) => m.InfracaoListaComponent),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'irregularidadeAdicionar',
@@ -87,6 +96,7 @@ export const routes: Routes = [
       import(
         './componentes/irregularidade/irregularidade-adicionar/irregularidade-adicionar.component'
       ).then((m) => m.IrregularidadeAdicionarComponent),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'irregularidadeAlterar',
@@ -94,13 +104,15 @@ export const routes: Routes = [
       import(
         './componentes/irregularidade/irregularidade-alterar/irregularidade-alterar.component'
       ).then((m) => m.IrregularidadeAlterarComponent),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'irregularidadeLista',
     loadComponent: () =>
       import(
-        './componentes/irregularidade/irregularidade-lista/irregularidade-lista.component'
+        '/home/pegons/apps/advertencia-penalidade/src/app/componentes/irregularidade/irregularidade-lista/irregularidade-lista.component'
       ).then((m) => m.IrregularidadeListaComponent),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'linhaForm',
@@ -108,6 +120,7 @@ export const routes: Routes = [
       import('./componentes/linha/linha-form/linha-form.component').then(
         (m) => m.LinhaFormComponent
       ),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'linhaLista',
@@ -115,6 +128,7 @@ export const routes: Routes = [
       import('./componentes/linha/linha-lista/linha-lista.component').then(
         (m) => m.LinhaListaComponent
       ),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'veiculoForm',
@@ -122,6 +136,7 @@ export const routes: Routes = [
       import('./componentes/veiculo/veiculo-form/veiculo-form.component').then(
         (m) => m.VeiculoFormComponent
       ),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'veiculoLista',
@@ -129,6 +144,7 @@ export const routes: Routes = [
       import(
         './componentes/veiculo/veiculo-lista/veiculo-lista.component'
       ).then((m) => m.VeiculoListaComponent),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'agenteForm',
@@ -136,6 +152,7 @@ export const routes: Routes = [
       import('./componentes/agente/agente-form/agente-form.component').then(
         (m) => m.AgenteFormComponent
       ),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'agenteLista',
@@ -143,6 +160,7 @@ export const routes: Routes = [
       import('./componentes/agente/agente-lista/agente-lista.component').then(
         (m) => m.AgenteListaComponent
       ),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'imprimir',
@@ -150,6 +168,7 @@ export const routes: Routes = [
       import('./componentes/imprimir/imprimir.component').then(
         (m) => m.ImprimirComponent
       ),
+    canActivate: [canActivateGuard],
   },
   {
     path: 'imprimirProtocolo',
@@ -157,5 +176,6 @@ export const routes: Routes = [
       import(
         './componentes/imprimir-protocolo/imprimir-protocolo.component'
       ).then((m) => m.ImprimirProtocoloComponent),
+    canActivate: [canActivateGuard],
   },
 ];

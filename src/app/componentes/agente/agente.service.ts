@@ -11,14 +11,12 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { IAgente, IAgentes } from '../../interface/agente';
-import { ExportarAgentes } from '../../agenteParaFirestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AgenteService {
   firestore: Firestore = inject(Firestore);
-  exportarFirestore: ExportarAgentes = inject(ExportarAgentes);
 
   agentes: IAgentes = [];
   agente: IAgente = {
@@ -63,9 +61,5 @@ export class AgenteService {
     let $agenteRef = doc(this.firestore, 'agentes', id);
 
     return deleteDoc($agenteRef);
-  }
-
-  loadAgentes(): IAgentes {
-    return this.exportarFirestore.agentes;
   }
 }

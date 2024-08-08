@@ -13,15 +13,28 @@ import { AngularMaterialModule } from '../../shared/angular-material/angular-mat
 export class ImprimirProtocoloComponent {
   #activatedRoute = inject(ActivatedRoute);
   numeroNotificacoesProtocolo: string[] = [];
+  numeroNotificacaoProtocoloUnitaria: string[] = [];
   dataProtocolo: Date = new Date();
   dataCabecalho: string = '';
   ordem: number = 0;
+  dataConferencia: string = '';
 
   constructor() {
     const dataEmissaoProtocolo = new Date();
     this.dataCabecalho = this.formatarData(dataEmissaoProtocolo);
-    this.numeroNotificacoesProtocolo =
-      this.#activatedRoute.snapshot.queryParams['protocolosNotificacao'];
+    const tipo = this.#activatedRoute.snapshot.queryParams['tipo'];
+
+    if (tipo === 'porLote') {
+      this.numeroNotificacoesProtocolo =
+        this.#activatedRoute.snapshot.queryParams['protocolosNotificacao'];
+    }
+    if (tipo === 'unitaria') {
+      this.numeroNotificacoesProtocolo.push(
+        this.#activatedRoute.snapshot.queryParams['protocolosNotificacao']
+      );
+    }
+    this.dataConferencia =
+      this.#activatedRoute.snapshot.queryParams['dataConferencia'];
   }
 
   formatarData(data: Date) {

@@ -20,12 +20,21 @@ import {
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { IrregularidadeService } from '../irregularidade.service';
+import { FormsModule } from '@angular/forms';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-irregularidade-lista',
   standalone: true,
-  imports: [AngularMaterialModule, MatSortModule, CommonModule],
-  providers: [DatePipe],
+  imports: [
+    AngularMaterialModule,
+    MatSortModule,
+    CommonModule,
+    FormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
+  ],
+  providers: [DatePipe, provideNgxMask()],
   templateUrl: './irregularidade-lista.component.html',
   styleUrl: './irregularidade-lista.component.scss',
 })
@@ -40,6 +49,8 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   dataFim: string = '';
   tipo: string = '';
   numNotificacao: string = '';
+  porNumero: string = '';
+  porPeriodo: string = '';
 
   filtradas: IIrregularidades = [];
   notificacoesProtocolo: string[] = [];
@@ -84,6 +95,7 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   ];
   dataSource = new MatTableDataSource(this.irregularidades);
   contador = 0;
+  dataConferencia: string = '';
 
   subscription: Subscription = new Subscription();
 
@@ -94,20 +106,21 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   }
 
   constructor() {
-    const porNumero = this.#activatedRoute.snapshot.queryParams['ehPorNumero'];
-    const porPeriodo =
-      this.#activatedRoute.snapshot.queryParams['ehPorPeriodo'];
+
+    this.porNumero = this.#activatedRoute.snapshot.queryParams['ehPorNumero'];
+    this.porPeriodo = this.#activatedRoute.snapshot.queryParams['ehPorPeriodo'];
+
     this.dataFim = this.#activatedRoute.snapshot.queryParams['dataFim'];
     this.dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
     this.numNotificacao =
       this.#activatedRoute.snapshot.queryParams['numeroNotificacao'];
 
-    if (porNumero) {
+    if (this.porNumero) {
       this.carregarListaPorNumeroNotificacao(this.numNotificacao);
       return;
     }
 
-    if (porPeriodo) {
+    if (this.porPeriodo) {
       this.#irregularidadeService
         .list()
         .pipe(
@@ -138,24 +151,46 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     this.#route.navigate(['irregularidadeAdicionar']);
   }
 
-  edit(numeroNotificacao: string) {
+  edit(id: string) {
     this.#route.navigate(['irregularidadeAlterar'], {
-      queryParams: { numeroNotificacao: numeroNotificacao },
+      queryParams: { id: id},
     });
   }
 
   delete(id: string) {
+
     const dialogReference = this.dialog.open(ConfirmationDialogComponent);
     this.subscription = dialogReference.afterClosed().subscribe(() =>
       this.#irregularidadeService
         .deleteIrregularidade(id)
         .then(() => {
-          this.#route.navigate(['parametros']);
-        })
+          this.filtradas = [];
+          this.#irregularidadeService
+          .list()
+          .pipe(
+            map((irregs: IIrregularidades) =>
+              irregs.forEach((irreg: IIrregularidade) => {
+                if (
+                  this.formatDate(irreg.dataIrregularidade) >=
+                    this.formatDate(this.dataInicio) &&
+                  this.formatDate(irreg.dataIrregularidade) <=
+                    this.formatDate(this.dataFim)
+                ) {
+                  this.filtradas.push(irreg);
+                }
+              })
+            )
+          )
+          .subscribe(() => {
+            this.dataSource = new MatTableDataSource(this.filtradas);
+            this.contador = this.filtradas.length;
+            this.isLoading = false;
+          });
+})
         .catch((err) => {
-          console.log(err);
+          console.log(err)
         })
-    );
+    )
   }
 
   voltar() {
@@ -184,7 +219,7 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     window.open(url, '_blank');
   }
   imprimirUma(numeroNotificacao: string) {
-      const url = this.#route.serializeUrl(
+    const url = this.#route.serializeUrl(
       this.#route.createUrlTree(['imprimir'], {
         queryParams: { numeroNotificacao: numeroNotificacao, tipo: 'unitaria' },
       })
@@ -225,7 +260,27 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     }
     const url = this.#route.serializeUrl(
       this.#route.createUrlTree(['imprimirProtocolo'], {
-        queryParams: { protocolosNotificacao: this.notificacoesProtocolo },
+        queryParams: {
+          protocolosNotificacao: this.notificacoesProtocolo,
+          dataConferencia: this.dataConferencia,
+          tipo: 'porLote'
+        },
+      })
+    );
+    window.open(url, '_blank');
+    this.notificacoesProtocolo = [];
+  }
+  imprimirProtocoloUnitaria() {
+    const notific: string =
+      this.#activatedRoute.snapshot.queryParams['numeroNotificacao'];
+    this.notificacoesProtocolo.push(notific);
+    const url = this.#route.serializeUrl(
+      this.#route.createUrlTree(['imprimirProtocolo'], {
+        queryParams: {
+          protocolosNotificacao: this.notificacoesProtocolo,
+          dataConferencia: this.dataConferencia,
+          tipo: 'unitaria'
+        },
       })
     );
     window.open(url, '_blank');

@@ -12,11 +12,6 @@
       <mat-toolbar id="toolbar" color="primary"
         >Irregularidade
 
-        <span>
-          <button (click)="add()" id="mat-button-custom-adm">
-            <span class="material-symbols-outlined new"> add </span>
-          </button>
-        </span>
       </mat-toolbar>
     </mat-card-header>
     <mat-card-content>
@@ -142,7 +137,7 @@
                     </span>
                   </button>
                   <button
-                    (click)="edit(irregularidade.numeroIrregularidade)"
+                    (click)="edit(irregularidade.id)"
                     id="mat-button-custom"
                   >
                     <span class="material-symbols-outlined" id="edit">
@@ -193,7 +188,7 @@
           VOLTAR
         </button>
 
-        <button
+        @if(porPeriodo) { <button
           style="
             margin: 10px 8px;
             background-color: rgb(63, 154, 196);
@@ -204,7 +199,6 @@
         >
           IMPRIMIR NOTIFICAÇÕES
         </button>
-
         <button
           style="
             margin: 10px 8px;
@@ -217,6 +211,33 @@
         >
           IMPRIMIR PROTOCOLO
         </button>
+      }
+
+      @if(porNumero){
+        <button
+        style="
+          margin: 10px 8px;
+          background-color: rgb(63, 154, 196);
+          color: white;
+
+        "
+        (click)="imprimirProtocoloUnitaria()"
+        mat-raised-button
+      >
+        IMPRIMIR PROTOCOLO UNITÁRIA
+      </button>
+      }
+
+      <mat-form-field style="margin-left: 10px; height: 70px;">
+
+        <input  matInput
+        placeholder="Data da Conferência"
+        type="text"
+        mask="d0/M0/0000"
+        [dropSpecialCharacters]="false"
+        [(ngModel)]="dataConferencia"
+        >
+      </mat-form-field>
       </div>
       <div class="contador">
         <span

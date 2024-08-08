@@ -67,8 +67,11 @@ export class IrregularidadeService {
       'irregularidades',
       id
     );
+    try {
     await updateDoc($irregularidadeRef, {
       numeroIrregularidade: irregularidade.numeroIrregularidade,
+      matriculaAgente: irregularidade.matriculaAgente,
+      matAgenteConferente: irregularidade.matAgenteConferente,
       dataIrregularidade: irregularidade.dataIrregularidade,
       horario: irregularidade.horario,
       local: irregularidade.local,
@@ -79,7 +82,11 @@ export class IrregularidadeService {
       numeroConsorcio: irregularidade.numeroConsorcio,
       numeroLinha: irregularidade.numeroLinha,
       numeroVeiculo: irregularidade.numeroVeiculo,
-    });
+      dataEmissao: irregularidade.dataEmissao,
+      prazoCumprimentoConferencia: irregularidade.prazoCumprimentoConferencia
+    })}catch (error) {
+      console.error("Erro ao atualizar documento:", error);
+    }
   }
 
   async deleteIrregularidade(id: string) {
