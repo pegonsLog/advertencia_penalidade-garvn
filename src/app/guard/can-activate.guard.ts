@@ -6,7 +6,7 @@ export const canActivateGuard: CanActivateFn = (route, state) => {
   const t = inject(Router);
 
 
-  const isAuthenticated = sessionStorage.getItem('isAuthenticated') === 'true';
+  const isAuthenticated = sessionStorage.getItem('isAuthenticated');
 
   if (isAuthenticated) {
     return true;
