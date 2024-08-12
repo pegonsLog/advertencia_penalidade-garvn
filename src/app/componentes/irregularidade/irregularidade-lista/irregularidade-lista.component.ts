@@ -112,10 +112,10 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
 
     this.dataFim = this.#activatedRoute.snapshot.queryParams['dataFim'];
     this.dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
-    this.numNotificacao =
-      this.#activatedRoute.snapshot.queryParams['numeroNotificacao'];
 
     if (this.porNumero) {
+      this.numNotificacao =
+        this.#activatedRoute.snapshot.queryParams['numeroNotificacao'];
       this.carregarListaPorNumeroNotificacao(this.numNotificacao);
       return;
     }
@@ -255,13 +255,15 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   }
 
   imprimirProtocolo() {
+
     for (let f of this.filtradas) {
       this.notificacoesProtocolo.push(f.numeroIrregularidade);
     }
     const url = this.#route.serializeUrl(
       this.#route.createUrlTree(['imprimirProtocolo'], {
         queryParams: {
-          protocolosNotificacao: this.notificacoesProtocolo,
+          dataInicio: this.dataInicio,
+          dataFim: this.dataFim,
           dataConferencia: this.dataConferencia,
           tipo: 'porLote'
         },
@@ -271,7 +273,7 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     this.notificacoesProtocolo = [];
   }
   imprimirProtocoloUnitaria() {
-    const notific: string =
+    const notific: any =
       this.#activatedRoute.snapshot.queryParams['numeroNotificacao'];
     this.notificacoesProtocolo.push(notific);
     const url = this.#route.serializeUrl(
