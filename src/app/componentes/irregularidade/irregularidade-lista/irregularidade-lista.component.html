@@ -24,7 +24,7 @@
           <mat-spinner></mat-spinner>
         </div>
         <ng-template #dataContent>
-          <table mat-table [dataSource]="dataSource">
+          <table #myDiv mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="numeroIrregularidade">
               <th mat-header-cell *matHeaderCellDef>Número</th>
               <td mat-cell *matCellDef="let irregularidade">

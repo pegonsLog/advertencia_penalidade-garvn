@@ -1,6 +1,7 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import {
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -53,9 +54,9 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   porPeriodo: string = '';
 
   filtradas: IIrregularidades = [];
-  notificacoesProtocolo: string[] = [];
-
   irregularidades: IIrregularidades = [];
+
+  notificacoesProtocolo: string[] = [];
 
   irregularidade = signal<IIrregularidade>({
     id: '',
@@ -99,14 +100,8 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
 
   subscription: Subscription = new Subscription();
 
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator | null = null;
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
 
   constructor() {
-
     this.porNumero = this.#activatedRoute.snapshot.queryParams['ehPorNumero'];
     this.porPeriodo = this.#activatedRoute.snapshot.queryParams['ehPorPeriodo'];
 
@@ -132,14 +127,13 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
                 this.formatDate(irreg.dataIrregularidade) <=
                   this.formatDate(this.dataFim)
               ) {
-                this.filtradas.push(irreg);
+                this.dataSource.data.push(irreg);
               }
             })
           )
         )
         .subscribe(() => {
-          this.dataSource = new MatTableDataSource(this.filtradas);
-          this.contador = this.filtradas.length;
+          this.contador = this.dataSource.data.length;
           this.isLoading = false;
         });
     }
@@ -152,13 +146,20 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   }
 
   edit(id: string) {
+    this.dataSource.data = [];
     this.#route.navigate(['irregularidadeAlterar'], {
-      queryParams: { id: id},
+      queryParams: {
+        id: id,
+        dataInicio: this.dataInicio,
+        dataFim: this.dataFim,
+        tipo: 'lote',
+        ehPorPeriodo: this.porPeriodo,
+        ehPorNumero: this.porNumero,
+      },
     });
   }
 
   delete(id: string) {
-
     const dialogReference = this.dialog.open(ConfirmationDialogComponent);
     this.subscription = dialogReference.afterClosed().subscribe(() =>
       this.#irregularidadeService
@@ -166,35 +167,40 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
         .then(() => {
           this.filtradas = [];
           this.#irregularidadeService
-          .list()
-          .pipe(
-            map((irregs: IIrregularidades) =>
-              irregs.forEach((irreg: IIrregularidade) => {
-                if (
-                  this.formatDate(irreg.dataIrregularidade) >=
-                    this.formatDate(this.dataInicio) &&
-                  this.formatDate(irreg.dataIrregularidade) <=
-                    this.formatDate(this.dataFim)
-                ) {
-                  this.filtradas.push(irreg);
-                }
-              })
+            .list()
+            .pipe(
+              map((irregs: IIrregularidades) =>
+                irregs.forEach((irreg: IIrregularidade) => {
+                  if (
+                    this.formatDate(irreg.dataIrregularidade) >=
+                      this.formatDate(this.dataInicio) &&
+                    this.formatDate(irreg.dataIrregularidade) <=
+                      this.formatDate(this.dataFim)
+                  ) {
+                    this.filtradas.push(irreg);
+                  }
+                })
+              )
             )
-          )
-          .subscribe(() => {
-            this.dataSource = new MatTableDataSource(this.filtradas);
-            this.contador = this.filtradas.length;
-            this.isLoading = false;
-          });
-})
-        .catch((err) => {
-          console.log(err)
+            .subscribe(() => {
+              this.dataSource = new MatTableDataSource(this.filtradas);
+              this.contador = this.filtradas.length;
+              this.isLoading = false;
+            });
         })
-    )
+        .catch((err) => {
+          console.log(err);
+        })
+    );
   }
 
   voltar() {
     this.#route.navigate(['parametros']);
+  }
+
+  limpar(){
+    this.filtradas = [];
+    this.dataSource = new MatTableDataSource(this.irregularidades);
   }
 
   applyFilter(event: Event) {
@@ -204,6 +210,7 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
+    this.limpar();
     this.subscription.unsubscribe();
   }
   imprimir() {
@@ -255,7 +262,6 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   }
 
   imprimirProtocolo() {
-
     for (let f of this.filtradas) {
       this.notificacoesProtocolo.push(f.numeroIrregularidade);
     }
@@ -265,7 +271,7 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
           dataInicio: this.dataInicio,
           dataFim: this.dataFim,
           dataConferencia: this.dataConferencia,
-          tipo: 'porLote'
+          tipo: 'porLote',
         },
       })
     );
@@ -281,7 +287,7 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
         queryParams: {
           protocolosNotificacao: this.notificacoesProtocolo,
           dataConferencia: this.dataConferencia,
-          tipo: 'unitaria'
+          tipo: 'unitaria',
         },
       })
     );

@@ -9,7 +9,7 @@ import {
   docData,
   updateDoc
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import {
   IIrregularidade,
   IIrregularidades,
@@ -61,14 +61,13 @@ export class IrregularidadeService {
     return addDoc($irregularidadeRef, irregularidade);
   }
 
-  async updateIrregularidade(id: string, irregularidade: IIrregularidade) {
+  updateIrregularidade(id: string, irregularidade: IIrregularidade): Observable<void> {
     const $irregularidadeRef = doc(
       this.firestore,
       'irregularidades',
       id
     );
-    try {
-    await updateDoc($irregularidadeRef, {
+  return from(updateDoc($irregularidadeRef, {
       numeroIrregularidade: irregularidade.numeroIrregularidade,
       matriculaAgente: irregularidade.matriculaAgente,
       matAgenteConferente: irregularidade.matAgenteConferente,
@@ -84,9 +83,7 @@ export class IrregularidadeService {
       numeroVeiculo: irregularidade.numeroVeiculo,
       dataEmissao: irregularidade.dataEmissao,
       prazoCumprimentoConferencia: irregularidade.prazoCumprimentoConferencia
-    })}catch (error) {
-      console.error("Erro ao atualizar documento:", error);
-    }
+    }))
   }
 
   async deleteIrregularidade(id: string) {
@@ -94,28 +91,4 @@ export class IrregularidadeService {
 
     return deleteDoc($irregularidadeRef);
   }
-
-  // padWithZeros(numeroNotificacao: string): any {
-  //   const ano = new Date();
-  //   // Converter o número para string
-  //   let numberStr = numeroNotificacao
-
-  //   // Verificar se o número está entre 0 e 9999999
-  //   if (/^\d{1,7}$/.test(numberStr)) {
-  //       // Preencher com zeros à esquerda até ter 7 dígitos
-  //       return ano.getFullYear() + numberStr.padStart(7, '0')
-  //   } else {
-  //       alert("Número fora do intervalo permitido (0-9999999)");
-  //   }
-  // }
-
-  // carregarListaPorPeriodoNotificacoes() {
-  //   // const dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
-
-  //   // const dataFim = this.#activatedRoute.snapshot.queryParams['dataFim'];
-
-
-  // }
-
-
 }

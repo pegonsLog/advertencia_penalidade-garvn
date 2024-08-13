@@ -1,25 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import {
-  ReactiveFormsModule,
-  FormsModule,
-  Validators,
-  FormGroup,
   FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
-import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
+import { Subscription } from 'rxjs';
 import { IAgentes } from '../../../interface/agente';
 import { IConsorcios } from '../../../interface/consorcio';
-import { IVeiculos } from '../../../interface/veiculo';
 import { IInfracoes } from '../../../interface/infracao';
-import { ILinhas } from '../../../interface/linha';
 import {
   IIrregularidade,
-  IIrregularidades,
+  IIrregularidades
 } from '../../../interface/irregularidade';
-import { Subscription } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ILinhas } from '../../../interface/linha';
+import { IVeiculos } from '../../../interface/veiculo';
+import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { AgenteService } from '../../agente/agente.service';
 import { ConsorcioService } from '../../consorcio/consorcio.service';
 import { InfracaoService } from '../../infracao/infracao.service';
@@ -85,6 +85,11 @@ export class IrregularidadeAlterarComponent {
 
   // typeForm = signal<string>('');
   numeroUltimaIrregularidade: number = 0;
+  dataInicio: string = '';
+  dataFim: string = '';
+  numNotificacao: string = '';
+  porPeriodo: string = '';
+  porNumero: string = '';
 
   id = signal<string>('');
 
@@ -112,15 +117,18 @@ export class IrregularidadeAlterarComponent {
 
   constructor() {
     this.irregularidade.id = this.#activatedRoute.snapshot.queryParams['id'];
-    // this.irregularidade.id = this.#activatedRoute.snapshot.queryParams['id'];
+    this.dataInicio = this.#activatedRoute.snapshot.queryParams['dataInicio'];
+    this.dataFim = this.#activatedRoute.snapshot.queryParams['dataFim'];
+    this.porPeriodo = this.#activatedRoute.snapshot.queryParams['ehPorPeriodo'];
+    this.porNumero = this.#activatedRoute.snapshot.queryParams['ehPorNumero'];
 
     this.subscription = this.#veiculoService
-    .list()
-    .subscribe((veiculos: IVeiculos) => {
-      for (let v of veiculos) {
-        this.veiculos.push(v);
-      }
-    });
+      .list()
+      .subscribe((veiculos: IVeiculos) => {
+        for (let v of veiculos) {
+          this.veiculos.push(v);
+        }
+      });
 
     if (this.#activatedRoute.snapshot.queryParams['id']) {
       // this.typeForm.set('edit');
@@ -151,7 +159,10 @@ export class IrregularidadeAlterarComponent {
               result.prazoCumprimentoConferencia,
               Validators.required,
             ],
-            matAgenteConferente: [result.matAgenteConferente, Validators.required],
+            matAgenteConferente: [
+              result.matAgenteConferente,
+              Validators.required,
+            ],
           });
           this.validarAgente();
           this.validarLinha();
@@ -163,22 +174,35 @@ export class IrregularidadeAlterarComponent {
   }
 
   onUpdate() {
-    this.#irregularidadeService
+    this.subscription = this.#irregularidadeService
       .updateIrregularidade(
         this.irregularidade.id,
         this.irregularidadeForm.getRawValue()
       )
-      .then(() => {
-        this.#route.navigate(['parametros']);
+      .subscribe(() => {
         alert('Registro atualizado com sucesso!');
-      })
-      .catch((error) => {
-        console.error('Erro ao adicionar irregularidade:', error);
-        alert('Erro ao alterar o registro');
+        this.#route.navigate(['irregularidadeLista'], {
+          queryParams: {
+            ehPorPeriodo: this.porPeriodo,
+            ehPorNumero: this.porNumero,
+            dataInicio: this.dataInicio,
+            dataFim: this.dataFim,
+            numeroNotificacao: this.irregularidadeForm.getRawValue().numeroIrregularidade,
+          },
+        });
+
       });
+
   }
   voltar() {
-    this.#route.navigate(['home']);
+    this.#route.navigate(['irregularidadeLista'], {
+      queryParams: {
+        ehPorPeriodo: this.porPeriodo,
+        ehPorNumero: this.porNumero,
+        dataInicio: this.dataInicio,
+        dataFim: this.dataFim,
+      },
+    });
   }
 
   ngOnInit() {}
