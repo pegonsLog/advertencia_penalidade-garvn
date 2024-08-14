@@ -51,6 +51,7 @@ export class VeiculoListaComponent implements OnDestroy {
     placa: '',
     tipo: '',
     operadora: '',
+    consorcio: '',
   });
 
   constructor() {

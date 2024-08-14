@@ -5,4 +5,5 @@ export interface IVeiculo {
   placa: string;
   tipo: string;
   operadora: string;
+  consorcio: string;
 }

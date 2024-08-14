@@ -72,7 +72,6 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     prazoCumprimentoConferencia: '',
     matAgenteConferente: '',
     codigoInfracao: '',
-    numeroConsorcio: '',
     numeroLinha: '',
     numeroVeiculo: '',
   });

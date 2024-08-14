@@ -32,7 +32,8 @@ export class VeiculoFormComponent implements OnDestroy {
     numeroVeiculo: '',
     placa: '',
     tipo: '',
-    operadora: ''
+    operadora: '',
+    consorcio: '',
   });
 
   constructor() {

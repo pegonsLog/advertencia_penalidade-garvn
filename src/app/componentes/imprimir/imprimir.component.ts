@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Subscription } from 'rxjs';
-import { IConsorcio, IConsorcios } from '../../interface/consorcio';
 import { IInfracao, IInfracoes } from '../../interface/infracao';
 import {
   IIrregularidade,
@@ -12,7 +11,6 @@ import { ILinha, ILinhas } from '../../interface/linha';
 import { IVeiculo, IVeiculos } from '../../interface/veiculo';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 import { AgenteService } from '../agente/agente.service';
-import { ConsorcioService } from '../consorcio/consorcio.service';
 import { InfracaoService } from '../infracao/infracao.service';
 import { IrregularidadeService } from '../irregularidade/irregularidade.service';
 import { LinhaService } from '../linha/linha.service';
@@ -31,7 +29,6 @@ export class ImprimirComponent implements OnDestroy {
   #linhaService = inject(LinhaService);
   #infracaoService = inject(InfracaoService);
   #veiculoService = inject(VeiculoService);
-  #consorcioService = inject(ConsorcioService);
   #agenteService = inject(AgenteService);
   #activatedRoute = inject(ActivatedRoute);
 
@@ -83,7 +80,6 @@ export class ImprimirComponent implements OnDestroy {
                 this.validarLinha(irreg.numeroLinha);
                 this.validarInfracao(irreg.codigoInfracao);
                 this.validarVeiculo(irreg.numeroVeiculo);
-                this.validarConsorcio(irreg.numeroConsorcio);
               }
             })
           )
@@ -110,7 +106,6 @@ export class ImprimirComponent implements OnDestroy {
                 this.validarLinha(irreg.numeroLinha);
                 this.validarInfracao(irreg.codigoInfracao);
                 this.validarVeiculo(irreg.numeroVeiculo);
-                this.validarConsorcio(irreg.numeroConsorcio);
               }
             })
           )
@@ -197,18 +192,4 @@ export class ImprimirComponent implements OnDestroy {
       .subscribe(() => {});
   }
 
-  validarConsorcio(numeroConsorcio: string) {
-    this.subscription = this.#consorcioService
-      .list()
-      .pipe(
-        map((consorcios: IConsorcios) =>
-          consorcios.forEach((consorcio: IConsorcio) => {
-            if (consorcio.numeroConsorcio == numeroConsorcio) {
-              this.nomeConsorcio = consorcio.nomeConsorcio;
-            }
-          })
-        )
-      )
-      .subscribe(() => {});
-  }
 }

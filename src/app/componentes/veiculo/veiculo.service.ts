@@ -25,6 +25,7 @@ export class VeiculoService {
     placa: '',
     tipo: '',
     operadora: '',
+    consorcio: ''
   };
   id: string = '';
 

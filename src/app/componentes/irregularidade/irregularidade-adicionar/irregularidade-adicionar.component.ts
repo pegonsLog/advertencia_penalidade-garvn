@@ -11,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { Subscription } from 'rxjs';
 import { IAgentes } from '../../../interface/agente';
-import { IConsorcios } from '../../../interface/consorcio';
 import { IInfracoes } from '../../../interface/infracao';
 import {
   IIrregularidade,
@@ -21,7 +20,6 @@ import { ILinhas } from '../../../interface/linha';
 import { IVeiculos } from '../../../interface/veiculo';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { AgenteService } from '../../agente/agente.service';
-import { ConsorcioService } from '../../consorcio/consorcio.service';
 import { InfracaoService } from '../../infracao/infracao.service';
 import { LinhaService } from '../../linha/linha.service';
 import { VeiculoService } from '../../veiculo/veiculo.service';
@@ -48,7 +46,6 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
   #linhaService = inject(LinhaService);
   #infracaoService = inject(InfracaoService);
   #veiculoService = inject(VeiculoService);
-  #consorcioService = inject(ConsorcioService);
   #agenteService = inject(AgenteService);
   #route = inject(Router);
   #activatedRoute = inject(ActivatedRoute);
@@ -56,13 +53,11 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
   linhaValidacao: string = '';
   infracaoValidacao: string = '';
   veiculoValidacao: string = '';
-  consorcioValidacao: string = '';
   agenteValidacao: string = '';
 
   condicaoValidacaoLinha: boolean = true;
   condicaoValidacaoInfracao: boolean = true;
   condicaoValidacaoVeiculo: boolean = true;
-  condicaoValidacaoConsorcio: boolean = true;
   condicaoValidacaoAgente: boolean = true;
 
   irregularidadeForm: FormGroup = this.#fb.group({
@@ -140,7 +135,6 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
             bairro: [result.bairro, Validators.required],
             descricao: [result.descricao, Validators.required],
             codigoInfracao: [result.codigoInfracao, Validators.required],
-            numeroConsorcio: [result.numeroConsorcio, Validators.required],
             numeroVeiculo: [result.numeroVeiculo, Validators.required],
             numeroLinha: [result.numeroLinha, Validators.required],
             dataEmissao: [result.dataEmissao, Validators.required],
@@ -157,7 +151,6 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
           this.validarLinha();
           this.validarInfracao();
           this.validarVeiculo();
-          this.validarConsorcio();
         });
     } else {
       this.subscription = this.#irregularidadeService
@@ -252,10 +245,6 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
       descricao: [irregularidadeIIrregularidade.descricao, Validators.required],
       numeroInfracao: [
         irregularidadeIIrregularidade.codigoInfracao,
-        Validators.required,
-      ],
-      numeroConsorcio: [
-        irregularidadeIIrregularidade.numeroConsorcio,
         Validators.required,
       ],
       numeroVeiculo: [
@@ -359,24 +348,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
     }
     this.veiculoValidacao = 'Veículo não cadastrado';
   }
-  validarConsorcio() {
-    const valorCampo = this.irregularidadeForm.get('numeroConsorcio')?.value;
-    this.condicaoValidacaoConsorcio = true;
 
-    this.subscription = this.#consorcioService
-      .list()
-      .subscribe((consorcios: IConsorcios) => {
-        for (let c of consorcios) {
-          if (c.numeroConsorcio == valorCampo) {
-            this.consorcioValidacao = c.nomeConsorcio;
-            this.condicaoValidacaoConsorcio = true;
-            return;
-          }
-          this.condicaoValidacaoConsorcio = false;
-        }
-        this.consorcioValidacao = 'Consórcio não cadastrado';
-      });
-  }
   validarAgente() {
     const valorCampo = this.irregularidadeForm.get('matriculaAgente')?.value;
     this.condicaoValidacaoAgente = true;

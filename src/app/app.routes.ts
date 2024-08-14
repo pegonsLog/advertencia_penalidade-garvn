@@ -43,22 +43,6 @@ export const routes: Routes = [
     canActivate: [canActivateGuard],
   },
   {
-    path: 'consorcioLista',
-    loadComponent: () =>
-      import(
-        './componentes/consorcio/consorcio-lista/consorcio-lista.component'
-      ).then((m) => m.ConsorcioListaComponent),
-    canActivate: [canActivateGuard],
-  },
-  {
-    path: 'consorcioForm',
-    loadComponent: () =>
-      import(
-        './componentes/consorcio/consorcio-form/consorcio-form.component'
-      ).then((m) => m.ConsorcioFormComponent),
-    canActivate: [canActivateGuard],
-  },
-  {
     path: 'fiscalizacaoLista',
     loadComponent: () =>
       import(

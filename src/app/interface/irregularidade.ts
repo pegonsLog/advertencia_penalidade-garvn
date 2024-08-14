@@ -13,7 +13,6 @@ export interface IIrregularidade {
   matAgenteConferente: string;
   matriculaAgente: string;
   codigoInfracao: string;
-  numeroConsorcio: string;
   numeroLinha: string;
   numeroVeiculo: string;
 }

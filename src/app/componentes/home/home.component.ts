@@ -32,9 +32,6 @@ export class HomeComponent {
   adicionarIrregularidade() {
     this.route.navigate(['irregularidadeAdicionar']);
   }
-  consorcio() {
-    this.route.navigate(['consorcioLista']);
-  }
   veiculo() {
     this.route.navigate(['veiculoLista']);
   }

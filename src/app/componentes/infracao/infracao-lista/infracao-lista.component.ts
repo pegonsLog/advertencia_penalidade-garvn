@@ -1,6 +1,8 @@
-import { CommonModule, NgIfContext } from '@angular/common';
-import { Component, OnDestroy, TemplateRef, ViewChild, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, ViewChild, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription, of } from 'rxjs';
@@ -8,8 +10,6 @@ import { IInfracao, IInfracoes } from '../../../interface/infracao';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { InfracaoService } from '../infracao.service';
-import { MatSortModule } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-infracao-lista',
