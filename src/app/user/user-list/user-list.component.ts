@@ -1,15 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, ViewChild, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IUsuario, IUsuarios } from '../../interface/usuario';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../shared/dialogs/confirmation/confirmation.component';
 import { UserService } from '../user.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { IFiscalizacao } from '../../interface/fiscalizacao';
 
 @Component({
   selector: 'app-user',

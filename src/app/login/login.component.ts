@@ -1,11 +1,10 @@
 import { Component, OnDestroy, inject, signal } from '@angular/core';
-import { AngularMaterialModule } from '../shared/angular-material/angular-material';
-import { routes } from '../app.routes';
-import { Router } from '@angular/router';
-import { UserService } from '../user/user.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IUsuario, IUsuarios } from '../interface/usuario';
-import { Subscription, map } from 'rxjs';
+import { AngularMaterialModule } from '../shared/angular-material/angular-material';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-login',
