@@ -23,9 +23,8 @@ export class VeiculoService {
     id: '',
     numeroVeiculo: '',
     placa: '',
-    tipo: '',
     operadora: '',
-    consorcio: ''
+    consorcio: '',
   };
   id: string = '';
 
@@ -53,8 +52,8 @@ export class VeiculoService {
     await updateDoc($veiculoRef, {
       numeroVeiculo: veiculo.numeroVeiculo,
       placa: veiculo.placa,
-      tipo: veiculo.tipo,
       operadora: veiculo.operadora,
+      consorcio: veiculo.consorcio,
     });
   }
 
@@ -63,4 +62,5 @@ export class VeiculoService {
 
     return deleteDoc($veiculoRef);
   }
+
 }

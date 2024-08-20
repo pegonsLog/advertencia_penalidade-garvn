@@ -1,15 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IAgente, IAgentes } from '../../../interface/agente';
+import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { AgenteService } from '../agente.service';
-import { MatSortModule } from '@angular/material/sort';
-import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-agente-lista',
@@ -93,9 +93,6 @@ export class AgenteListaComponent {
   voltar() {
     this.#route.navigate(['home']);
   }
-    expo() {
-    this.exportar()
-  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -106,9 +103,9 @@ export class AgenteListaComponent {
     this.subscription.unsubscribe();
   }
 
-  exportar() {
-    for (let agente of this.agentes) {
-      this.#agenteService.addAgente(agente).then(() => console.log(agente.matriculaAgenteFiscalizador));
-    }
-  }
+  // exportar() {
+  //   for (let agente of agenteExportar) {
+  //     this.#agenteService.addAgente(agente).then(() => console.log(agente.matriculaAgenteFiscalizador));
+  //   }
+  // }
 }

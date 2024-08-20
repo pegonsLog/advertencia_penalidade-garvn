@@ -6,10 +6,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IVeiculo, IVeiculos } from '../../../interface/veiculo';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { VeiculoService } from '../veiculo.service';
+import { IVeiculo, IVeiculos } from '../../../interface/veiculo';
 
 @Component({
   selector: 'app-veiculo-lista',
@@ -30,7 +30,7 @@ export class VeiculoListaComponent implements OnDestroy {
     'numeroVeiculo',
     'placa',
     'operadora',
-    'tipo',
+    'consorcio',
     'actions',
   ];
 
@@ -49,7 +49,6 @@ export class VeiculoListaComponent implements OnDestroy {
     id: '',
     numeroVeiculo: '',
     placa: '',
-    tipo: '',
     operadora: '',
     consorcio: '',
   });
@@ -70,7 +69,7 @@ export class VeiculoListaComponent implements OnDestroy {
 
   }
 
-  add(veiculo: IVeiculo) {
+  add() {
     this.#route.navigate(['veiculoForm']);
   }
   edit(id: string) {
@@ -111,7 +110,7 @@ export class VeiculoListaComponent implements OnDestroy {
   }
 
   // exportar() {
-  //   for (let veiculo of this.veiculos) {
+  //   for (let veiculo of veiculosExportar) {
   //     this.#veiculoService
   //       .addVeiculo(veiculo)
   //       .then(() => console.log(veiculo.numeroVeiculo));

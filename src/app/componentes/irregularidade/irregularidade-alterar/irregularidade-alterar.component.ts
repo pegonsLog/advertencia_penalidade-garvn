@@ -52,11 +52,13 @@ export class IrregularidadeAlterarComponent {
   linhaValidacao: string = '';
   infracaoValidacao: string = '';
   veiculoValidacao: string = '';
+  consorcioValidacao: string = '';
   agenteValidacao: string = '';
 
   condicaoValidacaoLinha: boolean = true;
   condicaoValidacaoInfracao: boolean = true;
   condicaoValidacaoVeiculo: boolean = true;
+  condicaoValidacaoConsorcio: boolean = true;
   condicaoValidacaoAgente: boolean = true;
 
   irregularidadeForm: FormGroup = this.#fb.group({
@@ -67,9 +69,8 @@ export class IrregularidadeAlterarComponent {
     local: ['', Validators.required],
     numeroLocal: ['', Validators.required],
     bairro: ['', Validators.required],
-    descricao: ['', Validators.required],
+    observacoes: [''],
     codigoInfracao: ['', Validators.required],
-    numeroConsorcio: ['', Validators.required],
     numeroVeiculo: ['', Validators.required],
     numeroLinha: ['', Validators.required],
     dataEmissao: ['', Validators.required],
@@ -97,9 +98,8 @@ export class IrregularidadeAlterarComponent {
     local: '',
     numeroLocal: '',
     bairro: '',
-    descricao: '',
+    observacoes: '',
     codigoInfracao: '',
-    numeroConsorcio: '',
     numeroLinha: '',
     numeroVeiculo: '',
     dataEmissao: '',
@@ -143,7 +143,7 @@ export class IrregularidadeAlterarComponent {
             local: [result.local, Validators.required],
             numeroLocal: [result.numeroLocal, Validators.required],
             bairro: [result.bairro, Validators.required],
-            descricao: [result.descricao, Validators.required],
+            observacoes: [result.observacoes],
             codigoInfracao: [result.codigoInfracao, Validators.required],
             numeroVeiculo: [result.numeroVeiculo, Validators.required],
             numeroLinha: [result.numeroLinha, Validators.required],
@@ -222,14 +222,11 @@ export class IrregularidadeAlterarComponent {
         Validators.required,
       ],
       bairro: [irregularidadeIIrregularidade.bairro, Validators.required],
-      descricao: [irregularidadeIIrregularidade.descricao, Validators.required],
+      observacoes: [irregularidadeIIrregularidade.observacoes],
       numeroInfracao: [
         irregularidadeIIrregularidade.codigoInfracao,
         Validators.required,
-      ],
-      numeroConsorcio: [
-        Validators.required,
-      ],
+      ],    
       numeroVeiculo: [
         irregularidadeIIrregularidade.numeroVeiculo,
         Validators.required,
@@ -269,9 +266,8 @@ export class IrregularidadeAlterarComponent {
       local: ['', Validators.required],
       numeroLocal: ['', Validators.required],
       bairro: ['', Validators.required],
-      descricao: ['', Validators.required],
+      observacoes: [''],
       codigoInfracao: ['', Validators.required],
-      numeroConsorcio: ['', Validators.required],
       numeroVeiculo: ['', Validators.required],
       numeroLinha: ['', Validators.required],
       dataEmissao: ['', Validators.required],
@@ -324,12 +320,15 @@ export class IrregularidadeAlterarComponent {
     for (let v of this.veiculos) {
       if (v.numeroVeiculo == valorCampo) {
         this.veiculoValidacao = v.placa;
+        this.consorcioValidacao = v.consorcio;
         this.condicaoValidacaoVeiculo = true;
         return;
       }
       this.condicaoValidacaoVeiculo = false;
+      this.condicaoValidacaoConsorcio = false;
     }
     this.veiculoValidacao = 'Veículo não cadastrado';
+    this.consorcioValidacao = 'Consorcio não cadastrado';
   }
   validarAgente() {
     const valorCampo = this.irregularidadeForm.get('matriculaAgente')?.value;

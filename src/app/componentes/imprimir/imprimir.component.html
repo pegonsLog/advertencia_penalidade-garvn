@@ -19,18 +19,17 @@
       ><strong>Veículo:</strong> {{ irregularidade.numeroVeiculo }}</span
     >
     <span style="margin-left: 40px; font-size: 10px"
+      ><strong>Placa:</strong> {{ placaVeiculo }}</span
+    >
+    <span style="margin-left: 40px; font-size: 10px"
       ><strong>Linha:</strong> {{ irregularidade.numeroLinha }} -
       {{ nomeLinha }}</span
     >
     <span style="margin-left: 30px; font-size: 10px"
       ><strong>Subconc.:</strong> {{ subconcessionaria }}</span
     >
-    <!-- <span style="margin-left: 40px; font-size: 10px"
-      ><strong>Consórcio:</strong> {{ irregularidade.numeroConsorcio }} -
-      {{ nomeConsorcio }}</span
-    > -->
     <span style="margin-left: 40px; font-size: 10px"
-      ><strong>Placa:</strong> {{ placaVeiculo }}</span
+      ><strong>Consórcio:</strong> {{ numeroConsorcio }}</span
     >
   </section>
   <mat-divider></mat-divider>
@@ -60,7 +59,7 @@
     </div>
     <div>
       <span style="font-size: 10px"
-        ><strong>Observações:</strong> {{ irregularidade.descricao }}</span
+        ><strong>Observações:</strong> {{ irregularidade.observacoes }}</span
       >
     </div>
   </section>
@@ -171,18 +170,17 @@
       ><strong>Veículo:</strong> {{ irregularidade.numeroVeiculo }}</span
     >
     <span style="margin-left: 30px; font-size: 10px"
+      ><strong>Placa:</strong> {{ placaVeiculo }}</span
+    >
+    <span style="margin-left: 30px; font-size: 10px"
       ><strong>Linha:</strong> {{ irregularidade.numeroLinha }} -
       {{ nomeLinha }}</span
     >
     <span style="margin-left: 30px; font-size: 10px"
       ><strong>Subconc.:</strong> {{ subconcessionaria }}</span
     >
-    <!-- <span style="margin-left: 30px; font-size: 10px"
-      ><strong>Consórcio:</strong> {{ irregularidade.numeroConsorcio }} -
-      {{ nomeConsorcio }}</span
-    > -->
     <span style="margin-left: 30px; font-size: 10px"
-      ><strong>Placa:</strong> {{ placaVeiculo }}</span
+      ><strong>Consórcio:</strong> {{ numeroConsorcio }}</span
     >
   </section>
   <mat-divider></mat-divider>
@@ -213,7 +211,7 @@
     </div>
     <div>
       <span style="font-size: 10px"
-        ><strong>Observações:</strong> {{ irregularidade.descricao }}</span
+        ><strong>Observações:</strong> {{ irregularidade.observacoes }}</span
       >
     </div>
   </section>

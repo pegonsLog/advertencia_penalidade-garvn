@@ -7,7 +7,7 @@ export interface IIrregularidade {
   local: string;
   numeroLocal: string;
   bairro: string;
-  descricao: string;
+  observacoes: string;
   dataEmissao: string;
   prazoCumprimentoConferencia: string;
   matAgenteConferente: string;

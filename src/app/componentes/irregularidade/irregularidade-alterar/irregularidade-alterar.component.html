@@ -27,6 +27,7 @@
           </mat-form-field>
           }@else{ -->
           <mat-form-field class="numero">
+            <mat-label>Nº Advertência</mat-label>
             <input
               matInput
               placeholder="Número"
@@ -37,6 +38,7 @@
           </mat-form-field>
           <!-- } -->
           <mat-form-field class="data">
+            <mat-label>Data</mat-label>
             <input
               matInput
               placeholder="Data"
@@ -47,6 +49,7 @@
             />
           </mat-form-field>
           <mat-form-field class="hora">
+            <mat-label>Hora</mat-label>
             <input
               type="text"
               matInput
@@ -58,6 +61,7 @@
             />
           </mat-form-field>
           <mat-form-field class="matriculaAgente">
+            <mat-label>Mat. Ag.</mat-label>
             <input
               matInput
               placeholder="Mat. Agente"
@@ -67,6 +71,7 @@
             />
           </mat-form-field>
           <mat-form-field class="nomeAgente">
+            <mat-label>Nome Agente</mat-label>
             <input
               matInput
               readonly="true"
@@ -79,6 +84,7 @@
 
         <div class="linha2">
           <mat-form-field class="local">
+            <mat-label>Local</mat-label>
             <input
               matInput
               placeholder="Local"
@@ -87,6 +93,7 @@
             />
           </mat-form-field>
           <mat-form-field class="numeroLocal">
+            <mat-label>Nº</mat-label>
             <input
               matInput
               placeholder="Nº"
@@ -95,6 +102,7 @@
             />
           </mat-form-field>
           <mat-form-field class="bairro">
+            <mat-label>Bairro</mat-label>
             <input
               matInput
               placeholder="Bairro"
@@ -105,6 +113,7 @@
         </div>
         <div class="linha3">
           <mat-form-field class="numeroLinha">
+            <mat-label>Nº da linha</mat-label>
             <input
               matInput
               placeholder="Nº Linha"
@@ -127,6 +136,7 @@
 
         <div class="linha4">
           <mat-form-field class="infracao">
+            <mat-label>Cód. da infração</mat-label>
             <input
               matInput
               placeholder="Cód. Infração"
@@ -148,6 +158,7 @@
         </div>
         <div class="linha5">
           <mat-form-field class="larguraMaxima">
+            <mat-label>Observações</mat-label>
             <input
               matInput
               placeholder="Descricao"
@@ -158,6 +169,7 @@
         </div>
         <div class="linha6">
           <mat-form-field class="numeroVeiculo">
+            <mat-label>Nº do Veículo</mat-label>
             <input
               matInput
               placeholder="Nº Veiculo"
@@ -176,6 +188,17 @@
               [ngStyle]="{ color: condicaoValidacaoVeiculo ? 'black' : 'red' }"
             />
           </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Consórcio</mat-label>
+            <input
+              matInput
+              readonly="true"
+              value="{{ consorcioValidacao }}"
+              tabindex="-1"
+              [ngStyle]="{ color: condicaoValidacaoVeiculo ? 'black' : 'red' }"
+            />
+          </mat-form-field>
+          
         </div>
 
         <!-- <div class="linha7">
@@ -204,6 +227,7 @@
 
         <div class="linha8">
           <mat-form-field class="matAgenteConferente">
+            <mat-label>Mat. Agente Conferente</mat-label>
             <input
               matInput
               placeholder="Mat. agente conferente"
@@ -212,6 +236,7 @@
             />
           </mat-form-field>
           <mat-form-field class="dataEmissao">
+            <mat-label>Data da Emissão</mat-label>
             <input
               matInput
               placeholder="Data Emissão"
@@ -222,6 +247,7 @@
             />
           </mat-form-field>
           <mat-form-field class="prazoCumprimentoConferencia">
+            <mat-label>Prazo de Cumprimento</mat-label>
             <input
               matInput
               placeholder="Prazo Cumprimento/Conferência"

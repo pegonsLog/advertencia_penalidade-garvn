@@ -53,11 +53,13 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
   linhaValidacao: string = '';
   infracaoValidacao: string = '';
   veiculoValidacao: string = '';
+  consorcioValidacao: string = '';
   agenteValidacao: string = '';
 
   condicaoValidacaoLinha: boolean = true;
   condicaoValidacaoInfracao: boolean = true;
   condicaoValidacaoVeiculo: boolean = true;
+  condicaoValidacaoConsorcio: boolean = true;
   condicaoValidacaoAgente: boolean = true;
 
   irregularidadeForm: FormGroup = this.#fb.group({
@@ -70,7 +72,6 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
     bairro: ['', Validators.required],
     descricao: ['', Validators.required],
     codigoInfracao: ['', Validators.required],
-    numeroConsorcio: ['', Validators.required],
     numeroVeiculo: ['', Validators.required],
     numeroLinha: ['', Validators.required],
     dataEmissao: ['', Validators.required],
@@ -92,9 +93,8 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
     local: '',
     numeroLocal: '',
     bairro: '',
-    descricao: '',
+    observacoes: '',
     codigoInfracao: '',
-    numeroConsorcio: '',
     numeroLinha: '',
     numeroVeiculo: '',
     dataEmissao: '',
@@ -133,7 +133,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
             local: [result.local, Validators.required],
             numeroLocal: [result.numeroLocal, Validators.required],
             bairro: [result.bairro, Validators.required],
-            descricao: [result.descricao, Validators.required],
+            observacoes: [result.observacoes],
             codigoInfracao: [result.codigoInfracao, Validators.required],
             numeroVeiculo: [result.numeroVeiculo, Validators.required],
             numeroLinha: [result.numeroLinha, Validators.required],
@@ -184,7 +184,6 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
               bairro: ['', Validators.required],
               descricao: [''],
               codigoInfracao: ['', Validators.required],
-              numeroConsorcio: ['', Validators.required],
               numeroVeiculo: ['', Validators.required],
               numeroLinha: ['', Validators.required],
               dataEmissao: ['', Validators.required],
@@ -242,7 +241,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
         Validators.required,
       ],
       bairro: [irregularidadeIIrregularidade.bairro, Validators.required],
-      descricao: [irregularidadeIIrregularidade.descricao, Validators.required],
+      observacoes: [irregularidadeIIrregularidade.observacoes],
       numeroInfracao: [
         irregularidadeIIrregularidade.codigoInfracao,
         Validators.required,
@@ -288,7 +287,6 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
       bairro: ['', Validators.required],
       descricao: ['', Validators.required],
       codigoInfracao: ['', Validators.required],
-      numeroConsorcio: ['', Validators.required],
       numeroVeiculo: ['', Validators.required],
       numeroLinha: ['', Validators.required],
       dataEmissao: ['', Validators.required],
@@ -341,12 +339,15 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
     for (let v of this.veiculos) {
       if (v.numeroVeiculo == valorCampo) {
         this.veiculoValidacao = v.placa;
+        this.consorcioValidacao = v.consorcio;
         this.condicaoValidacaoVeiculo = true;
         return;
       }
       this.condicaoValidacaoVeiculo = false;
+      this.condicaoValidacaoConsorcio = false;
     }
     this.veiculoValidacao = 'Veículo não cadastrado';
+    this.consorcioValidacao = 'Consórcio não cadastrado';
   }
 
   validarAgente() {

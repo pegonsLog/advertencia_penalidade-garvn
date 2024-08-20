@@ -1,60 +1,19 @@
-.coluna1L1 {
-  display: flex;
-  justify-content: left;
-  .card {
-    width: 300px;
-    background-color: rgb(96, 193, 238);
-  }
-}
-.coluna1L2 {
-  display: flex;
-  justify-content: left;
-  margin-top: -5px;
-  .card {
-    width: 300px;
-    background-color: rgb(96, 193, 238);
-  }
-}
-.coluna1L3 {
-  display: flex;
-  justify-content: left;
-  margin-top: -5px;
-  .card {
-    width: 300px;
-    background-color: rgb(96, 193, 238);
-  }
-}
-.coluna2L1 {
-  display: flex;
-  justify-content: center;
-  .card {
-    width: 50%;
-    background-color: rgb(145, 189, 214);
-  }
-}
-.coluna2L2 {
-  display: flex;
-  justify-content: center;
-  margin-top: -5px;
-  .card {
-    width: 50%;
-    background-color: rgb(145, 189, 214);
-  }
-}
-.coluna2L3 {
-  display: flex;
-  justify-content: center;
-  margin-top: -5px;
-  .card {
-    width: 50%;
-    background-color: rgb(145, 189, 214);
-  }
-}
 .coluna1{
-  width: 300px;
+  margin-top: 2px;
+  margin-bottom: 4px;
+  width: 240px;
 }
 .coluna2{
-  width: 400px;
+  margin-top: 2px;
+  width: 130px;
+}
+.coluna3{
+  margin-top: 2px;
+  width: 130px;
+}
+.coluna4{
+  margin-top: 2px;
+  width: 140px;
 }
 .colunas{
   display: flex;
@@ -71,9 +30,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 150px;
+  width: 120px;
   height: 80px;
-  margin: 0px 10px 15px 10px;
+  margin: 0px 10px 12px 10px;
+  background-color: rgb(133, 201, 228);
+  letter-spacing: 2px;
+  font-weight: 300;
+}
+.card2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 230px;
+  height: 80px;
+  margin: 0px 10px 12px 10px;
   background-color: rgb(133, 201, 228);
   letter-spacing: 2px;
   font-weight: 300;
@@ -92,8 +62,4 @@
   font-family: Montserrat, Roboto, Helvetica, Arial, sans-serif;
   letter-spacing: 2px;
   font-weight: 300;
-}
-.background-cards-coluna2
-{
-  background-color: rgb(64, 115, 131);
 }

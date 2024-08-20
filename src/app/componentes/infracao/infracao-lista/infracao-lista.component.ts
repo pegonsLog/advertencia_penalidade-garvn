@@ -47,7 +47,7 @@ export class InfracaoListaComponent implements OnDestroy {
   subscription: Subscription = new Subscription();
 
   constructor() {
-    // this.infracoes = this.#infracaoService.loadInfracoes();
+
     this.#infracaoService
       .list()
       .pipe()
@@ -87,9 +87,6 @@ export class InfracaoListaComponent implements OnDestroy {
   voltar() {
     this.#route.navigate(['home']);
   }
-  // expo() {
-  //   this.exportar()
-  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -102,11 +99,11 @@ export class InfracaoListaComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  exportar() {
-    for (let infracao of this.infracoes) {
-      this.#infracaoService
-        .addInfracao(infracao)
-        .then(() => console.log(infracao.codigoInfracao));
-    }
-  }
+  // exportar() {
+  //   for (let infracao of infracoesExportar) {
+  //     this.#infracaoService
+  //       .addInfracao(infracao)
+  //       .then(() => console.log(infracao.codigoInfracao));
+  //   }
+  // }
 }

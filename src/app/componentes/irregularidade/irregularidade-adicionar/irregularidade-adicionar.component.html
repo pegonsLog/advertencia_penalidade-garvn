@@ -61,6 +61,7 @@
           <mat-form-field class="nomeAgente">
             <input
               matInput
+              placeholder="Nome do Agente"
               readonly="true"
               value="{{ agenteValidacao }}"
               tabindex="-1"
@@ -165,6 +166,16 @@
               matInput
               readonly="true"
               value="{{ veiculoValidacao }}"
+              tabindex="-1"
+              [ngStyle]="{ color: condicaoValidacaoVeiculo ? 'black' : 'red' }"
+            />
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Consórcio</mat-label>
+            <input
+              matInput
+              readonly="true"
+              value="{{ consorcioValidacao }}"
               tabindex="-1"
               [ngStyle]="{ color: condicaoValidacaoVeiculo ? 'black' : 'red' }"
             />

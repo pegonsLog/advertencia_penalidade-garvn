@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, inject, signal } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IVeiculo } from '../../../interface/veiculo';
@@ -31,7 +36,6 @@ export class VeiculoFormComponent implements OnDestroy {
     id: '',
     numeroVeiculo: '',
     placa: '',
-    tipo: '',
     operadora: '',
     consorcio: '',
   });
@@ -48,8 +52,8 @@ export class VeiculoFormComponent implements OnDestroy {
             id: [result.id],
             numeroVeiculo: [result.numeroVeiculo, Validators.required],
             placa: [result.placa, Validators.required],
-            tipo: [result.tipo, Validators.required],
             operadora: [result.operadora, Validators.required],
+            consorcio: [result.consorcio, Validators.required]
           });
         });
     }
@@ -57,8 +61,8 @@ export class VeiculoFormComponent implements OnDestroy {
     this.veiculoForm = this.#fb.group({
       numeroVeiculo: ['', Validators.required],
       placa: ['', Validators.required],
-      tipo: ['', Validators.required],
-      operadora: ['', Validators.required]
+      operadora: ['', Validators.required],
+      consorcio: ['', Validators.required],
     });
   }
 
@@ -94,8 +98,8 @@ export class VeiculoFormComponent implements OnDestroy {
     this.veiculoForm = this.#fb.group({
       numeroVeiculo: [veiculo.numeroVeiculo, Validators.required],
       placa: [veiculo.placa, Validators.required],
-      tipo: [veiculo.tipo, Validators.required],
-      operadora: [veiculo.operadora, Validators.required]
+      operadora: [veiculo.operadora, Validators.required],
+      consorcio: [veiculo.consorcio, Validators.required],
     });
   }
   ngOnDestroy(): void {

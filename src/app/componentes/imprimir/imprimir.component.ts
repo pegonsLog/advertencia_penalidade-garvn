@@ -37,6 +37,7 @@ export class ImprimirComponent implements OnDestroy {
   placaVeiculo: string = '';
   nomeConsorcio: string = '';
   subconcessionaria: string = '';
+  numeroConsorcio: string = '';
 
   filtradas: IIrregularidades = [];
 
@@ -57,7 +58,6 @@ export class ImprimirComponent implements OnDestroy {
     matAgenteConferente: '',
     prazoCumprimentoConferencia: '',
     codigoInfracao: '',
-    numeroConsorcio: '',
     numeroLinha: '',
     numeroVeiculo: '',
   };
@@ -185,6 +185,7 @@ export class ImprimirComponent implements OnDestroy {
             if (veiculo.numeroVeiculo == numeroVeiculo) {
               this.placaVeiculo = veiculo.placa;
               this.subconcessionaria = veiculo.operadora;
+              this.numeroConsorcio = veiculo.consorcio;
             }
           })
         )
