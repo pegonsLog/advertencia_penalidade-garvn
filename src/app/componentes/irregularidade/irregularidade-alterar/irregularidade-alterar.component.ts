@@ -78,7 +78,6 @@ export class IrregularidadeAlterarComponent {
     matAgenteConferente: ['', Validators.required],
   });
 
-  // typeForm = signal<string>('');
   numeroUltimaIrregularidade: number = 0;
   dataInicio: string = '';
   dataFim: string = '';
@@ -125,7 +124,6 @@ export class IrregularidadeAlterarComponent {
       });
 
     if (this.#activatedRoute.snapshot.queryParams['id']) {
-      // this.typeForm.set('edit');
       this.subscription = this.#irregularidadeService
         .umaIrregularidade(this.irregularidade.id)
         .subscribe((result: IIrregularidade) => {
@@ -226,7 +224,7 @@ export class IrregularidadeAlterarComponent {
       numeroInfracao: [
         irregularidadeIIrregularidade.codigoInfracao,
         Validators.required,
-      ],    
+      ],
       numeroVeiculo: [
         irregularidadeIIrregularidade.numeroVeiculo,
         Validators.required,

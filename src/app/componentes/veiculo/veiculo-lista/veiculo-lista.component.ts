@@ -6,10 +6,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { IVeiculo, IVeiculos } from '../../../interface/veiculo';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { VeiculoService } from '../veiculo.service';
-import { IVeiculo, IVeiculos } from '../../../interface/veiculo';
 
 @Component({
   selector: 'app-veiculo-lista',
@@ -54,8 +54,6 @@ export class VeiculoListaComponent implements OnDestroy {
   });
 
   constructor() {
-    // this.veiculos = this.#veiculoService.loadVeiculos();
-
       this.#veiculoService
         .list()
         .pipe()

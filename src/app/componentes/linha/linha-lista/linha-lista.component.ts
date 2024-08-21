@@ -44,8 +44,6 @@ export class LinhaListaComponent implements OnDestroy {
   }
 
   constructor() {
-    // console.log(this.#linhaService.loadLinhas());
-    //     this.linhas = this.#linhaService.loadLinhas();
 
     this.#linhaService
       .list()
@@ -99,10 +97,10 @@ export class LinhaListaComponent implements OnDestroy {
   }
 
   // exportar() {
-  //   for (let veiculo of this.linhas) {
+  //   for (let veiculo of linhasExportar) {
   //     this.#linhaService
   //       .addLinha(veiculo)
-  //       .then(() => console.log(veiculo.numeroLinha));
+  //       .then();
   //   }
   // }
 }

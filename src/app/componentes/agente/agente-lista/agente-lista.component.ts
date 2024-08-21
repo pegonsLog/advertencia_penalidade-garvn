@@ -104,7 +104,7 @@ export class AgenteListaComponent {
   }
 
   // exportar() {
-  //   for (let agente of agenteExportar) {
+  //   for (let agente of agentesExportar) {
   //     this.#agenteService.addAgente(agente).then(() => console.log(agente.matriculaAgenteFiscalizador));
   //   }
   // }

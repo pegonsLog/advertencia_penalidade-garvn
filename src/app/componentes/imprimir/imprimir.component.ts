@@ -29,13 +29,11 @@ export class ImprimirComponent implements OnDestroy {
   #linhaService = inject(LinhaService);
   #infracaoService = inject(InfracaoService);
   #veiculoService = inject(VeiculoService);
-  #agenteService = inject(AgenteService);
   #activatedRoute = inject(ActivatedRoute);
 
   nomeLinha: string = '';
   descricaoInfracao: string = '';
   placaVeiculo: string = '';
-  nomeConsorcio: string = '';
   subconcessionaria: string = '';
   numeroConsorcio: string = '';
 
