@@ -67,15 +67,15 @@ export class IrregularidadeAlterarComponent {
     horario: ['', Validators.required],
     matriculaAgente: ['', Validators.required],
     local: ['', Validators.required],
-    numeroLocal: ['', Validators.required],
-    bairro: ['', Validators.required],
+    numeroLocal: [''],
+    bairro: [''],
     observacoes: [''],
     codigoInfracao: ['', Validators.required],
     numeroVeiculo: ['', Validators.required],
     numeroLinha: ['', Validators.required],
-    dataEmissao: ['', Validators.required],
-    prazoCumprimentoConferencia: ['', Validators.required],
-    matAgenteConferente: ['', Validators.required],
+    dataEmissao: [''],
+    prazoCumprimentoConferencia: [''],
+    matAgenteConferente: [''],
   });
 
   numeroUltimaIrregularidade: number = 0;
@@ -139,20 +139,18 @@ export class IrregularidadeAlterarComponent {
             horario: [result.horario, Validators.required],
             matriculaAgente: [result.matriculaAgente, Validators.required],
             local: [result.local, Validators.required],
-            numeroLocal: [result.numeroLocal, Validators.required],
-            bairro: [result.bairro, Validators.required],
+            numeroLocal: [result.numeroLocal],
+            bairro: [result.bairro],
             observacoes: [result.observacoes],
             codigoInfracao: [result.codigoInfracao, Validators.required],
             numeroVeiculo: [result.numeroVeiculo, Validators.required],
             numeroLinha: [result.numeroLinha, Validators.required],
-            dataEmissao: [result.dataEmissao, Validators.required],
+            dataEmissao: [result.dataEmissao],
             prazoCumprimentoConferencia: [
-              result.prazoCumprimentoConferencia,
-              Validators.required,
+              result.prazoCumprimentoConferencia
             ],
             matAgenteConferente: [
-              result.matAgenteConferente,
-              Validators.required,
+              result.matAgenteConferente
             ],
           });
           this.validarAgente();
@@ -216,10 +214,9 @@ export class IrregularidadeAlterarComponent {
       ],
       local: [irregularidadeIIrregularidade.local, Validators.required],
       numeroLocal: [
-        irregularidadeIIrregularidade.numeroLocal,
-        Validators.required,
+        irregularidadeIIrregularidade.numeroLocal
       ],
-      bairro: [irregularidadeIIrregularidade.bairro, Validators.required],
+      bairro: [irregularidadeIIrregularidade.bairro],
       observacoes: [irregularidadeIIrregularidade.observacoes],
       numeroInfracao: [
         irregularidadeIIrregularidade.codigoInfracao,
@@ -234,16 +231,13 @@ export class IrregularidadeAlterarComponent {
         Validators.required,
       ],
       dataEmissao: [
-        irregularidadeIIrregularidade.dataEmissao,
-        Validators.required,
+        irregularidadeIIrregularidade.dataEmissao
       ],
       prazoCumprimentoConferencia: [
-        irregularidadeIIrregularidade.prazoCumprimentoConferencia,
-        Validators.required,
+        irregularidadeIIrregularidade.prazoCumprimentoConferencia
       ],
       matAgenteConferente: [
-        irregularidadeIIrregularidade.matAgenteConferente,
-        Validators.required,
+        irregularidadeIIrregularidade.matAgenteConferente
       ],
     });
   }
@@ -262,15 +256,15 @@ export class IrregularidadeAlterarComponent {
       horario: ['', Validators.required],
       matriculaAgente: ['', Validators.required],
       local: ['', Validators.required],
-      numeroLocal: ['', Validators.required],
-      bairro: ['', Validators.required],
+      numeroLocal: [''],
+      bairro: [''],
       observacoes: [''],
       codigoInfracao: ['', Validators.required],
       numeroVeiculo: ['', Validators.required],
       numeroLinha: ['', Validators.required],
-      dataEmissao: ['', Validators.required],
-      prazoCumprimentoConferencia: ['', Validators.required],
-      matAgenteConferente: ['', Validators.required],
+      dataEmissao: [''],
+      prazoCumprimentoConferencia: [''],
+      matAgenteConferente: [''],
     });
   }
 
