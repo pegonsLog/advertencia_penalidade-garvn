@@ -22,6 +22,7 @@ export class UserListComponent implements OnDestroy {
   #route = inject(Router);
   dialog = inject(MatDialog);
   isLoading = true;
+  role: string | null  = '';
 
   users: IUsuarios = [];
 
@@ -46,6 +47,8 @@ export class UserListComponent implements OnDestroy {
   subscription: Subscription = new Subscription();
 
   constructor() {
+    this.role = sessionStorage.getItem('role');
+
     this.#userService
       .list()
       .pipe()

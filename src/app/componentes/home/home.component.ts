@@ -11,8 +11,11 @@ import { AngularMaterialModule } from '../../shared/angular-material/angular-mat
 })
 export class HomeComponent {
   private route = inject(Router);
+  role: string | null;
 
-  constructor() {}
+  constructor() {
+    this.role = sessionStorage.getItem('role');
+  }
   sair() {
     sessionStorage.removeItem('isAuthenticated');
     this.route.navigate(['login']);
@@ -21,7 +24,11 @@ export class HomeComponent {
     this.route.navigate(['agenteLista']);
   }
   usuario() {
+    if(this.role === 'adm'){
     this.route.navigate(['userLista']);
+    }else{
+      alert('O gerenciamento de usuários só pode ser acessado por administradores!')
+    }
   }
   infracao() {
     this.route.navigate(['infracaoLista']);

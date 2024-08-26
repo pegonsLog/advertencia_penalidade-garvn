@@ -43,6 +43,7 @@ export class LoginComponent implements OnDestroy {
       if (r.matricula === matricula && r.senha === senha) {
         this.user.set(r);
         sessionStorage.setItem('isAuthenticated', 'true');
+        sessionStorage.setItem('role', r.perfil);
         this.route.navigate(['home']);
       }
     }
