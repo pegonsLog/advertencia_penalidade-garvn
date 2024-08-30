@@ -69,7 +69,7 @@ export class IrregularidadeAlterarComponent {
     local: ['', Validators.required],
     numeroLocal: [''],
     bairro: [''],
-    observacoes: [''],
+    descricao: [''],
     codigoInfracao: ['', Validators.required],
     numeroVeiculo: ['', Validators.required],
     numeroLinha: ['', Validators.required],
@@ -97,7 +97,7 @@ export class IrregularidadeAlterarComponent {
     local: '',
     numeroLocal: '',
     bairro: '',
-    observacoes: '',
+    descricao: '',
     codigoInfracao: '',
     numeroLinha: '',
     numeroVeiculo: '',
@@ -141,7 +141,7 @@ export class IrregularidadeAlterarComponent {
             local: [result.local, Validators.required],
             numeroLocal: [result.numeroLocal],
             bairro: [result.bairro],
-            observacoes: [result.observacoes],
+            descricao: [result.descricao],
             codigoInfracao: [result.codigoInfracao, Validators.required],
             numeroVeiculo: [result.numeroVeiculo, Validators.required],
             numeroLinha: [result.numeroLinha, Validators.required],
@@ -189,6 +189,7 @@ export class IrregularidadeAlterarComponent {
         ehPorNumero: this.porNumero,
         dataInicio: this.dataInicio,
         dataFim: this.dataFim,
+        numeroNotificacao: this.irregularidadeForm.getRawValue().numeroIrregularidade,
       },
     });
   }
@@ -217,7 +218,7 @@ export class IrregularidadeAlterarComponent {
         irregularidadeIIrregularidade.numeroLocal
       ],
       bairro: [irregularidadeIIrregularidade.bairro],
-      observacoes: [irregularidadeIIrregularidade.observacoes],
+      descricao: [irregularidadeIIrregularidade.descricao],
       numeroInfracao: [
         irregularidadeIIrregularidade.codigoInfracao,
         Validators.required,
@@ -258,7 +259,7 @@ export class IrregularidadeAlterarComponent {
       local: ['', Validators.required],
       numeroLocal: [''],
       bairro: [''],
-      observacoes: [''],
+      descricao: [''],
       codigoInfracao: ['', Validators.required],
       numeroVeiculo: ['', Validators.required],
       numeroLinha: ['', Validators.required],

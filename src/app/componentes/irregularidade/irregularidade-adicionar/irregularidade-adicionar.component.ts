@@ -93,7 +93,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
     local: '',
     numeroLocal: '',
     bairro: '',
-    observacoes: '',
+    descricao: '',
     codigoInfracao: '',
     numeroLinha: '',
     numeroVeiculo: '',
@@ -133,7 +133,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
             local: [result.local, Validators.required],
             numeroLocal: [result.numeroLocal],
             bairro: [result.bairro],
-            observacoes: [result.observacoes],
+            descricao: [result.descricao],
             codigoInfracao: [result.codigoInfracao, Validators.required],
             numeroVeiculo: [result.numeroVeiculo, Validators.required],
             numeroLinha: [result.numeroLinha, Validators.required],
@@ -238,7 +238,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
         irregularidadeIIrregularidade.numeroLocal
       ],
       bairro: [irregularidadeIIrregularidade.bairro],
-      observacoes: [irregularidadeIIrregularidade.observacoes],
+      descricao: [irregularidadeIIrregularidade.descricao],
       numeroInfracao: [
         irregularidadeIIrregularidade.codigoInfracao,
         Validators.required,
