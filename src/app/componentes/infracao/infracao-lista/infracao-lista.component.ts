@@ -24,6 +24,8 @@ export class InfracaoListaComponent implements OnDestroy {
   dialog = inject(MatDialog);
   isLoading = true;
 
+
+
   infracoes: IInfracoes = [];
 
   displayedColumns: string[] = ['codigoInfracao', 'nomeInfracao', 'actions'];
@@ -100,7 +102,7 @@ export class InfracaoListaComponent implements OnDestroy {
   }
 
   // exportar() {
-  //   for (let infracao of infracoesExportar) {
+  //   for (let infracao of infracaoExportar) {
   //     this.#infracaoService
   //       .addInfracao(infracao)
   //       .then(() => console.log(infracao.codigoInfracao));
