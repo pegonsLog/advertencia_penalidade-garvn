@@ -124,7 +124,7 @@ export const infracaoExportar: IInfracoes = [
    {
     "id": "25",
     "codigoInfracao": "01024",
-    "nomeInfracao": "CAIXA DE MARCHA/ALAVANCA – MÁS CONDIÇÕES "
+    "nomeInfracao": "CAIXA DE MARCHA/ALAVANCA - MÁS CONDIÇÕES "
    },
    {
     "id": "26",
@@ -199,12 +199,12 @@ export const infracaoExportar: IInfracoes = [
    {
     "id": "40",
     "codigoInfracao": "01039",
-    "nomeInfracao": "DIFERENCIAL – MÁS CONDIÇÕES  "
+    "nomeInfracao": "DIFERENCIAL - MÁS CONDIÇÕES  "
    },
    {
     "id": "41",
     "codigoInfracao": "01040",
-    "nomeInfracao": "EMBREAGEM – MÁS CONDIÇÕES"
+    "nomeInfracao": "EMBREAGEM - MÁS CONDIÇÕES"
    },
    {
     "id": "42",
@@ -319,7 +319,7 @@ export const infracaoExportar: IInfracoes = [
    {
     "id": "64",
     "codigoInfracao": "01064",
-    "nomeInfracao": "LUZ DE FAROL – MÁS CONDIÇÕES"
+    "nomeInfracao": "LUZ DE FAROL - MÁS CONDIÇÕES"
    },
    {
     "id": "65",
@@ -429,7 +429,7 @@ export const infracaoExportar: IInfracoes = [
    {
     "id": "86",
     "codigoInfracao": "01092",
-    "nomeInfracao": "LUZ DE SETA – OUTROS"
+    "nomeInfracao": "LUZ DE SETA - OUTROS"
    },
    {
     "id": "87",
@@ -509,17 +509,17 @@ export const infracaoExportar: IInfracoes = [
    {
     "id": "102",
     "codigoInfracao": "01071",
-    "nomeInfracao": "LUZ MARCHA-RÉ AMBOS LADOS – MÁS CONDIÇÕES "
+    "nomeInfracao": "LUZ MARCHA-RÉ AMBOS LADOS - MÁS CONDIÇÕES "
    },
    {
     "id": "103",
     "codigoInfracao": "01087",
-    "nomeInfracao": "LUZ SETA DIANTEIRA AMBOS LADOS – MÁS CONDIÇÕES "
+    "nomeInfracao": "LUZ SETA DIANTEIRA AMBOS LADOS - MÁS CONDIÇÕES "
    },
    {
     "id": "104",
     "codigoInfracao": "01093",
-    "nomeInfracao": "LUZ SETA TRASEIRA AMBOS LADOS – MÁS CONDIÇÕES"
+    "nomeInfracao": "LUZ SETA TRASEIRA AMBOS LADOS - MÁS CONDIÇÕES"
    },
    {
     "id": "105",
@@ -544,7 +544,7 @@ export const infracaoExportar: IInfracoes = [
    {
     "id": "109",
     "codigoInfracao": "01109",
-    "nomeInfracao": "PAINEL DE CONTROLE – MÁS CONDIÇÕES"
+    "nomeInfracao": "PAINEL DE CONTROLE - MÁS CONDIÇÕES"
    },
    {
     "id": "110",
@@ -784,7 +784,7 @@ export const infracaoExportar: IInfracoes = [
    {
     "id": "157",
     "codigoInfracao": "01157",
-    "nomeInfracao": "TRANSMISSÃO – MÁS CONDIÇÕES"
+    "nomeInfracao": "TRANSMISSÃO - MÁS CONDIÇÕES"
    },
    {
     "id": "158",
@@ -799,7 +799,7 @@ export const infracaoExportar: IInfracoes = [
    {
     "id": "160",
     "codigoInfracao": "01161",
-    "nomeInfracao": "VOLANTE – MÁS CONDIÇÕES"
+    "nomeInfracao": "VOLANTE - MÁS CONDIÇÕES"
    }
 
     ]

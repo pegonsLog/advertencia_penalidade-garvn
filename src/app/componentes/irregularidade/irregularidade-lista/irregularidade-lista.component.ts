@@ -120,9 +120,9 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
           map((irregs: IIrregularidades) =>
             irregs.forEach((irreg: IIrregularidade) => {
               if (
-                this.formatDate(irreg.dataIrregularidade) >=
+                this.formatDate(irreg.prazoCumprimentoConferencia) >=
                   this.formatDate(this.dataInicio) &&
-                this.formatDate(irreg.dataIrregularidade) <=
+                this.formatDate(irreg.prazoCumprimentoConferencia) <=
                   this.formatDate(this.dataFim)
               ) {
                 this.dataSource.data.push(irreg);

@@ -138,12 +138,8 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
             numeroVeiculo: [result.numeroVeiculo, Validators.required],
             numeroLinha: [result.numeroLinha, Validators.required],
             dataEmissao: [result.dataEmissao],
-            prazoCumprimentoConferencia: [
-              result.prazoCumprimentoConferencia
-            ],
-            matAgenteConferente: [
-              result.matAgenteConferente
-            ],
+            prazoCumprimentoConferencia: [result.prazoCumprimentoConferencia],
+            matAgenteConferente: [result.matAgenteConferente],
           });
           this.validarAgente();
           this.validarLinha();
@@ -155,23 +151,23 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
         .list()
         .subscribe((irr: IIrregularidades) => {
           const data = new Date().getFullYear();
+
           (this.numeroUltimaIrregularidade = irr
-            .map((obj) =>
-              Number(
-                data.toString() +
-                  obj.numeroIrregularidade
-                    .toString()
-                    .padStart(5, '0')
-                    .substring(4)
-              )
-            )
+            .map((obj) =>{
+                    const partes = obj.numeroIrregularidade.split('/');
+              return Number(partes[1]);
+        })
             .reduce(
               (max, current) => (current > max ? current : max),
-              Number.NEGATIVE_INFINITY
-            )),
+              0
+            ));
+
+            this.numeroUltimaIrregularidade++;
+            const novoNumeroIrregularidade = `${data}/${this.numeroUltimaIrregularidade.toString().padStart(6, '0')}`;
+
             (this.irregularidadeForm = this.#fb.group({
               numeroIrregularidade: [
-                this.numeroUltimaIrregularidade + 1,
+                novoNumeroIrregularidade,
                 Validators.required,
               ],
               dataIrregularidade: ['', Validators.required],
@@ -234,9 +230,7 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
         Validators.required,
       ],
       local: [irregularidadeIIrregularidade.local, Validators.required],
-      numeroLocal: [
-        irregularidadeIIrregularidade.numeroLocal
-      ],
+      numeroLocal: [irregularidadeIIrregularidade.numeroLocal],
       bairro: [irregularidadeIIrregularidade.bairro],
       descricao: [irregularidadeIIrregularidade.descricao],
       numeroInfracao: [
@@ -251,15 +245,11 @@ export class IrregularidadeAdicionarComponent implements OnDestroy {
         irregularidadeIIrregularidade.numeroLinha,
         Validators.required,
       ],
-      dataEmissao: [
-        irregularidadeIIrregularidade.dataEmissao
-      ],
+      dataEmissao: [irregularidadeIIrregularidade.dataEmissao],
       prazoCumprimento: [
-        irregularidadeIIrregularidade.prazoCumprimentoConferencia
+        irregularidadeIIrregularidade.prazoCumprimentoConferencia,
       ],
-      dataCumprimento: [
-        irregularidadeIIrregularidade.matAgenteConferente
-      ],
+      dataCumprimento: [irregularidadeIIrregularidade.matAgenteConferente],
     });
   }
 
