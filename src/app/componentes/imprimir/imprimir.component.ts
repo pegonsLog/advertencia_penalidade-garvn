@@ -94,9 +94,9 @@ export class ImprimirComponent implements OnDestroy {
           map((irregs: IIrregularidades) =>
             irregs.forEach((irreg: IIrregularidade) => {
               if (
-                this.formatDate(irreg.dataIrregularidade) >=
+                this.formatDate(irreg.prazoCumprimentoConferencia) >=
                   this.formatDate(dataInicio) &&
-                this.formatDate(irreg.dataIrregularidade) <=
+                this.formatDate(irreg.prazoCumprimentoConferencia) <=
                   this.formatDate(dataFim)
               ) {
                 this.filtradas.push(irreg);
