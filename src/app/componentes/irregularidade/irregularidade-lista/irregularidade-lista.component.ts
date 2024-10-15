@@ -1,18 +1,17 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import {
   Component,
-  ElementRef,
   OnDestroy,
   OnInit,
-  ViewChild,
   inject,
-  signal,
+  signal
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { Subscription, map } from 'rxjs';
 import {
   IIrregularidade,
@@ -21,8 +20,6 @@ import {
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { IrregularidadeService } from '../irregularidade.service';
-import { FormsModule } from '@angular/forms';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-irregularidade-lista',
