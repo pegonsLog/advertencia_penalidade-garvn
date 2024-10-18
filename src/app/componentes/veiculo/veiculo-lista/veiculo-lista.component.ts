@@ -10,6 +10,7 @@ import { IVeiculo, IVeiculos } from '../../../interface/veiculo';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { VeiculoService } from '../veiculo.service';
+import { veiculosExportar } from '../../../veiculos';
 
 @Component({
   selector: 'app-veiculo-lista',
