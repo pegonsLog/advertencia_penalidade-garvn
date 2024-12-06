@@ -10,6 +10,7 @@ import { IInfracao, IInfracoes } from '../../../interface/infracao';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
 import { InfracaoService } from '../infracao.service';
+import { infracaoExportar } from '../../../infracoes';
 
 @Component({
   selector: 'app-infracao-lista',
