@@ -64,39 +64,39 @@ font-size: 10px;
 
 .watermark-sumob-1via {
   position: fixed;
-  top: 18%;
+  top: 19%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-40deg);
   font-size: 3rem; /* Ajuste o tamanho do texto conforme necessário */
   font-weight: 800;
   color: transparent; /* Cor e opacidade da marca d'água */
-  -webkit-text-stroke: 1px gray;
+  -webkit-text-stroke: 1px rgba(128, 128, 128, 0.5);
   z-index: 9999; /* Coloca a marca d'água atrás de outros conteúdos */
   pointer-events: none; /* Faz com que a marca d'água não seja clicável */
   user-select: none; /* Evita que o texto da marca d'água seja selecionável */
 }
 .watermark-bhtrans-1via {
   position: fixed;
-  top: 33%;
+  top: 34%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-40deg);
   font-size: 3rem; /* Ajuste o tamanho do texto conforme necessário */
   font-weight: 800;
   color: transparent; /* Cor e opacidade da marca d'água */
-  -webkit-text-stroke: 1px gray;
+  -webkit-text-stroke: 1px rgba(128, 128, 128, 0.5);
   z-index: 9999; /* Coloca a marca d'água atrás de outros conteúdos */
   pointer-events: none; /* Faz com que a marca d'água não seja clicável */
   user-select: none; /* Evita que o texto da marca d'água seja selecionável */
 }
 .watermark-sumob-2via {
   position: fixed;
-  top: 68%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-40deg);
   font-size: 3rem; /* Ajuste o tamanho do texto conforme necessário */
   font-weight: 800;
   color: transparent; /* Cor e opacidade da marca d'água */
-  -webkit-text-stroke: 1px gray;
+  -webkit-text-stroke: 1px rgba(128, 128, 128, 0.5);
   z-index: 9999; /* Coloca a marca d'água atrás de outros conteúdos */
   pointer-events: none; /* Faz com que a marca d'água não seja clicável */
   user-select: none; /* Evita que o texto da marca d'água seja selecionável */
@@ -109,7 +109,7 @@ font-size: 10px;
   font-size: 3rem; /* Ajuste o tamanho do texto conforme necessário */
   font-weight: 800;
   color: transparent; /* Cor e opacidade da marca d'água */
-  -webkit-text-stroke: 1px gray;
+  -webkit-text-stroke: 1px rgba(128, 128, 128, 0.5);
   z-index: 9999; /* Coloca a marca d'água atrás de outros conteúdos */
   pointer-events: none; /* Faz com que a marca d'água não seja clicável */
   user-select: none; /* Evita que o texto da marca d'água seja selecionável */
