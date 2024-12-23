@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Subscription, map } from 'rxjs';
 import {
   IIrregularidade,
@@ -29,9 +29,8 @@ import { IrregularidadeService } from '../irregularidade.service';
     MatSortModule,
     CommonModule,
     FormsModule,
-    NgxMaskDirective,
-    NgxMaskPipe,
-  ],
+    NgxMaskDirective
+],
   providers: [DatePipe, provideNgxMask()],
   templateUrl: './irregularidade-lista.component.html',
   styleUrl: './irregularidade-lista.component.scss',
