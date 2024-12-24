@@ -21,6 +21,7 @@ export const appConfig: ApplicationConfig = {
           appId: "1:685474518147:web:3fce911cf7170227a7f7b6",
           measurementId: "G-Y23E3PFPEN"
 
+
         })
       )
     ),
