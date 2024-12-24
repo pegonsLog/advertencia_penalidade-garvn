@@ -1,37 +1,20 @@
-import { CommonModule, DatePipe, NgIf } from '@angular/common';
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  inject,
-  signal
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSortModule } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { Subscription, map } from 'rxjs';
-import {
-  IIrregularidade,
-  IIrregularidades,
-} from '../../../interface/irregularidade';
-import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
-import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
-import { IrregularidadeService } from '../irregularidade.service';
+import { Component, inject, OnDestroy, OnInit, signal } from "@angular/core";
+import { AngularMaterialModule } from "../../../shared/angular-material/angular-material";
+import { CommonModule, DatePipe } from "@angular/common";
+import { provideNgxMask } from "ngx-mask";
+import { IrregularidadeService } from "../irregularidade.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MatDialog } from "@angular/material/dialog";
+import { IIrregularidade, IIrregularidades } from "../../../interface/irregularidade";
+import { map, Subscription } from "rxjs";
+import { ConfirmationDialogComponent } from "../../../shared/dialogs/confirmation/confirmation.component";
+import { MatTableDataSource } from "@angular/material/table";
+
 
 @Component({
   selector: 'app-irregularidade-lista',
   standalone: true,
-  imports: [
-    AngularMaterialModule,
-    MatSortModule,
-    CommonModule,
-    FormsModule,
-    NgxMaskDirective,
-    NgIf
-],
+  imports: [ CommonModule, AngularMaterialModule],
   providers: [DatePipe, provideNgxMask()],
   templateUrl: './irregularidade-lista.component.html',
   styleUrl: './irregularidade-lista.component.scss',
