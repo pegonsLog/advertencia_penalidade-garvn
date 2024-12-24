@@ -24,7 +24,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   exports: [
-    MatToolbarModule,
+
     MatTableModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -46,6 +46,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDatepickerModule,
     MatPaginatorModule,
     MatSortModule,
+    MatToolbarModule
   ],
 })
 export class AngularMaterialModule {}
