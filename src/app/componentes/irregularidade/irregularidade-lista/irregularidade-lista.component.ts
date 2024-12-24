@@ -1,20 +1,22 @@
-import { Component, inject, OnDestroy, OnInit, signal } from "@angular/core";
-import { AngularMaterialModule } from "../../../shared/angular-material/angular-material";
-import { CommonModule, DatePipe } from "@angular/common";
-import { provideNgxMask } from "ngx-mask";
-import { IrregularidadeService } from "../irregularidade.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { MatDialog } from "@angular/material/dialog";
-import { IIrregularidade, IIrregularidades } from "../../../interface/irregularidade";
-import { map, Subscription } from "rxjs";
-import { ConfirmationDialogComponent } from "../../../shared/dialogs/confirmation/confirmation.component";
-import { MatTableDataSource } from "@angular/material/table";
-
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
+import { provideNgxMask } from 'ngx-mask';
+import { map, Subscription } from 'rxjs';
+import {
+  IIrregularidade,
+  IIrregularidades,
+} from '../../../interface/irregularidade';
+import { AngularMaterialModule } from '../../../shared/angular-material/angular-material';
+import { ConfirmationDialogComponent } from '../../../shared/dialogs/confirmation/confirmation.component';
+import { IrregularidadeService } from '../irregularidade.service';
 
 @Component({
   selector: 'app-irregularidade-lista',
   standalone: true,
-  imports: [ CommonModule, AngularMaterialModule],
+  imports: [CommonModule, AngularMaterialModule],
   providers: [DatePipe, provideNgxMask()],
   templateUrl: './irregularidade-lista.component.html',
   styleUrl: './irregularidade-lista.component.scss',
@@ -77,7 +79,6 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
   dataConferencia: string = '';
 
   subscription: Subscription = new Subscription();
-
 
   constructor() {
     this.porNumero = this.#activatedRoute.snapshot.queryParams['ehPorNumero'];
@@ -176,7 +177,7 @@ export class IrregularidadeListaComponent implements OnDestroy, OnInit {
     this.#route.navigate(['parametros']);
   }
 
-  limpar(){
+  limpar() {
     this.filtradas = [];
     this.dataSource = new MatTableDataSource(this.irregularidades);
   }
